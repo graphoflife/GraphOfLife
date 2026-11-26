@@ -58,6 +58,15 @@ stakes smaller than the coalition's sum, so the order of equals lasts only
 until mutation finds wealth. An order that is to last needs a rule that
 wealth cannot break (not tested; a rule change, the author's call).
 
+**Added after Experiment 66.** Three such rules were tried (setting
+`wealth_guard`, the author's choice of 26 November 2026). A coalition
+counted by heads stops the hand-written hoarder in its first game, 30 of
+30, and a world of equals plays under it as before. A limit on a stake
+does not stop it; levelling by one token a link only slows it. Open:
+whether a world keeps or forms the order under the head count over a long
+run, and whether mutation finds another break (the largest staker now
+loses; a line of many small stakes was not tried).
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -586,3 +595,35 @@ Read by `E50/e64.py E65`.
 - All three of Experiment 48's worlds share `contest` = lottery and
   `redistribution` = parents. The evolution rank that chose them rewards
   fast turnover.
+
+### Experiment 66: three rules against the hoarder that spreads (undecided)
+
+New setting `wealth_guard` (off by default): `heads` (a coalition counted
+by members, the largest staker counts one), `limit` (a stake on another's
+node at most what its agent holds, the rest stays at home), `level` (after
+each game one token passes down each link whose ends differ by two or
+more). Invasion trials may now change `rules` for the trial and `play_on`
+without the strategy (the control). 114 trials: Experiment 65's 30 under
+each rule, and 6 controls with no hoarder under each rule and under none.
+Read by `E50/e66.py`.
+
+- Heads: 0 of 30 lines sweep, 0 worlds end; 29 lines gone in game 1, one
+  in game 2. Controls in the densest world are identical to no rule for
+  all 1,000 iterations (every stake is one token there).
+- Limit: 25 of 30 sweep, 25 worlds end. At home 15 of 15 at 37 to 125
+  (median 68, as without the rule); moving 10 of 15 at 19 to 66 (median
+  22, faster: the surplus stays at home and holds the own node), 5 lost
+  early.
+- Level: 11 of 30 sweep (9 at home at 293 to 738, median 407; 2 moving at
+  617 and 952), 9 worlds end, 12 lines lost (8 in game 2). None at home
+  in the densest world (103 links each), but two there still growing at
+  1,000. Controls live; their richest holding falls to about half.
+- No control world ended under any rule (0 of 24).
+- Thesis (heads and level stop it, limit does not): undecided, because
+  level only slows it. The arithmetic "one token a link in, one out" was
+  wrong: the hoarder at home kept 4 to 40 tokens a game under levelling.
+- A bug of the limit rule (crash when an agent has no link) was fixed
+  mid-experiment (dcc28e6); 55 trials on engine 4a5cea469cc81d44, 59 on
+  cc2ffab3bdc4e725. Nine crashed trials were played again from their
+  start; their folders had to be removed, since an existing run stays on
+  the engine that made it.

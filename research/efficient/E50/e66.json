@@ -1,0 +1,7090 @@
+{
+ "by heads": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 43,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "at home",
+   "richest_most": 212
+  },
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 43,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 115,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "at home",
+   "richest_most": 230
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 115,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "moving",
+   "richest_most": 183
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 49,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 49,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 134,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10898,
+   "world_ends": false,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10898
+    ]
+   },
+   "way": "at home",
+   "richest_most": 259
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 134,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10898,
+   "world_ends": false,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10898
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 108,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "at home",
+   "richest_most": 215
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 108,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "moving",
+   "richest_most": 186
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 34,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 34,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 71,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "at home",
+   "richest_most": 212
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 71,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 101,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "at home",
+   "richest_most": 202
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 101,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "moving",
+   "richest_most": 169
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 36,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13156,
+   "world_ends": false,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13156
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 1,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 36,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13156,
+   "world_ends": false,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13156
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 119,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "at home",
+   "richest_most": 230
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 119,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 99,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "at home",
+   "richest_most": 197
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 99,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "moving",
+   "richest_most": 126
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 53,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13156,
+   "world_ends": false,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13156
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 53,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13156,
+   "world_ends": false,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13156
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 1,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 109,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "at home",
+   "richest_most": 221
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 1,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 109,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10896,
+   "world_ends": false,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     0,
+     0,
+     485,
+     10896
+    ]
+   },
+   "way": "moving",
+   "richest_most": 221
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 1,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 103,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "at home",
+   "richest_most": 205
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 1,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 103,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13263,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13263,
+   "world_ends": false,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     0,
+     0,
+     257,
+     13263
+    ]
+   },
+   "way": "moving",
+   "richest_most": 171
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 1,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": true,
+   "line_gone_at": 1,
+   "takes_off_at": null,
+   "most_tokens": 99,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 2,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 101,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     101,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  }
+ ],
+ "a limit on a stake": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 108,
+   "most_tokens": 40000,
+   "most_copies": 253,
+   "two_at": 109,
+   "sweeps_at": 125,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 128,
+   "under_20_at": 130,
+   "died_out_at": null,
+   "agents_end": 4,
+   "links_end": 3,
+   "world_ends": true,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     85,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     126,
+     1,
+     485,
+     10895
+    ],
+    "5": [
+     247,
+     1,
+     485,
+     10892
+    ],
+    "10": [
+     429,
+     1,
+     485,
+     10885
+    ],
+    "25": [
+     945,
+     1,
+     484,
+     10883
+    ],
+    "50": [
+     1853,
+     1,
+     477,
+     10874
+    ],
+    "100": [
+     3726,
+     1,
+     475,
+     10868
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     39997,
+     4,
+     4,
+     3
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 15,
+   "most_tokens": 39998,
+   "most_copies": 320,
+   "two_at": 2,
+   "sweeps_at": 22,
+   "least_agents": 3,
+   "least_links": 2,
+   "halved_at": 27,
+   "under_20_at": 29,
+   "died_out_at": null,
+   "agents_end": 19,
+   "links_end": 27,
+   "world_ends": true,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     44,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     83,
+     2,
+     485,
+     10895
+    ],
+    "5": [
+     214,
+     3,
+     485,
+     10891
+    ],
+    "10": [
+     999,
+     15,
+     487,
+     10864
+    ],
+    "25": [
+     37222,
+     320,
+     392,
+     2027
+    ],
+    "50": [
+     39986,
+     9,
+     9,
+     14
+    ],
+    "100": [
+     39989,
+     9,
+     9,
+     11
+    ],
+    "200": [
+     39987,
+     9,
+     9,
+     13
+    ],
+    "300": [
+     39992,
+     8,
+     8,
+     8
+    ],
+    "500": [
+     39983,
+     13,
+     13,
+     17
+    ],
+    "750": [
+     39980,
+     13,
+     13,
+     20
+    ],
+    "1000": [
+     39973,
+     19,
+     19,
+     27
+    ]
+   },
+   "way": "moving",
+   "richest_most": 28418
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 38,
+   "most_tokens": 40000,
+   "most_copies": 173,
+   "two_at": 35,
+   "sweeps_at": 62,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 67,
+   "under_20_at": 69,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     230,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     342,
+     1,
+     257,
+     13252
+    ],
+    "5": [
+     585,
+     1,
+     257,
+     13194
+    ],
+    "10": [
+     747,
+     1,
+     257,
+     13131
+    ],
+    "25": [
+     955,
+     1,
+     257,
+     13073
+    ],
+    "50": [
+     6036,
+     10,
+     256,
+     11554
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "300": [
+     39994,
+     6,
+     6,
+     6
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 11,
+   "most_tokens": 39999,
+   "most_copies": 240,
+   "two_at": 2,
+   "sweeps_at": 19,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 23,
+   "under_20_at": 24,
+   "died_out_at": null,
+   "agents_end": 7,
+   "links_end": 9,
+   "world_ends": true,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     137,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     232,
+     2,
+     257,
+     13264
+    ],
+    "5": [
+     631,
+     4,
+     257,
+     13250
+    ],
+    "10": [
+     3148,
+     17,
+     257,
+     12936
+    ],
+    "25": [
+     39988,
+     12,
+     12,
+     12
+    ],
+    "50": [
+     39992,
+     6,
+     6,
+     8
+    ],
+    "100": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "200": [
+     39996,
+     4,
+     4,
+     4
+    ],
+    "300": [
+     39987,
+     9,
+     9,
+     13
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39978,
+     15,
+     15,
+     22
+    ],
+    "1000": [
+     39991,
+     7,
+     7,
+     9
+    ]
+   },
+   "way": "moving",
+   "richest_most": 39254
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 24,
+   "most_tokens": 40000,
+   "most_copies": 299,
+   "two_at": 11,
+   "sweeps_at": 38,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 43,
+   "under_20_at": 44,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     97,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     145,
+     1,
+     533,
+     13157
+    ],
+    "5": [
+     281,
+     1,
+     533,
+     13150
+    ],
+    "10": [
+     387,
+     1,
+     533,
+     13092
+    ],
+    "25": [
+     5510,
+     28,
+     532,
+     11977
+    ],
+    "50": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 58,
+   "most_tokens": 39999,
+   "most_copies": 409,
+   "two_at": 2,
+   "sweeps_at": 66,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 71,
+   "under_20_at": 73,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     23,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     40,
+     2,
+     533,
+     13157
+    ],
+    "5": [
+     36,
+     2,
+     533,
+     13153
+    ],
+    "10": [
+     45,
+     2,
+     533,
+     13147
+    ],
+    "25": [
+     49,
+     2,
+     533,
+     13142
+    ],
+    "50": [
+     432,
+     8,
+     533,
+     13092
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "moving",
+   "richest_most": 29306
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 37,
+   "most_tokens": 40000,
+   "most_copies": 243,
+   "two_at": 62,
+   "sweeps_at": 73,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 76,
+   "under_20_at": 78,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     259,
+     1,
+     485,
+     10898
+    ],
+    "2": [
+     392,
+     1,
+     485,
+     10896
+    ],
+    "5": [
+     755,
+     1,
+     484,
+     10895
+    ],
+    "10": [
+     1320,
+     1,
+     483,
+     10893
+    ],
+    "25": [
+     2905,
+     1,
+     481,
+     10890
+    ],
+    "50": [
+     5310,
+     1,
+     473,
+     10877
+    ],
+    "100": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "200": [
+     39991,
+     8,
+     8,
+     9
+    ],
+    "300": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "500": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 17,
+   "most_tokens": 39999,
+   "most_copies": 323,
+   "two_at": 1,
+   "sweeps_at": 25,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 30,
+   "under_20_at": 31,
+   "died_out_at": null,
+   "agents_end": 7,
+   "links_end": 15,
+   "world_ends": true,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     261,
+     2,
+     485,
+     10898
+    ],
+    "2": [
+     363,
+     2,
+     485,
+     10898
+    ],
+    "5": [
+     643,
+     2,
+     485,
+     10897
+    ],
+    "10": [
+     1151,
+     4,
+     485,
+     10893
+    ],
+    "25": [
+     27645,
+     282,
+     475,
+     6050
+    ],
+    "50": [
+     39995,
+     5,
+     5,
+     5
+    ],
+    "100": [
+     39987,
+     10,
+     10,
+     13
+    ],
+    "200": [
+     39988,
+     11,
+     11,
+     12
+    ],
+    "300": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "500": [
+     39994,
+     5,
+     5,
+     6
+    ],
+    "750": [
+     39979,
+     13,
+     13,
+     21
+    ],
+    "1000": [
+     39985,
+     7,
+     7,
+     15
+    ]
+   },
+   "way": "moving",
+   "richest_most": 32342
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 44,
+   "most_tokens": 40000,
+   "most_copies": 161,
+   "two_at": 42,
+   "sweeps_at": 68,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 73,
+   "under_20_at": 74,
+   "died_out_at": null,
+   "agents_end": 3,
+   "links_end": 2,
+   "world_ends": true,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     215,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     321,
+     1,
+     257,
+     13261
+    ],
+    "5": [
+     578,
+     1,
+     257,
+     13216
+    ],
+    "10": [
+     782,
+     1,
+     257,
+     13135
+    ],
+    "25": [
+     1013,
+     1,
+     257,
+     13061
+    ],
+    "50": [
+     5866,
+     11,
+     256,
+     11593
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39996,
+     5,
+     5,
+     4
+    ],
+    "300": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     39996,
+     5,
+     5,
+     4
+    ],
+    "1000": [
+     39998,
+     3,
+     3,
+     2
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 13,
+   "most_tokens": 39999,
+   "most_copies": 223,
+   "two_at": 2,
+   "sweeps_at": 21,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 27,
+   "under_20_at": 28,
+   "died_out_at": null,
+   "agents_end": 7,
+   "links_end": 11,
+   "world_ends": true,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     157,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     262,
+     2,
+     257,
+     13264
+    ],
+    "5": [
+     751,
+     4,
+     257,
+     13239
+    ],
+    "10": [
+     2100,
+     10,
+     257,
+     13113
+    ],
+    "25": [
+     39431,
+     221,
+     222,
+     551
+    ],
+    "50": [
+     39995,
+     5,
+     5,
+     5
+    ],
+    "100": [
+     39996,
+     5,
+     5,
+     4
+    ],
+    "200": [
+     39992,
+     8,
+     8,
+     8
+    ],
+    "300": [
+     39994,
+     5,
+     5,
+     6
+    ],
+    "500": [
+     39997,
+     3,
+     3,
+     3
+    ],
+    "750": [
+     39995,
+     4,
+     4,
+     5
+    ],
+    "1000": [
+     39989,
+     7,
+     7,
+     11
+    ]
+   },
+   "way": "moving",
+   "richest_most": 39513
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 45,
+   "most_tokens": 39999,
+   "most_copies": 321,
+   "two_at": 33,
+   "sweeps_at": 60,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 63,
+   "under_20_at": 65,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     67,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     100,
+     1,
+     533,
+     13156
+    ],
+    "5": [
+     181,
+     1,
+     533,
+     13141
+    ],
+    "10": [
+     244,
+     1,
+     533,
+     13124
+    ],
+    "25": [
+     294,
+     1,
+     533,
+     13100
+    ],
+    "50": [
+     9350,
+     53,
+     525,
+     10971
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 39910
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 2,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 34,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     19,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 68,
+   "most_tokens": 40000,
+   "most_copies": 255,
+   "two_at": 80,
+   "sweeps_at": 93,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 96,
+   "under_20_at": 98,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     139,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     202,
+     1,
+     485,
+     10895
+    ],
+    "5": [
+     382,
+     1,
+     485,
+     10894
+    ],
+    "10": [
+     658,
+     1,
+     484,
+     10891
+    ],
+    "25": [
+     1499,
+     1,
+     484,
+     10891
+    ],
+    "50": [
+     2945,
+     1,
+     481,
+     10886
+    ],
+    "100": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "200": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "300": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 2,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 71,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10894,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10895,
+   "world_ends": false,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     13,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     0,
+     0,
+     485,
+     10895
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 48,
+   "most_tokens": 40000,
+   "most_copies": 193,
+   "two_at": 41,
+   "sweeps_at": 88,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 92,
+   "under_20_at": 92,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     202,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     303,
+     1,
+     257,
+     13258
+    ],
+    "5": [
+     549,
+     1,
+     257,
+     13217
+    ],
+    "10": [
+     714,
+     1,
+     257,
+     13153
+    ],
+    "25": [
+     933,
+     1,
+     257,
+     13082
+    ],
+    "50": [
+     4237,
+     8,
+     257,
+     12118
+    ],
+    "100": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "200": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "300": [
+     39993,
+     8,
+     8,
+     7
+    ],
+    "500": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 10,
+   "most_tokens": 39999,
+   "most_copies": 238,
+   "two_at": 2,
+   "sweeps_at": 19,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 23,
+   "under_20_at": 24,
+   "died_out_at": null,
+   "agents_end": 9,
+   "links_end": 15,
+   "world_ends": true,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     137,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     232,
+     2,
+     257,
+     13263
+    ],
+    "5": [
+     624,
+     4,
+     257,
+     13251
+    ],
+    "10": [
+     4608,
+     21,
+     257,
+     12846
+    ],
+    "25": [
+     39994,
+     7,
+     7,
+     6
+    ],
+    "50": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "100": [
+     39979,
+     13,
+     13,
+     21
+    ],
+    "200": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "300": [
+     39993,
+     6,
+     6,
+     7
+    ],
+    "500": [
+     39996,
+     5,
+     5,
+     4
+    ],
+    "750": [
+     39990,
+     9,
+     9,
+     10
+    ],
+    "1000": [
+     39985,
+     9,
+     9,
+     15
+    ]
+   },
+   "way": "moving",
+   "richest_most": 38387
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 26,
+   "most_tokens": 39999,
+   "most_copies": 311,
+   "two_at": 13,
+   "sweeps_at": 40,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 45,
+   "under_20_at": 47,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     71,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     103,
+     1,
+     533,
+     13153
+    ],
+    "5": [
+     165,
+     1,
+     533,
+     13128
+    ],
+    "10": [
+     198,
+     1,
+     533,
+     13125
+    ],
+    "25": [
+     3535,
+     13,
+     530,
+     12403
+    ],
+    "50": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 39970
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 2,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 36,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13156,
+   "world_ends": false,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     13,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13156
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 46,
+   "most_tokens": 40000,
+   "most_copies": 226,
+   "two_at": 73,
+   "sweeps_at": 86,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 90,
+   "under_20_at": 91,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     230,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     346,
+     1,
+     485,
+     10895
+    ],
+    "5": [
+     625,
+     1,
+     485,
+     10894
+    ],
+    "10": [
+     1072,
+     1,
+     485,
+     10894
+    ],
+    "25": [
+     2347,
+     1,
+     481,
+     10888
+    ],
+    "50": [
+     4312,
+     1,
+     478,
+     10884
+    ],
+    "100": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "200": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 15,
+   "most_tokens": 39999,
+   "most_copies": 310,
+   "two_at": 1,
+   "sweeps_at": 22,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 28,
+   "under_20_at": 29,
+   "died_out_at": null,
+   "agents_end": 12,
+   "links_end": 14,
+   "world_ends": true,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     232,
+     2,
+     485,
+     10896
+    ],
+    "2": [
+     337,
+     2,
+     485,
+     10894
+    ],
+    "5": [
+     563,
+     2,
+     485,
+     10890
+    ],
+    "10": [
+     1361,
+     13,
+     485,
+     10871
+    ],
+    "25": [
+     36574,
+     310,
+     401,
+     2205
+    ],
+    "50": [
+     39988,
+     11,
+     11,
+     12
+    ],
+    "100": [
+     39984,
+     13,
+     13,
+     16
+    ],
+    "200": [
+     39994,
+     5,
+     5,
+     6
+    ],
+    "300": [
+     39989,
+     9,
+     9,
+     11
+    ],
+    "500": [
+     39989,
+     9,
+     9,
+     11
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     39986,
+     12,
+     12,
+     14
+    ]
+   },
+   "way": "moving",
+   "richest_most": 36102
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 60,
+   "most_tokens": 40000,
+   "most_copies": 195,
+   "two_at": 58,
+   "sweeps_at": 100,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 105,
+   "under_20_at": 107,
+   "died_out_at": null,
+   "agents_end": 3,
+   "links_end": 2,
+   "world_ends": true,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     197,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     291,
+     1,
+     257,
+     13255
+    ],
+    "5": [
+     511,
+     1,
+     257,
+     13209
+    ],
+    "10": [
+     676,
+     1,
+     257,
+     13162
+    ],
+    "25": [
+     896,
+     1,
+     257,
+     13102
+    ],
+    "50": [
+     1217,
+     1,
+     257,
+     12988
+    ],
+    "100": [
+     30838,
+     142,
+     242,
+     4410
+    ],
+    "200": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "300": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "500": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "750": [
+     39996,
+     5,
+     5,
+     4
+    ],
+    "1000": [
+     39998,
+     3,
+     3,
+     2
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 7,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 7,
+   "takes_off_at": null,
+   "most_tokens": 224,
+   "most_copies": 2,
+   "two_at": 3,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13252,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13252,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     55,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     110,
+     1,
+     257,
+     13263
+    ],
+    "5": [
+     224,
+     2,
+     257,
+     13259
+    ]
+   },
+   "way": "moving",
+   "richest_most": 169
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 25,
+   "most_tokens": 40000,
+   "most_copies": 303,
+   "two_at": 14,
+   "sweeps_at": 41,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 45,
+   "under_20_at": 46,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     105,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     156,
+     1,
+     533,
+     13154
+    ],
+    "5": [
+     262,
+     1,
+     533,
+     13122
+    ],
+    "10": [
+     311,
+     1,
+     533,
+     13100
+    ],
+    "25": [
+     4172,
+     21,
+     531,
+     12533
+    ],
+    "50": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 15,
+   "most_tokens": 39999,
+   "most_copies": 415,
+   "two_at": 2,
+   "sweeps_at": 21,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 26,
+   "under_20_at": 28,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     50,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     81,
+     2,
+     533,
+     13156
+    ],
+    "5": [
+     201,
+     5,
+     533,
+     13148
+    ],
+    "10": [
+     851,
+     20,
+     533,
+     13103
+    ],
+    "25": [
+     39127,
+     388,
+     409,
+     752
+    ],
+    "50": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "moving",
+   "richest_most": 34553
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 45,
+   "most_tokens": 40000,
+   "most_copies": 234,
+   "two_at": 66,
+   "sweeps_at": 78,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 81,
+   "under_20_at": 83,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     211,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     313,
+     1,
+     485,
+     10896
+    ],
+    "5": [
+     610,
+     1,
+     484,
+     10894
+    ],
+    "10": [
+     1087,
+     1,
+     483,
+     10893
+    ],
+    "25": [
+     2434,
+     1,
+     483,
+     10893
+    ],
+    "50": [
+     4403,
+     1,
+     482,
+     10892
+    ],
+    "100": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "200": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "300": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 25,
+   "most_tokens": 39998,
+   "most_copies": 327,
+   "two_at": 1,
+   "sweeps_at": 32,
+   "least_agents": 3,
+   "least_links": 2,
+   "halved_at": 38,
+   "under_20_at": 39,
+   "died_out_at": null,
+   "agents_end": 4,
+   "links_end": 3,
+   "world_ends": true,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     214,
+     2,
+     485,
+     10896
+    ],
+    "2": [
+     301,
+     2,
+     485,
+     10896
+    ],
+    "5": [
+     523,
+     2,
+     484,
+     10895
+    ],
+    "10": [
+     827,
+     2,
+     483,
+     10894
+    ],
+    "25": [
+     4436,
+     54,
+     482,
+     10784
+    ],
+    "50": [
+     24438,
+     13,
+     25,
+     57
+    ],
+    "100": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "200": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "300": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "500": [
+     39994,
+     7,
+     7,
+     6
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     39997,
+     4,
+     4,
+     3
+    ]
+   },
+   "way": "moving",
+   "richest_most": 29926
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 75,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 75,
+   "takes_off_at": 42,
+   "most_tokens": 39774,
+   "most_copies": 169,
+   "two_at": 27,
+   "sweeps_at": 62,
+   "least_agents": 4,
+   "least_links": 3,
+   "halved_at": 67,
+   "under_20_at": 69,
+   "died_out_at": null,
+   "agents_end": 7,
+   "links_end": 12,
+   "world_ends": true,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     205,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     304,
+     1,
+     257,
+     13257
+    ],
+    "5": [
+     537,
+     1,
+     257,
+     13218
+    ],
+    "10": [
+     722,
+     1,
+     257,
+     13152
+    ],
+    "25": [
+     929,
+     1,
+     257,
+     13074
+    ],
+    "50": [
+     6012,
+     15,
+     255,
+     11455
+    ]
+   },
+   "way": "at home",
+   "richest_most": 23408
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 17,
+   "most_tokens": 39999,
+   "most_copies": 231,
+   "two_at": 2,
+   "sweeps_at": 26,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 32,
+   "under_20_at": 32,
+   "died_out_at": null,
+   "agents_end": 4,
+   "links_end": 4,
+   "world_ends": true,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     137,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     232,
+     2,
+     257,
+     13263
+    ],
+    "5": [
+     300,
+     2,
+     257,
+     13254
+    ],
+    "10": [
+     405,
+     3,
+     257,
+     13237
+    ],
+    "25": [
+     22336,
+     112,
+     257,
+     7528
+    ],
+    "50": [
+     39997,
+     3,
+     3,
+     3
+    ],
+    "100": [
+     39998,
+     3,
+     3,
+     2
+    ],
+    "200": [
+     39993,
+     5,
+     5,
+     7
+    ],
+    "300": [
+     39996,
+     4,
+     4,
+     4
+    ],
+    "500": [
+     39997,
+     3,
+     3,
+     3
+    ],
+    "750": [
+     39997,
+     4,
+     4,
+     3
+    ],
+    "1000": [
+     39996,
+     4,
+     4,
+     4
+    ]
+   },
+   "way": "moving",
+   "richest_most": 39300
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 25,
+   "most_tokens": 40000,
+   "most_copies": 314,
+   "two_at": 8,
+   "sweeps_at": 37,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 41,
+   "under_20_at": 43,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     198,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     295,
+     1,
+     533,
+     13155
+    ],
+    "5": [
+     532,
+     1,
+     533,
+     13076
+    ],
+    "10": [
+     970,
+     4,
+     533,
+     12993
+    ],
+    "25": [
+     4897,
+     22,
+     531,
+     12133
+    ],
+    "50": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "100": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "200": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "300": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "500": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 2,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 99,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13155,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13157,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     6,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13157
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  }
+ ],
+ "levelling": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 563,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 563,
+   "takes_off_at": 404,
+   "most_tokens": 37679,
+   "most_copies": 227,
+   "two_at": 330,
+   "sweeps_at": 519,
+   "least_agents": 42,
+   "least_links": 55,
+   "halved_at": 526,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 1286,
+   "links_end": 1698,
+   "world_ends": false,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     88,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     97,
+     1,
+     485,
+     10880
+    ],
+    "5": [
+     113,
+     1,
+     485,
+     10852
+    ],
+    "10": [
+     132,
+     1,
+     485,
+     10843
+    ],
+    "25": [
+     182,
+     1,
+     485,
+     10832
+    ],
+    "50": [
+     266,
+     1,
+     485,
+     10822
+    ],
+    "100": [
+     446,
+     1,
+     485,
+     10813
+    ],
+    "200": [
+     866,
+     1,
+     487,
+     10800
+    ],
+    "300": [
+     1300,
+     1,
+     491,
+     10796
+    ],
+    "500": [
+     19310,
+     144,
+     517,
+     7017
+    ]
+   },
+   "way": "at home",
+   "richest_most": 11262
+  },
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 43,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 199,
+   "most_tokens": 31466,
+   "most_copies": 187,
+   "two_at": 99,
+   "sweeps_at": null,
+   "least_agents": 430,
+   "least_links": 1945,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 430,
+   "links_end": 1945,
+   "world_ends": false,
+   "at": {
+    "0": [
+     43,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     72,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     89,
+     1,
+     485,
+     10888
+    ],
+    "5": [
+     115,
+     1,
+     485,
+     10858
+    ],
+    "10": [
+     141,
+     1,
+     485,
+     10849
+    ],
+    "25": [
+     247,
+     1,
+     485,
+     10837
+    ],
+    "50": [
+     462,
+     1,
+     485,
+     10818
+    ],
+    "100": [
+     704,
+     3,
+     485,
+     10775
+    ],
+    "200": [
+     4001,
+     4,
+     486,
+     10568
+    ],
+    "300": [
+     15160,
+     44,
+     487,
+     8270
+    ],
+    "500": [
+     26808,
+     132,
+     473,
+     3852
+    ],
+    "750": [
+     30023,
+     170,
+     452,
+     2559
+    ],
+    "1000": [
+     31417,
+     176,
+     430,
+     1945
+    ]
+   },
+   "way": "moving",
+   "richest_most": 3621
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 2,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 115,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13249,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13249,
+   "world_ends": false,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     0,
+     0,
+     257,
+     13249
+    ]
+   },
+   "way": "at home",
+   "richest_most": 124
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 115,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": null,
+   "most_tokens": 1783,
+   "most_copies": 9,
+   "two_at": 98,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 12674,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13351,
+   "world_ends": false,
+   "at": {
+    "0": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     115,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     127,
+     1,
+     257,
+     13246
+    ],
+    "5": [
+     146,
+     1,
+     257,
+     13180
+    ],
+    "10": [
+     194,
+     1,
+     257,
+     13114
+    ],
+    "25": [
+     432,
+     1,
+     257,
+     13010
+    ],
+    "50": [
+     900,
+     1,
+     257,
+     12855
+    ],
+    "100": [
+     492,
+     1,
+     257,
+     12686
+    ],
+    "200": [
+     892,
+     1,
+     257,
+     12806
+    ],
+    "300": [
+     1290,
+     1,
+     257,
+     12775
+    ],
+    "500": [
+     1311,
+     1,
+     257,
+     13123
+    ],
+    "750": [
+     582,
+     1,
+     257,
+     13567
+    ],
+    "1000": [
+     876,
+     1,
+     257,
+     13351
+    ]
+   },
+   "way": "moving",
+   "richest_most": 1783
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 322,
+   "most_tokens": 40000,
+   "most_copies": 322,
+   "two_at": 199,
+   "sweeps_at": 738,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 768,
+   "under_20_at": 775,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     54,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     63,
+     1,
+     533,
+     13008
+    ],
+    "5": [
+     89,
+     1,
+     533,
+     12719
+    ],
+    "10": [
+     114,
+     1,
+     533,
+     12438
+    ],
+    "25": [
+     180,
+     1,
+     533,
+     12156
+    ],
+    "50": [
+     288,
+     1,
+     533,
+     11977
+    ],
+    "100": [
+     494,
+     1,
+     533,
+     11844
+    ],
+    "200": [
+     625,
+     8,
+     533,
+     11844
+    ],
+    "300": [
+     3163,
+     20,
+     533,
+     11494
+    ],
+    "500": [
+     12792,
+     109,
+     524,
+     9257
+    ],
+    "750": [
+     28569,
+     261,
+     476,
+     4815
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "start_tokens": 49,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 312,
+   "most_tokens": 39999,
+   "most_copies": 265,
+   "two_at": 25,
+   "sweeps_at": 617,
+   "least_agents": 2,
+   "least_links": 1,
+   "halved_at": 649,
+   "under_20_at": 674,
+   "died_out_at": null,
+   "agents_end": 2,
+   "links_end": 1,
+   "world_ends": true,
+   "at": {
+    "0": [
+     49,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     56,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     59,
+     1,
+     533,
+     12998
+    ],
+    "5": [
+     68,
+     1,
+     533,
+     12697
+    ],
+    "10": [
+     90,
+     1,
+     533,
+     12467
+    ],
+    "25": [
+     170,
+     3,
+     533,
+     12152
+    ],
+    "50": [
+     156,
+     1,
+     533,
+     11988
+    ],
+    "100": [
+     149,
+     1,
+     533,
+     11894
+    ],
+    "200": [
+     505,
+     1,
+     533,
+     12044
+    ],
+    "300": [
+     2865,
+     13,
+     533,
+     11647
+    ],
+    "500": [
+     22299,
+     138,
+     532,
+     5609
+    ],
+    "750": [
+     39999,
+     2,
+     2,
+     1
+    ],
+    "1000": [
+     39999,
+     2,
+     2,
+     1
+    ]
+   },
+   "way": "moving",
+   "richest_most": 36527
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 156,
+   "most_tokens": 40000,
+   "most_copies": 216,
+   "two_at": 150,
+   "sweeps_at": 318,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 325,
+   "under_20_at": 326,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     172,
+     1,
+     485,
+     10898
+    ],
+    "2": [
+     215,
+     1,
+     485,
+     10893
+    ],
+    "5": [
+     343,
+     1,
+     485,
+     10875
+    ],
+    "10": [
+     538,
+     1,
+     485,
+     10863
+    ],
+    "25": [
+     1049,
+     1,
+     485,
+     10839
+    ],
+    "50": [
+     1818,
+     1,
+     485,
+     10785
+    ],
+    "100": [
+     3033,
+     1,
+     485,
+     10707
+    ],
+    "200": [
+     7525,
+     28,
+     486,
+     10056
+    ],
+    "300": [
+     23108,
+     165,
+     471,
+     6325
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 6,
+   "start_tokens": 134,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 6,
+   "takes_off_at": null,
+   "most_tokens": 191,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10867,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10867,
+   "world_ends": false,
+   "at": {
+    "0": [
+     134,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     134,
+     1,
+     485,
+     10898
+    ],
+    "2": [
+     160,
+     1,
+     485,
+     10893
+    ],
+    "5": [
+     191,
+     1,
+     485,
+     10868
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 2,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 108,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13244,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13244,
+   "world_ends": false,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     0,
+     0,
+     257,
+     13244
+    ]
+   },
+   "way": "at home",
+   "richest_most": 123
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 108,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 856,
+   "most_tokens": 6533,
+   "most_copies": 23,
+   "two_at": 116,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 11285,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 11285,
+   "world_ends": false,
+   "at": {
+    "0": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     108,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     118,
+     1,
+     257,
+     13244
+    ],
+    "5": [
+     137,
+     1,
+     257,
+     13193
+    ],
+    "10": [
+     178,
+     1,
+     257,
+     13117
+    ],
+    "25": [
+     396,
+     1,
+     257,
+     12982
+    ],
+    "50": [
+     857,
+     1,
+     257,
+     12842
+    ],
+    "100": [
+     1787,
+     1,
+     257,
+     12658
+    ],
+    "200": [
+     969,
+     1,
+     257,
+     12722
+    ],
+    "300": [
+     1091,
+     1,
+     257,
+     13012
+    ],
+    "500": [
+     1173,
+     11,
+     257,
+     12806
+    ],
+    "750": [
+     1414,
+     13,
+     257,
+     12822
+    ],
+    "1000": [
+     6533,
+     23,
+     257,
+     11285
+    ]
+   },
+   "way": "moving",
+   "richest_most": 6488
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 242,
+   "most_tokens": 40000,
+   "most_copies": 324,
+   "two_at": 123,
+   "sweeps_at": 407,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 430,
+   "under_20_at": 431,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     54,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     63,
+     1,
+     533,
+     13014
+    ],
+    "5": [
+     80,
+     1,
+     533,
+     12699
+    ],
+    "10": [
+     103,
+     1,
+     533,
+     12414
+    ],
+    "25": [
+     177,
+     1,
+     533,
+     12110
+    ],
+    "50": [
+     305,
+     1,
+     533,
+     11955
+    ],
+    "100": [
+     566,
+     1,
+     533,
+     11838
+    ],
+    "200": [
+     2471,
+     8,
+     533,
+     11429
+    ],
+    "300": [
+     8936,
+     75,
+     533,
+     10092
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "start_tokens": 34,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 369,
+   "most_tokens": 29389,
+   "most_copies": 186,
+   "two_at": 44,
+   "sweeps_at": null,
+   "least_agents": 490,
+   "least_links": 2829,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 490,
+   "links_end": 2829,
+   "world_ends": false,
+   "at": {
+    "0": [
+     34,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     45,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     56,
+     1,
+     533,
+     12981
+    ],
+    "5": [
+     70,
+     1,
+     533,
+     12700
+    ],
+    "10": [
+     111,
+     1,
+     533,
+     12472
+    ],
+    "25": [
+     242,
+     1,
+     533,
+     12188
+    ],
+    "50": [
+     399,
+     1,
+     533,
+     12053
+    ],
+    "100": [
+     409,
+     1,
+     533,
+     11903
+    ],
+    "200": [
+     391,
+     1,
+     533,
+     11873
+    ],
+    "300": [
+     362,
+     6,
+     533,
+     12199
+    ],
+    "500": [
+     16022,
+     105,
+     532,
+     7487
+    ],
+    "750": [
+     23218,
+     138,
+     518,
+     5162
+    ],
+    "1000": [
+     29389,
+     177,
+     490,
+     2829
+    ]
+   },
+   "way": "moving",
+   "richest_most": 3911
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 196,
+   "most_tokens": 39924,
+   "most_copies": 228,
+   "two_at": 163,
+   "sweeps_at": 336,
+   "least_agents": 8,
+   "least_links": 10,
+   "halved_at": 350,
+   "under_20_at": 382,
+   "died_out_at": null,
+   "agents_end": 30,
+   "links_end": 44,
+   "world_ends": true,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     99,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     120,
+     1,
+     485,
+     10891
+    ],
+    "5": [
+     185,
+     1,
+     485,
+     10864
+    ],
+    "10": [
+     287,
+     1,
+     485,
+     10854
+    ],
+    "25": [
+     548,
+     1,
+     485,
+     10841
+    ],
+    "50": [
+     931,
+     1,
+     485,
+     10815
+    ],
+    "100": [
+     1609,
+     1,
+     485,
+     10790
+    ],
+    "200": [
+     4199,
+     18,
+     485,
+     10441
+    ],
+    "300": [
+     14970,
+     82,
+     485,
+     8534
+    ],
+    "500": [
+     38812,
+     22,
+     30,
+     45
+    ],
+    "750": [
+     35277,
+     20,
+     27,
+     52
+    ],
+    "1000": [
+     35375,
+     22,
+     30,
+     44
+    ]
+   },
+   "way": "at home",
+   "richest_most": 32380
+  },
+  {
+   "world": "s6301",
+   "place": 3,
+   "played": 466,
+   "start_tokens": 71,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 466,
+   "takes_off_at": null,
+   "most_tokens": 456,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10798,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 490,
+   "links_end": 10798,
+   "world_ends": false,
+   "at": {
+    "0": [
+     71,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     79,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     107,
+     1,
+     485,
+     10886
+    ],
+    "5": [
+     129,
+     1,
+     485,
+     10861
+    ],
+    "10": [
+     206,
+     1,
+     485,
+     10853
+    ],
+    "25": [
+     450,
+     1,
+     485,
+     10839
+    ],
+    "50": [
+     145,
+     1,
+     486,
+     10828
+    ],
+    "100": [
+     336,
+     1,
+     487,
+     10822
+    ],
+    "200": [
+     356,
+     1,
+     488,
+     10805
+    ],
+    "300": [
+     359,
+     1,
+     490,
+     10801
+    ]
+   },
+   "way": "moving",
+   "richest_most": 456
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 723,
+   "most_tokens": 8518,
+   "most_copies": 24,
+   "two_at": 549,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 11023,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 259,
+   "links_end": 11026,
+   "world_ends": false,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     105,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     112,
+     1,
+     257,
+     13230
+    ],
+    "5": [
+     126,
+     1,
+     257,
+     13169
+    ],
+    "10": [
+     157,
+     1,
+     257,
+     13106
+    ],
+    "25": [
+     204,
+     1,
+     257,
+     12990
+    ],
+    "50": [
+     243,
+     1,
+     257,
+     12952
+    ],
+    "100": [
+     299,
+     1,
+     257,
+     12903
+    ],
+    "200": [
+     379,
+     1,
+     257,
+     13002
+    ],
+    "300": [
+     503,
+     1,
+     257,
+     13237
+    ],
+    "500": [
+     1191,
+     1,
+     257,
+     12893
+    ],
+    "750": [
+     5464,
+     21,
+     259,
+     11730
+    ],
+    "1000": [
+     8518,
+     24,
+     259,
+     11026
+    ]
+   },
+   "way": "at home",
+   "richest_most": 1415
+  },
+  {
+   "world": "s6302",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 101,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": null,
+   "most_tokens": 1849,
+   "most_copies": 11,
+   "two_at": 108,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 12624,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 12908,
+   "world_ends": false,
+   "at": {
+    "0": [
+     101,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     105,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     119,
+     1,
+     257,
+     13249
+    ],
+    "5": [
+     136,
+     1,
+     257,
+     13193
+    ],
+    "10": [
+     181,
+     1,
+     257,
+     13132
+    ],
+    "25": [
+     386,
+     1,
+     257,
+     12991
+    ],
+    "50": [
+     841,
+     1,
+     257,
+     12878
+    ],
+    "100": [
+     1734,
+     1,
+     257,
+     12664
+    ],
+    "200": [
+     699,
+     1,
+     257,
+     12776
+    ],
+    "300": [
+     1260,
+     1,
+     257,
+     12880
+    ],
+    "500": [
+     1002,
+     1,
+     257,
+     12945
+    ],
+    "750": [
+     1091,
+     1,
+     257,
+     12841
+    ],
+    "1000": [
+     1061,
+     1,
+     257,
+     12908
+    ]
+   },
+   "way": "moving",
+   "richest_most": 1849
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 1000,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 259,
+   "most_tokens": 40000,
+   "most_copies": 308,
+   "two_at": 154,
+   "sweeps_at": 424,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 439,
+   "under_20_at": 442,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     54,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     62,
+     1,
+     533,
+     13016
+    ],
+    "5": [
+     98,
+     1,
+     533,
+     12718
+    ],
+    "10": [
+     140,
+     1,
+     533,
+     12459
+    ],
+    "25": [
+     244,
+     1,
+     533,
+     12124
+    ],
+    "50": [
+     410,
+     1,
+     533,
+     11944
+    ],
+    "100": [
+     730,
+     1,
+     533,
+     11786
+    ],
+    "200": [
+     2048,
+     12,
+     533,
+     11642
+    ],
+    "300": [
+     6716,
+     39,
+     533,
+     10872
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 3,
+   "played": 2,
+   "start_tokens": 36,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 48,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13024,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13024,
+   "world_ends": false,
+   "at": {
+    "0": [
+     36,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     48,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13024
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 132,
+   "most_tokens": 40000,
+   "most_copies": 227,
+   "two_at": 118,
+   "sweeps_at": 306,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 316,
+   "under_20_at": 318,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     158,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     209,
+     1,
+     485,
+     10894
+    ],
+    "5": [
+     330,
+     1,
+     485,
+     10871
+    ],
+    "10": [
+     516,
+     1,
+     485,
+     10861
+    ],
+    "25": [
+     1007,
+     1,
+     485,
+     10830
+    ],
+    "50": [
+     1712,
+     1,
+     485,
+     10785
+    ],
+    "100": [
+     2937,
+     1,
+     485,
+     10726
+    ],
+    "200": [
+     9347,
+     23,
+     485,
+     9593
+    ],
+    "300": [
+     27465,
+     213,
+     460,
+     5119
+    ],
+    "500": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6301",
+   "place": 4,
+   "played": 2,
+   "start_tokens": 119,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 119,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10888,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 485,
+   "links_end": 10888,
+   "world_ends": false,
+   "at": {
+    "0": [
+     119,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     119,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     0,
+     0,
+     485,
+     10888
+    ]
+   },
+   "way": "moving",
+   "richest_most": 212
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": null,
+   "most_tokens": 3470,
+   "most_copies": 8,
+   "two_at": 452,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 12226,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 12226,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     105,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     109,
+     1,
+     257,
+     13237
+    ],
+    "5": [
+     126,
+     1,
+     257,
+     13169
+    ],
+    "10": [
+     138,
+     1,
+     257,
+     13097
+    ],
+    "25": [
+     173,
+     1,
+     257,
+     12990
+    ],
+    "50": [
+     217,
+     1,
+     257,
+     12916
+    ],
+    "100": [
+     309,
+     1,
+     257,
+     12884
+    ],
+    "200": [
+     471,
+     1,
+     257,
+     12907
+    ],
+    "300": [
+     626,
+     1,
+     257,
+     13043
+    ],
+    "500": [
+     1174,
+     8,
+     257,
+     12925
+    ],
+    "750": [
+     1895,
+     8,
+     257,
+     12706
+    ],
+    "1000": [
+     3470,
+     8,
+     257,
+     12226
+    ]
+   },
+   "way": "at home",
+   "richest_most": 954
+  },
+  {
+   "world": "s6302",
+   "place": 4,
+   "played": 2,
+   "start_tokens": 99,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 104,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13237,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13237,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     104,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     0,
+     0,
+     257,
+     13237
+    ]
+   },
+   "way": "moving",
+   "richest_most": 123
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 466,
+   "most_tokens": 40000,
+   "most_copies": 311,
+   "two_at": 368,
+   "sweeps_at": 634,
+   "least_agents": 1,
+   "least_links": 0,
+   "halved_at": 646,
+   "under_20_at": 654,
+   "died_out_at": null,
+   "agents_end": 1,
+   "links_end": 0,
+   "world_ends": true,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     54,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     69,
+     1,
+     533,
+     12991
+    ],
+    "5": [
+     89,
+     1,
+     533,
+     12697
+    ],
+    "10": [
+     110,
+     1,
+     533,
+     12440
+    ],
+    "25": [
+     160,
+     1,
+     533,
+     12128
+    ],
+    "50": [
+     234,
+     1,
+     533,
+     11925
+    ],
+    "100": [
+     364,
+     1,
+     533,
+     11804
+    ],
+    "200": [
+     687,
+     1,
+     533,
+     11721
+    ],
+    "300": [
+     993,
+     1,
+     533,
+     11673
+    ],
+    "500": [
+     7655,
+     71,
+     533,
+     11033
+    ],
+    "750": [
+     40000,
+     1,
+     1,
+     0
+    ],
+    "1000": [
+     40000,
+     1,
+     1,
+     0
+    ]
+   },
+   "way": "at home",
+   "richest_most": 40000
+  },
+  {
+   "world": "s6303",
+   "place": 4,
+   "played": 1000,
+   "start_tokens": 53,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": null,
+   "most_tokens": 291,
+   "most_copies": 2,
+   "two_at": 27,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 11720,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 11720,
+   "world_ends": false,
+   "at": {
+    "0": [
+     53,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     55,
+     1,
+     533,
+     13156
+    ],
+    "2": [
+     61,
+     1,
+     533,
+     13011
+    ],
+    "5": [
+     68,
+     1,
+     533,
+     12695
+    ],
+    "10": [
+     102,
+     1,
+     533,
+     12447
+    ],
+    "25": [
+     277,
+     1,
+     533,
+     12128
+    ],
+    "50": [
+     236,
+     1,
+     533,
+     11947
+    ],
+    "100": [
+     218,
+     1,
+     533,
+     11835
+    ],
+    "200": [
+     246,
+     1,
+     533,
+     11776
+    ],
+    "300": [
+     237,
+     1,
+     533,
+     11749
+    ],
+    "500": [
+     252,
+     1,
+     533,
+     11732
+    ],
+    "750": [
+     163,
+     1,
+     533,
+     11725
+    ],
+    "1000": [
+     240,
+     1,
+     533,
+     11720
+    ]
+   },
+   "way": "moving",
+   "richest_most": 291
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 135,
+   "most_tokens": 39993,
+   "most_copies": 216,
+   "two_at": 112,
+   "sweeps_at": 293,
+   "least_agents": 4,
+   "least_links": 3,
+   "halved_at": 299,
+   "under_20_at": 318,
+   "died_out_at": null,
+   "agents_end": 21,
+   "links_end": 41,
+   "world_ends": true,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     155,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     188,
+     1,
+     485,
+     10888
+    ],
+    "5": [
+     284,
+     1,
+     485,
+     10871
+    ],
+    "10": [
+     420,
+     1,
+     485,
+     10865
+    ],
+    "25": [
+     796,
+     1,
+     485,
+     10851
+    ],
+    "50": [
+     1374,
+     1,
+     485,
+     10813
+    ],
+    "100": [
+     2385,
+     1,
+     485,
+     10756
+    ],
+    "200": [
+     7822,
+     17,
+     510,
+     10018
+    ],
+    "300": [
+     32567,
+     68,
+     115,
+     127
+    ],
+    "500": [
+     39989,
+     4,
+     5,
+     7
+    ],
+    "750": [
+     38894,
+     26,
+     43,
+     93
+    ],
+    "1000": [
+     36979,
+     16,
+     21,
+     41
+    ]
+   },
+   "way": "at home",
+   "richest_most": 37228
+  },
+  {
+   "world": "s6301",
+   "place": 5,
+   "played": 676,
+   "start_tokens": 109,
+   "agents_start": 484,
+   "links_start": 10894,
+   "lost_first_game": false,
+   "line_gone_at": 676,
+   "takes_off_at": null,
+   "most_tokens": 216,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 484,
+   "least_links": 10830,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 570,
+   "links_end": 10988,
+   "world_ends": false,
+   "at": {
+    "0": [
+     109,
+     1,
+     484,
+     10894
+    ],
+    "1": [
+     110,
+     1,
+     485,
+     10896
+    ],
+    "2": [
+     141,
+     1,
+     485,
+     10889
+    ],
+    "5": [
+     175,
+     1,
+     485,
+     10875
+    ],
+    "10": [
+     140,
+     1,
+     485,
+     10864
+    ],
+    "25": [
+     133,
+     1,
+     485,
+     10852
+    ],
+    "50": [
+     116,
+     1,
+     485,
+     10848
+    ],
+    "100": [
+     135,
+     1,
+     485,
+     10844
+    ],
+    "200": [
+     121,
+     1,
+     486,
+     10835
+    ],
+    "300": [
+     190,
+     1,
+     490,
+     10835
+    ],
+    "500": [
+     193,
+     1,
+     517,
+     10878
+    ]
+   },
+   "way": "moving",
+   "richest_most": 216
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 2,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 105,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 257,
+   "least_links": 13230,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 257,
+   "links_end": 13230,
+   "world_ends": false,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     105,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     0,
+     0,
+     257,
+     13230
+    ]
+   },
+   "way": "at home",
+   "richest_most": 123
+  },
+  {
+   "world": "s6302",
+   "place": 5,
+   "played": 1000,
+   "start_tokens": 103,
+   "agents_start": 257,
+   "links_start": 13263,
+   "lost_first_game": false,
+   "line_gone_at": null,
+   "takes_off_at": 480,
+   "most_tokens": 39261,
+   "most_copies": 133,
+   "two_at": 106,
+   "sweeps_at": 952,
+   "least_agents": 126,
+   "least_links": 172,
+   "halved_at": 993,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 201,
+   "links_end": 347,
+   "world_ends": false,
+   "at": {
+    "0": [
+     103,
+     1,
+     257,
+     13263
+    ],
+    "1": [
+     105,
+     1,
+     257,
+     13263
+    ],
+    "2": [
+     117,
+     1,
+     257,
+     13249
+    ],
+    "5": [
+     131,
+     1,
+     257,
+     13182
+    ],
+    "10": [
+     183,
+     1,
+     257,
+     13120
+    ],
+    "25": [
+     360,
+     1,
+     257,
+     13095
+    ],
+    "50": [
+     771,
+     1,
+     257,
+     13013
+    ],
+    "100": [
+     1593,
+     1,
+     257,
+     12748
+    ],
+    "200": [
+     678,
+     1,
+     257,
+     12750
+    ],
+    "300": [
+     1139,
+     1,
+     257,
+     12740
+    ],
+    "500": [
+     4274,
+     16,
+     257,
+     11980
+    ],
+    "750": [
+     8076,
+     40,
+     257,
+     10796
+    ],
+    "1000": [
+     37855,
+     93,
+     201,
+     347
+    ]
+   },
+   "way": "moving",
+   "richest_most": 8514
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 2,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 100,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13012,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13012,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     100,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13012
+    ]
+   },
+   "way": "at home",
+   "richest_most": 225
+  },
+  {
+   "world": "s6303",
+   "place": 5,
+   "played": 2,
+   "start_tokens": 99,
+   "agents_start": 533,
+   "links_start": 13155,
+   "lost_first_game": false,
+   "line_gone_at": 2,
+   "takes_off_at": null,
+   "most_tokens": 99,
+   "most_copies": 1,
+   "two_at": null,
+   "sweeps_at": null,
+   "least_agents": 533,
+   "least_links": 13001,
+   "halved_at": null,
+   "under_20_at": null,
+   "died_out_at": null,
+   "agents_end": 533,
+   "links_end": 13001,
+   "world_ends": false,
+   "at": {
+    "0": [
+     99,
+     1,
+     533,
+     13155
+    ],
+    "1": [
+     99,
+     1,
+     533,
+     13157
+    ],
+    "2": [
+     0,
+     0,
+     533,
+     13001
+    ]
+   },
+   "way": "moving",
+   "richest_most": 225
+  }
+ ],
+ "by heads, no hoarder": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    484,
+    484,
+    546
+   ],
+   "links_each": [
+    45.0,
+    40.2
+   ],
+   "richest": [
+    212,
+    218,
+    196
+   ],
+   "richest_median": 200,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.2
+   ],
+   "richest": [
+    123,
+    126,
+    123
+   ],
+   "richest_median": 124,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    533,
+    533,
+    533
+   ],
+   "links_each": [
+    49.4,
+    49.4
+   ],
+   "richest": [
+    225,
+    246,
+    235
+   ],
+   "richest_median": 235,
+   "world_ends": false
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    484,
+    469,
+    469
+   ],
+   "links_each": [
+    45.0,
+    46.1
+   ],
+   "richest": [
+    212,
+    239,
+    231
+   ],
+   "richest_median": 216,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.8
+   ],
+   "richest": [
+    123,
+    127,
+    122
+   ],
+   "richest_median": 123,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    533,
+    525,
+    525
+   ],
+   "links_each": [
+    49.4,
+    50.4
+   ],
+   "richest": [
+    225,
+    315,
+    312
+   ],
+   "richest_median": 275,
+   "world_ends": false
+  }
+ ],
+ "a limit on a stake, no hoarder": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    484,
+    483,
+    564
+   ],
+   "links_each": [
+    45.0,
+    38.7
+   ],
+   "richest": [
+    212,
+    230,
+    197
+   ],
+   "richest_median": 204,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.2
+   ],
+   "richest": [
+    123,
+    126,
+    123
+   ],
+   "richest_median": 124,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    533,
+    525,
+    525
+   ],
+   "links_each": [
+    49.4,
+    50.3
+   ],
+   "richest": [
+    225,
+    237,
+    158
+   ],
+   "richest_median": 225,
+   "world_ends": false
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    484,
+    479,
+    479
+   ],
+   "links_each": [
+    45.0,
+    45.5
+   ],
+   "richest": [
+    212,
+    249,
+    226
+   ],
+   "richest_median": 218,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.8
+   ],
+   "richest": [
+    123,
+    127,
+    122
+   ],
+   "richest_median": 123,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    533,
+    531,
+    531
+   ],
+   "links_each": [
+    49.4,
+    49.5
+   ],
+   "richest": [
+    225,
+    298,
+    294
+   ],
+   "richest_median": 266,
+   "world_ends": false
+  }
+ ],
+ "levelling, no hoarder": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    484,
+    484,
+    499
+   ],
+   "links_each": [
+    45.0,
+    43.3
+   ],
+   "richest": [
+    212,
+    212,
+    89
+   ],
+   "richest_median": 91,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    102.7
+   ],
+   "richest": [
+    123,
+    123,
+    105
+   ],
+   "richest_median": 105,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    533,
+    533,
+    533
+   ],
+   "links_each": [
+    49.4,
+    46.4
+   ],
+   "richest": [
+    225,
+    225,
+    70
+   ],
+   "richest_median": 77,
+   "world_ends": false
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    484,
+    484,
+    501
+   ],
+   "links_each": [
+    45.0,
+    43.3
+   ],
+   "richest": [
+    212,
+    212,
+    92
+   ],
+   "richest_median": 92,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.3
+   ],
+   "richest": [
+    123,
+    123,
+    104
+   ],
+   "richest_median": 105,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    533,
+    533,
+    533
+   ],
+   "links_each": [
+    49.4,
+    50.0
+   ],
+   "richest": [
+    225,
+    225,
+    53
+   ],
+   "richest_median": 55,
+   "world_ends": false
+  }
+ ],
+ "no rule, no hoarder": [
+  {
+   "world": "s6301",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    484,
+    481,
+    484
+   ],
+   "links_each": [
+    45.0,
+    44.5
+   ],
+   "richest": [
+    212,
+    225,
+    224
+   ],
+   "richest_median": 212,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.2
+   ],
+   "richest": [
+    123,
+    126,
+    123
+   ],
+   "richest_median": 124,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 1,
+   "played": 1000,
+   "agents": [
+    533,
+    526,
+    526
+   ],
+   "links_each": [
+    49.4,
+    50.3
+   ],
+   "richest": [
+    225,
+    237,
+    152
+   ],
+   "richest_median": 225,
+   "world_ends": false
+  },
+  {
+   "world": "s6301",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    484,
+    484,
+    565
+   ],
+   "links_each": [
+    45.0,
+    37.8
+   ],
+   "richest": [
+    212,
+    244,
+    224
+   ],
+   "richest_median": 213,
+   "world_ends": false
+  },
+  {
+   "world": "s6302",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    257,
+    257,
+    257
+   ],
+   "links_each": [
+    103.2,
+    103.8
+   ],
+   "richest": [
+    123,
+    127,
+    122
+   ],
+   "richest_median": 123,
+   "world_ends": false
+  },
+  {
+   "world": "s6303",
+   "place": 2,
+   "played": 1000,
+   "agents": [
+    533,
+    531,
+    531
+   ],
+   "links_each": [
+    49.4,
+    49.5
+   ],
+   "richest": [
+    225,
+    298,
+    294
+   ],
+   "richest_median": 266,
+   "world_ends": false
+  }
+ ]
+}

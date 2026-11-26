@@ -56,6 +56,15 @@ hand, a hoarder that stakes on all its [neighbours](the-world.md#the-network "An
 is rich enough: its line took half the world in all 30 trials and 25
 worlds ended; confirmed. The world of equals has no defence against it.
 
+Experiment 66 played those 30 trials again under each of three rules that
+wealth should not break, chosen by the author. A coalition counted by
+heads stops the hoarder in its first [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in all 30 trials, and a world
+of equals plays under it as before. A limit on a stake does not stop it
+(25 of 30 lines took half the world). Tokens that level across links only
+slow it: 11 lines took half the world, 3.5 to 22 times later than
+without the rule. The
+thesis had levelling stop it, so it is undecided.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -96,7 +105,7 @@ a node, unless a coalition of smaller stakers outweighs it
 an agent may walk the network to make a link with a stranger, who cannot
 refuse; every link holds a token; a link nobody staked across is cut.
 
-In the world of equals every agent does the same in every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."):
+In the world of equals every agent does the same in every game:
 
 1. It puts one token on each of its neighbours and one on itself. With 56
    links and 56 tokens that uses them all.
@@ -923,7 +932,124 @@ itself lives on under it.
 > **It fails if:** By heads or under levelling at least 20 of the 30 lines sweep, or at least three of the six control worlds end; or under the limit at most 5 of the 30 lines sweep. Anything else is undecided. Reported beside it, for each rule by itself: how many lines sweep and worlds end, by way of hoarding and by world, and when; how many lines are lost and when; the most tokens a line held; in the controls the world's agents, links and richest holding at the start and the end, beside the six controls under no rule; and the counts of Experiment 65, which played the same trials under no rule (30 of 30 lines swept, 25 of 30 worlds ended).
 <!-- /thesis -->
 
-*Planned; the result follows here when the trials are played.*
+**The thesis is undecided.** Two of its three predictions held and one did
+not. By heads no line swept and no world ended, as predicted. Under the
+limit 25 of the 30 lines swept, as predicted. But under levelling 11 lines
+swept and 9 worlds ended, where the thesis allowed 5: levelling slows the
+hoarder and does not stop it. No control world ended under any rule.
+
+| rule | lines that sweep, of 30 | worlds that end, of 30 | lines lost | control worlds that end, of 6 |
+|---|---|---|---|---|
+| none (Experiment 65) | 30 | 25 | 2 | 0 |
+| a coalition counted by heads | 0 | 0 | 30 | 0 |
+| a limit on a stake | 25 | 25 | 6 | 0 |
+| tokens that level across links | 11 | 9 | 12 | 0 |
+
+- **By heads the hoarder is gone at once.** 29 of the 30 hoarders lost
+  their node in their first game and the last in its second, at home and
+  moving alike. None held more than 134 tokens, and no world changed by
+  more than one agent. The hoarder is the largest staker on the node it
+  hoards on, and two neighbours that flag a token there now take it.
+- **By heads a world of equals plays as before.** In the densest world the
+  two controls by heads are the controls under no rule, iteration for
+  iteration, through all 1,000: the same agents, links and richest holding.
+  There every stake is one token, so tokens and heads count the same. The
+  other two worlds differ from the second iteration on and have 469 to
+  546 agents at the end (484 to 565 under no rule).
+- **The limit changes nothing for the hoarder at home.** All 15 swept, at
+  iteration 37 to 125, 68 as a median; without the rule it was 33 to 121
+  and 71. The hoarder that spreads stakes on each node what its holder
+  holds, and that is what the limit allows.
+- **Under the limit the moving hoarder is faster, or lost.** 10 of 15
+  swept, at iteration 19 to 66, 22 as a median, where it was 71 to 134
+  without the rule; the other five were lost in their first seven games.
+  What is over the limit stays on its own node, so it holds that node
+  while it stakes on its neighbour's. All 25 worlds whose line swept
+  ended, with 1 to 19 agents.
+- **Levelling is a brake.** At home 9 of 15 lines swept, at iteration 293
+  to 738, 407 as a median, where it was 71 without the rule.
+  Moving, 2 of 15 swept, at 617 and 952. Twelve lines were lost, eight of
+  them in their second game. Six of the nine worlds that ended were left
+  as one agent with all 40,000 tokens.
+- **Levelling brakes harder where agents have more links.** In the densest
+  world, with 103 links each, no hoarder at home swept: three were lost in
+  their second game, and the other two held 8 and 24 agents and 3,470 and
+  8,518 tokens after 1,000 iterations, still growing. In the worlds with
+  45 and 49 links each, 9 of 10 swept.
+- **Levelling changes the world of equals itself, and it lives.** The
+  richest holding of the six controls fell from 212, 123 and 225 tokens to
+  89 and 92, 104 and 105, and 53 and 70. The agents stayed: 499 and 501,
+  257 and 257, 533 and 533.
+
+| rule | hoards | seed 6301, 45 links each | seed 6302, 103 links each | seed 6303, 49 links each |
+|---|---|---|---|---|
+| none (Experiment 65) | at home | 5 of 5 sweep, at 71 to 121 | 5 of 5, at 61 to 101 | 5 of 5, at 33 to 56 |
+| | moving | 5 of 5, at 73 to 113 | 5 of 5, at 90 to 134 | 5 of 5, at 71 to 89 |
+| by heads | at home | 0 of 5 | 0 of 5 | 0 of 5 |
+| | moving | 0 of 5 | 0 of 5 | 0 of 5 |
+| a limit on a stake | at home | 5 of 5, at 73 to 125 | 5 of 5, at 62 to 100 | 5 of 5, at 37 to 60 |
+| | moving | 4 of 5, at 22 to 32 | 4 of 5, at 19 to 26 | 2 of 5, at 21 and 66 |
+| levelling | at home | 5 of 5, at 293 to 519 | 0 of 5 | 4 of 5, at 407 to 738 |
+| | moving | 0 of 5 | 1 of 5, at 952 | 1 of 5, at 617 |
+
+The control worlds, with no hoarder, at the start and after 1,000
+iterations (two trials for each world):
+
+| rule | world | agents | links each | richest holding |
+|---|---|---|---|---|
+| none | seed 6301 | 484 → 484, 565 | 45.0 → 44.5, 37.8 | 212 → 224, 224 |
+| | seed 6302 | 257 → 257, 257 | 103.2 → 103.2, 103.8 | 123 → 123, 122 |
+| | seed 6303 | 533 → 526, 531 | 49.4 → 50.3, 49.5 | 225 → 152, 294 |
+| by heads | seed 6301 | 484 → 546, 469 | 45.0 → 40.2, 46.1 | 212 → 196, 231 |
+| | seed 6302 | 257 → 257, 257 | 103.2 → 103.2, 103.8 | 123 → 123, 122 |
+| | seed 6303 | 533 → 533, 525 | 49.4 → 49.4, 50.4 | 225 → 235, 312 |
+| a limit on a stake | seed 6301 | 484 → 564, 479 | 45.0 → 38.7, 45.5 | 212 → 197, 226 |
+| | seed 6302 | 257 → 257, 257 | 103.2 → 103.2, 103.8 | 123 → 123, 122 |
+| | seed 6303 | 533 → 525, 531 | 49.4 → 50.3, 49.5 | 225 → 158, 294 |
+| levelling | seed 6301 | 484 → 499, 501 | 45.0 → 43.3, 43.3 | 212 → 89, 92 |
+| | seed 6302 | 257 → 257, 257 | 103.2 → 102.7, 103.3 | 123 → 105, 104 |
+| | seed 6303 | 533 → 533, 533 | 49.4 → 46.4, 50.0 | 225 → 70, 53 |
+
+Under the limit, too, the densest world plays exactly as under no rule
+for all 1,000 iterations, and one of the two trials of seed 6303 does.
+Among equals the limit is hardly ever met.
+
+**Where the thesis was wrong.** It reckoned that a hoarder gains about one
+token a link in a game and that levelling takes one a link back, so that
+nothing is left. Something is left. Over the first ten games a hoarder at
+home gained 16 to 119 tokens a game without the rule, and under levelling
+still 6 to 40 in the two worlds with fewer links and 4 to 6 in the
+densest. A reading, not measured: the tokens that levelling passes to the
+neighbours are staked again, in part on the hoarder's node, and come back
+to it. And once a line holds several nodes its tokens grow many times
+faster, in one trial from 566 to 8,936 within 200 iterations, which one
+token a link does not hold back.
+
+**What this shows.** Of the three rules one stops the hoarder that
+spreads: a coalition counted by heads. It stops it in the first game, in
+every world, and a world of equals plays under it as it did before,
+because among equals a stake is already one token. A limit by what the
+holder holds is no guard, since it is the very stake that takes a node.
+Levelling by one token a link buys time, more with more links, and not
+safety.
+
+**What it does not show.** The hoarder is written by hand, for the old
+rule. By heads the largest staker on a node is the one who loses it, and a
+line that wins by many small stakes was not tried. The residents' brains
+were made under the old rule, and the controls play 1,000 iterations: that
+a world keeps the order of equals for long under a head count, that it
+forms it there, and that mutation finds no other way to break it, are not
+shown. Those need worlds played on under the rule.
+
+One mistake was found on the way. The limit crashed in a game in which
+some agent had no link, in nine trials, after the world had been taken.
+It was corrected while the experiment was being played
+(26 November 2026), and those nine were played again from their start. So
+55 trials ran on the first copy of the engine and 59 on the corrected one.
+The two differ only under the limit, in a game with such an agent, and no
+trial that finished on the first copy met one: it would have stopped.
+
+The numbers are made by `python3 research/efficient/E50/e66.py`.
 
 <!-- runs E66 -->
 > [!info]- The trials behind this page
@@ -1016,6 +1142,7 @@ Experiments 56, 57 and 58 are read by
 `E63` after it); the last iterations of the worlds that died by
 `python3 research/efficient/E50/autopsy.py` and
 `autopsy_lines.py`; Experiments 64 and 65 by
-`python3 research/efficient/E50/e64.py` (with `E65` after it). What the agents
+`python3 research/efficient/E50/e64.py` (with `E65` after it); Experiment 66
+by `python3 research/efficient/E50/e66.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
