@@ -256,6 +256,11 @@ def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
     every draw from then on: the same world played on in several ways. Its iterations go on counting
     from there, so `iterations` is where it ends, not how long it plays. Such a run is named for where
     it comes from as well as for what it is, and keeps the world it started from as its first.
+
+    A source that says `"again": true` is played again instead: under the settings and the seed of the
+    run that kept the world, and with the random state kept with it, so that it is that run's own history
+    from there (the worker refuses any other settings). It is how a finished run comes to keep more of
+    its worlds than it did: the same play, recorded more often.
     """
     if "readout" in runs:
         raise LabError(f"{name}: a plan played on from a kept world has no readout (its checks would ask for "
@@ -265,19 +270,20 @@ def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
     own = {c.get("name"): c["from"] for c in runs["conditions"] if "from" in c}
     for spec in specs:
         source = own.get(spec.condition, runs.get("from"))
-        if not isinstance(source, dict) or set(source) != {"run", "at"} or not _whole(source["at"], 0):
+        if not isinstance(source, dict) or not {"run", "at"} <= set(source) <= {"run", "at", "again"} \
+                or not _whole(source["at"], 0) or source.get("again", True) is not True:
             raise LabError(f"{name} from: a run and the iteration of a world it kept, {{\"run\": ..., \"at\": ...}}, "
-                           f"for the plan or for every condition")
-        at = int(source["at"])
-        mark = hashlib.sha1(f"{source['run']} {at}".encode()).hexdigest()[:6]
+                           f"for the plan or for every condition; with \"again\": true to play it again as it was")
+        at, again = int(source["at"]), bool(source.get("again"))
+        mark = hashlib.sha1(f"{source['run']} {at}{' again' if again else ''}".encode()).hexdigest()[:6]
         if spec.targets[-1] <= at:
             raise LabError(f"{name}: it is played on from iteration {at:,}, so it has to end later than that")
         if not int(spec.config.get("archive_every", 0)) or at % int(spec.config["archive_every"]):
             raise LabError(f"{name}: a run played on keeps the world it starts from, so iteration {at:,} has to "
                            f"be one its record.archive_every keeps")
         spec.run_id += f"-on{mark}"
-        spec.name += f" · played on from {source['run']} at {at:,}"
-        spec.lab = {**spec.lab, "from": {"run": source["run"], "at": at}}
+        spec.name += f" · played {'again' if again else 'on'} from {source['run']} at {at:,}"
+        spec.lab = {**spec.lab, "from": {"run": source["run"], "at": at, **({"again": True} if again else {})}}
         spec.targets = [t for t in spec.targets if t > at]
         spec.start = at
 
@@ -299,6 +305,11 @@ def nothing_to_play_on_from(spec: RunSpec) -> Optional[str]:
         return f"there is no run {source['run']} on this machine to play on from"
     if source["at"] not in kept:
         return f"{source['run']} kept no world at iteration {source['at']:,}"
+    if source.get("again"):
+        other = store.other_settings(spec.config, source["run"])
+        if other:
+            return (f"a world is played again under the settings it was played under: {', '.join(other)} "
+                    f"differ from those of {source['run']}")
     return None
 
 
@@ -391,11 +402,14 @@ def trial_id_for(trial: Dict[str, Any]) -> str:
 
 
 def _grid(name: str, label: str, grid: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """Every combination of a grid's lists; a `pair` is two eras, `home` "a" or "b" one of them."""
+    """
+    Every combination of a grid's lists; a `pair` is two eras, `home` "a" or "b" one of them. A `line`
+    is one value, the brains of a line, and not a list of values to try.
+    """
     import itertools
     keys = sorted(grid)
     values = [parse_seeds(grid[k]) if k in ("seed", "place") and isinstance(grid[k], str)
-              else grid[k] if isinstance(grid[k], list) else [grid[k]] for k in keys]
+              else grid[k] if isinstance(grid[k], list) and k != "line" else [grid[k]] for k in keys]
     items = []
     for combo in itertools.product(*values):
         item = dict(zip(keys, combo))
@@ -479,6 +493,7 @@ def _experiment_trials(name: str) -> List[RunSpec]:
                 if trial["kind"] == "contest" else
                 f"{trial['mutants']} mutants ({trial['operator']}) beside {trial['controls']} controls at {era:,}, "
                 f"seed {trial['seed']}" if trial["kind"] == "assay" else
+                f"played on from {era:,}, seed {trial['seed']}" if trial["kind"] == "sequel" else
                 f"{trial['strategy']} in a patch of {trial['size']:g} at {era:,}, place {trial['place']}"
                 + (f", in a world of {trial['background']}" if trial.get("background") else ""))
         specs.append(RunSpec(

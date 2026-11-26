@@ -1,0 +1,90 @@
+{
+ "id": "E67",
+ "title": "The two worlds of equals that died, played again from the last world each kept",
+ "thesis": {
+  "claim": "A world played again from a world its run kept, under the same settings and with the random state kept with that world, is the same world. Both worlds of equals that died in Experiment 63 are taken by the same line of brains again and die out at the same iteration.",
+  "why": "A world draws all its luck from one stream of random numbers, and a kept world holds the state of that stream beside every agent, brain, link and message. Nothing else decides what happens next. The engine has been changed since those runs were made (hand-written strategies, the setting wealth_guard), but with those off it should play as it did. If that is so, a finished run can be made to keep more of its worlds than it kept: here one every 10 iterations through the takeover, where the runs kept one every 2,500. The worlds inside the takeover hold the brains of the lines that took them, which no kept world has, and a rule can then be tried against a line that evolved and not only against one written by hand.",
+  "confirm": "Each of the two runs is played again from the last world it kept before it died, iteration 27,500 for the world with 30 numbers and 22,500 for the world with 50, under its own settings and seed, keeping a world every 10 iterations. The thesis holds if in both, after every game, the agents, the tokens each holds and the brain each carries are those of the first play, read from the frames of the two plays, and the world dies out at the same iteration, 29,351 and 23,853.",
+  "refute": "In either world some agent, holding or brain differs after some game, or the world dies out at another iteration or not at all. Reported beside it: the first iteration at which the two plays differ, if any, and how many worlds each play kept."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "seeds": "6302",
+  "iterations": 30000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 10
+  },
+  "workers": 2,
+  "conditions": [
+   {
+    "name": "30 numbers, again",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-8020c3-s6302-on210139",
+     "at": 27500,
+     "again": true
+    }
+   },
+   {
+    "name": "50 numbers, again",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-3f4b02-s6302-on210139",
+     "at": 22500,
+     "again": true
+    }
+   }
+  ]
+ }
+}

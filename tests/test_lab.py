@@ -810,6 +810,50 @@ def test_a_plan_can_play_a_kept_world_on_under_other_settings():
         refused(lambda: gol_plan.experiment_runs(write(trials_plan("E92", "invasion", [{"name": "x", "grid": {
             "run": one, "era": 8, "strategy": "resident", "size": 1, "place": 1, "rules": {"seed": 2}}}]))), "rules")
 
+        # A sequel plays a kept world on with nothing planted, under a changed rule if it says so, and
+        # follows a line of brains: here every brain of the world, so the line is the whole world.
+        brains = sorted(set(gol_store.load_archive(one, 8)["brain_ids"].tolist()))
+        write(trials_plan("E92", "sequel", [{"name": "on", "grid": {
+            "run": one, "era": 8, "seed": "1..2", "rules": {"wealth_guard": "heads"}, "line": brains}}], T=5))
+        sequels = gol_plan.experiment_runs("E92")
+        assert len(sequels) == 2 and sequels[0].trial["line"] == brains and sequels[0].config["wealth_guard"] == "heads"
+        series = gol_trial.sequel(sequels[0].trial, lambda world, t: False)["series"]
+        assert [p["t"] for p in series] == list(range(len(series))) and (len(series) == 6 or series[-1]["agents"] == 0)
+        assert all(p["mine"] == p["agents"] and p["tokens"] == 400 for p in series if p["agents"]), series
+        unfollowed = {k: v for k, v in sequels[0].trial.items() if k != "line"}
+        assert all(p["mine"] == 0 for p in gol_trial.sequel(unfollowed, lambda world, t: False)["series"])
+        try:
+            gol_trial.sequel({**sequels[0].trial, "line": [10 ** 9]}, lambda world, t: False)
+            raise AssertionError("a line with a brain the world does not have was followed")
+        except ValueError as exc:
+            assert "no brain" in str(exc)
+        refused(lambda: gol_plan.experiment_runs(write(trials_plan("E92", "sequel", [{"name": "x", "grid": {
+            "run": one, "era": 8, "seed": 1, "line": "all"}}]))), "line")
+
+        # A kept world played again is the run that kept it: its settings, its seed and the random state
+        # kept with the world, so its next worlds are that run's, and it may keep more of them.
+        def again(name, condition, at=6, seeds="7"):
+            p = plan(name, seeds=seeds, iterations=8, record={**ARCHIVED, "archive_every": 1}, conditions=[condition])
+            p["runs"]["from"] = {"run": one, "at": at, "again": True}
+            return write(p)
+        replay = gol_plan.experiment_runs(again("E90", {"name": "as it is"}))[0]
+        assert replay.run_id != one and replay.lab["from"] == {"run": one, "at": 6, "again": True} and "again" in replay.name
+        played_on = plan("E89", seeds="7", iterations=8, record={**ARCHIVED, "archive_every": 1},
+                         conditions=[{"name": "as it is"}])
+        played_on["runs"]["from"] = {"run": one, "at": 6}
+        assert replay.run_id != gol_plan.experiment_runs(write(played_on))[0].run_id
+        assert gol_plan.nothing_to_play_on_from(replay) is None
+        assert work(replay, 8) == 0
+        assert gol_store.archived(replay.run_id) == [6, 7, 8], gol_store.archived(replay.run_id)
+        first, second = gol_store.load_archive(one, 8), gol_store.load_archive(replay.run_id, 8)
+        for key in ("ids", "tokens", "edges", "brain_ids", "W0", "b0", "rng_keys"):
+            assert np.array_equal(first[key], second[key]), key
+        other = gol_plan.experiment_runs(again("E90", {"name": "small", "set": {"mutation_numbers": 2}}))[0]
+        assert "mutation_numbers" in gol_plan.nothing_to_play_on_from(other)
+        assert work(other, 8) != 0 and not os.path.exists(os.path.join(gol_store.run_dir(other.run_id), "meta.json"))
+        assert "seed" in gol_plan.nothing_to_play_on_from(gol_plan.experiment_runs(again("E90", {"name": "as it is"}, seeds="8"))[0])
+        refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": source.run_id, "at": 4, "again": False}})), "again")
+
         refused(lambda: gol_plan.experiment_runs(on("E97", iterations=4)), "end later")
         refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": source.run_id, "at": 3}})), "archive_every")
         # A world that is not here blocks the run when the lab comes to make it, not when the plan is read:

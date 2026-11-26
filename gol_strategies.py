@@ -533,16 +533,17 @@ def fill(world, strategy: str) -> None:
 #: What each kind of trial must say, and may.
 TRIAL_NEEDS = {"contest": ("run", "T", "home", "a", "b", "seed"),
                "invasion": ("run", "T", "era", "strategy", "size", "place"),
-               "assay": ("run", "T", "era", "seed", "operator", "mutants", "controls")}
+               "assay": ("run", "T", "era", "seed", "operator", "mutants", "controls"),
+               "sequel": ("run", "T", "era", "seed")}
 TRIAL_MAY = {"contest": ("plant", "a_run", "b_run"), "invasion": ("background", "settle", "rules", "play_on"),
-             "assay": ("world_seed", "swap")}
+             "assay": ("world_seed", "swap"), "sequel": ("rules", "line")}
 
 
 def check_trial(trial: Dict[str, Any]) -> None:
     """Refuse a trial that says too little, or what no trial reads, or names no strategy there is."""
     kind = trial.get("kind")
     if kind not in TRIAL_NEEDS:
-        raise ValueError(f"a trial is a {' or an '.join(TRIAL_NEEDS)}, not {kind!r}")
+        raise ValueError(f"a trial is one of {', '.join(TRIAL_NEEDS)}, not {kind!r}")
     missing = [k for k in TRIAL_NEEDS[kind] if k not in trial]
     unknown = sorted(set(trial) - {"kind", *TRIAL_NEEDS[kind], *TRIAL_MAY[kind]})
     if missing or unknown:
@@ -556,6 +557,9 @@ def check_trial(trial: Dict[str, Any]) -> None:
     rules = trial.get("rules", {})
     if not isinstance(rules, dict) or set(rules) - set(MECHANICS):
         raise ValueError(f"a trial's rules are settings of the world it plays in, changed for the trial, not {rules!r}")
+    line = trial.get("line", [0])
+    if not isinstance(line, list) or not line or not all(isinstance(b, int) and not isinstance(b, bool) for b in line):
+        raise ValueError(f"a sequel's line is the brains of a line, a list of their numbers, not {line!r}")
     if kind == "contest" and trial["home"] not in (trial["a"], trial["b"]) \
             and not (trial.get("a_run") or trial.get("b_run")):
         raise ValueError(f"a contest is played on one of its two eras' worlds, not on {trial['home']}")

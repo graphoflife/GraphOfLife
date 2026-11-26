@@ -639,6 +639,17 @@ def source_config(source: str) -> Dict[str, Any]:
     return made["cfg"]
 
 
+def other_settings(config: Dict[str, Any], source: str) -> List[str]:
+    """
+    The settings by which `config` differs from those the run `source` was played under, what is
+    recorded aside. A world played again (a plan's `from` with `again`) may differ in none: the
+    random state kept with a world is that run's history only under that run's settings and seed.
+    """
+    from gol_config import INFRASTRUCTURE
+    mine, theirs = SimConfig.from_dict(config).to_dict(), SimConfig.from_dict(source_config(source)).to_dict()
+    return sorted(k for k in mine if k not in INFRASTRUCTURE and mine[k] != theirs[k])
+
+
 def kept_world(source: str, iteration: int) -> Dict[str, np.ndarray]:
     """The whole world a run kept at `iteration` in its archive, or a pilot in its checkpoint."""
     if not source.startswith(PILOT):

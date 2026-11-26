@@ -145,12 +145,17 @@ def play_on(run_id: str, cfg: SimConfig, source: Dict[str, Any]) -> None:
     from here on, so that two runs played on from one world differ by their settings and their luck
     and by nothing else. It is saved as the run's checkpoint, which the run then resumes from as any
     run does, and as the first world it keeps, so that contests can start from it.
+
+    A source that says `again` is played again as it was: with the random state the world was kept with,
+    which is only that run's history under that run's settings and seed, so any other are refused
+    before the run is made.
     """
     import numpy as np
     blob = dict(store.kept_world(source["run"], int(source["at"])))
-    state = np.random.RandomState(cfg.seed).get_state()
-    blob["rng_keys"] = state[1].astype(np.uint32)
-    blob["rng_scalars"] = np.array([state[2], state[3], state[4]], dtype=np.float64)
+    if not source.get("again"):
+        state = np.random.RandomState(cfg.seed).get_state()
+        blob["rng_keys"] = state[1].astype(np.uint32)
+        blob["rng_scalars"] = np.array([state[2], state[3], state[4]], dtype=np.float64)
     world = GraphOfLife.GraphOfLife.from_checkpoint(blob, cfg)
     if world.iteration != int(source["at"]):
         raise ValueError(f"the world kept at {source['at']} says it is at iteration {world.iteration}")
@@ -185,6 +190,12 @@ def main() -> int:
     if not os.path.exists(os.path.join(folder, "meta.json")):
         spec = json.loads(args.spec)
         cfg = SimConfig.from_dict(spec["config"], stored=False)
+        source = spec["lab"].get("from") or {}
+        other = store.other_settings(cfg.to_dict(), source["run"]) if source.get("again") else []
+        if other:
+            print(f"refusing {run_id}: a world is played again under the settings it was played under; "
+                  f"{', '.join(other)} differ from those of {source['run']}", file=sys.stderr)
+            return EXIT_REFUSED
         store.create_run(spec["name"], cfg, run_id=run_id,
                          record=spec["record"], lab=spec["lab"])
         if spec["lab"].get("from"):

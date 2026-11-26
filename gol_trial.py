@@ -20,6 +20,12 @@ in its archive, or a pilot of the engine's own rules in its checkpoint
              (`rules`); its result is the strategy's agents and tokens, and the
              world's agents, links and richest holding, after every iteration.
              It ends when the strategy is gone, unless it says `play_on`
+  sequel     the world of one era played on with its own mutations and a seed
+             of its own, under the run's rules or with some of them changed
+             for the trial (`rules`): what would have come next, another time.
+             Its result is the world's agents, links and richest holding
+             after every iteration, and the agents and tokens of one line of
+             brains if the trial names its brains at that era (`line`)
   assay      the world of one era, some of its agents' brains changed once
              and marked, as many more only marked, with mutation off
              (gol_tournament.assay); its result is how many agents carry
@@ -102,6 +108,44 @@ def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optiona
     return {"series": series, "patch": len(patch)}
 
 
+def sequel(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
+    """
+    A kept world played on: nothing planted and nothing switched off. A line is a brain and every brain
+    copied from it, changed or not; the trial names the line's brains at the era, and every brain made
+    from one of them after that joins it. The series is an invasion's, with the line as `mine`.
+    """
+    cfg = SimConfig.from_dict({**store.source_config(trial["run"]), **trial.get("rules", {})})
+    cfg.extinction_threshold = 0
+    world = GraphOfLife.GraphOfLife.from_checkpoint(store.kept_world(trial["run"], int(trial["era"])), cfg)
+    world.rng = np.random.RandomState(int(trial["seed"]))
+    line = set(trial.get("line", []))
+    absent = sorted(line - {b.brain_id for b in world.brains.values()})
+    if absent:
+        raise ValueError(f"the world {trial['run']} kept at {trial['era']} has no brain {absent[0]}"
+                         + (f", nor {len(absent) - 1} more of the line" if len(absent) > 1 else ""))
+    series: List[Dict[str, int]] = []
+    for t in range(int(trial["T"]) + 1):
+        if t:
+            frames = world.step(record_decisions=False)
+            # A brain is changed at a birth and when its agent takes a node, so in either phase; a
+            # brain new in a phase was copied from one that was there before it, as its frame says.
+            for frame in frames:
+                line |= {b for b, of in zip(frame["brain_ids"], frame["parent_brain_ids"]) if of in line}
+            if stop(world, t):
+                return None
+            if gol_tournament.died_out(frames):
+                series.append({"t": t, "agents": 0, "links": 0, "mine": 0, "tokens": 0, "richest": 0})
+                break
+        ids = list(world.G.nodes())
+        mine = [u for u in ids if world.brains[u].brain_id in line]
+        series.append({"t": t, "agents": len(ids), "links": world.G.number_of_edges(), "mine": len(mine),
+                       "tokens": int(sum(world.tokens[u] for u in mine)),
+                       "richest": int(max(world.tokens[u] for u in ids)) if ids else 0})
+        if not ids:
+            break
+    return {"series": series}
+
+
 def assay(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
     source = trial["run"]
     return gol_tournament.assay(store.source_config(source), store.kept_world(source, int(trial["era"])),
@@ -110,7 +154,7 @@ def assay(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[D
                                 swap=trial.get("swap"))
 
 
-PLAY = {"contest": contest, "invasion": invasion, "assay": assay}
+PLAY = {"contest": contest, "invasion": invasion, "sequel": sequel, "assay": assay}
 
 
 def main() -> int:

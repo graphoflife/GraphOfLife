@@ -265,6 +265,9 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
             "assays: in the world of one era some agents' brains are changed once and marked, as many "
             "more only marked, every mutation off, and the agents carrying each mark counted at the end"
             if kind == "assay" else
+            "sequels: the world of one era played on with its own mutations and a seed of its own, and "
+            "its agents, and those of one line of brains, counted after every iteration"
+            if kind == "sequel" else
             "invasions: a patch of the world of one era given a strategy written by hand, and "
             "its agents counted after every iteration")
     lines = [f"**{number(len(found))} trials**, {what}; each plays {number(T)} iterations, from a "
@@ -287,7 +290,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
              ("size", "patches of"), ("place", "places"), ("background", "in a world of"),
              ("settle", "settled for"), ("rules", "with"), ("play_on", "played on when the strategy is gone"),
              ("operator", "mutations of"), ("mutants", "mutants"),
-             ("controls", "controls"), ("seed", "seeds" if kind == "assay" else "coins"),
+             ("controls", "controls"), ("seed", "coins" if kind == "contest" else "seeds"),
+             ("line", "following a line of"),
              ("swap", "brains moved by seeds"), ("world_seed", "played with the luck of seeds")]
     for label, fields in gol_plan.trial_sets(name).items():
         count = sum(1 for f in found if f["set"] == label)
@@ -296,6 +300,7 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
             fields.pop("home", None)                   # every pair is played on both its eras' worlds
         said = "; ".join(word if key == "play_on" else
                          f"{word} " + (", ".join(f"`{v}`" for v in fields[key]) if key == "run"
+                                       else " or ".join(f"{number(len(v))} brains" for v in fields[key]) if key == "line"
                                        else sizes(fields[key]) if key == "size"
                                        else span(fields[key]))
                          for key, word in words if key in fields)
@@ -486,10 +491,11 @@ def runs(md: str, name: str) -> str:
                  + ("each of its seeds" if own else f"every seed ({seeds})")
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "")
-                 + (f", played on from the world `{spec['from']['run']}` kept at iteration "
+                 + (f", played {'again' if spec['from'].get('again') else 'on'} from the world "
+                    f"`{spec['from']['run']}` kept at iteration "
                     f"{number(spec['from']['at'])}, to iteration {number(spec['iterations'])} — or "
                     if "from" in spec else
-                    f", played on from a kept world of its own to iteration {number(spec['iterations'])} — or "
+                    f", played on or again from a kept world of its own to iteration {number(spec['iterations'])} — or "
                     if any("from" in c for c in conditions) else f", for {number(spec['iterations'])} iterations — or ")
                  + "until its world dies out. " + baseline(md, base) + "\n")
     for c in conditions:
@@ -507,8 +513,10 @@ def runs(md: str, name: str) -> str:
         named = ids.get(c["name"], [])
         where = (f" Run `{named[0]}`." if len(named) == 1
                  else f" Runs `{named[0]}` … `{named[-1]}`." if named else "")
+        source = (f"; played {'again' if c['from'].get('again') else 'on'} from `{c['from']['run']}` at iteration "
+                  f"{number(c['from']['at'])}" if "from" in c else "")
         lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
-                     f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
+                     f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f"{source}.{where}")
     lines.append("")
     lines.append(made_again("make these runs", name, WRITES))
     if any((c.get("set") or {}).get("proto") for c in conditions) and once("proto"):

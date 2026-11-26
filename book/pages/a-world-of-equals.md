@@ -446,10 +446,10 @@ going back and forth, and how many die on the way, needs more of them.
 
 <!-- runs E61 -->
 > [!info]- The runs behind this page
-> **2 runs.** Every condition below is run once for every seed (6101), played on from a kept world of its own to iteration 35,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+> **2 runs.** Every condition below is run once for every seed (6101), played on or again from a kept world of its own to iteration 35,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
 >
-> - **30 numbers, from the run of seed 6001** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Run `B1-40000-8020c3-s6101-on697699`.
-> - **30 numbers, from the run of seed 6002** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Run `B1-40000-8020c3-s6101-onb1e06c`.
+> - **30 numbers, from the run of seed 6001** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-8020c3-s6001-on45a3d3` at iteration 25,000. Run `B1-40000-8020c3-s6101-on697699`.
+> - **30 numbers, from the run of seed 6002** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-8020c3-s6002-on45a3d3` at iteration 25,000. Run `B1-40000-8020c3-s6101-onb1e06c`.
 >
 > To make these runs again: `python3 gol_lab.py run E61`.
 <!-- /runs -->
@@ -533,14 +533,14 @@ advantage. The numbers are made by
 
 <!-- runs E57 -->
 > [!info]- The runs behind this page
-> **12 runs.** Every condition below is run once for every seed (5701 to 5702), played on from a kept world of its own to iteration 5,500 — or until its world dies out. Every setting is B1's unless the condition changes it.
+> **12 runs.** Every condition below is run once for every seed (5701 to 5702), played on or again from a kept world of its own to iteration 5,500 — or until its world dies out. Every setting is B1's unless the condition changes it.
 >
-> - **s4601, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-onfbb674` … `B1-10000-01519c-s5702-onfbb674`.
-> - **s4601, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-onfbb674` … `B1-10000-122402-s5702-onfbb674`.
-> - **s4602, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-onfad1ed` … `B1-10000-01519c-s5702-onfad1ed`.
-> - **s4602, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-onfad1ed` … `B1-10000-122402-s5702-onfad1ed`.
-> - **s4603, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-on6669d4` … `B1-10000-01519c-s5702-on6669d4`.
-> - **s4603, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-on6669d4` … `B1-10000-122402-s5702-on6669d4`.
+> - **s4601, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4601` at iteration 500. Runs `B1-10000-01519c-s5701-onfbb674` … `B1-10000-01519c-s5702-onfbb674`.
+> - **s4601, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4601` at iteration 500. Runs `B1-10000-122402-s5701-onfbb674` … `B1-10000-122402-s5702-onfbb674`.
+> - **s4602, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4602` at iteration 500. Runs `B1-10000-01519c-s5701-onfad1ed` … `B1-10000-01519c-s5702-onfad1ed`.
+> - **s4602, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4602` at iteration 500. Runs `B1-10000-122402-s5701-onfad1ed` … `B1-10000-122402-s5702-onfad1ed`.
+> - **s4603, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4603` at iteration 500. Runs `B1-10000-01519c-s5701-on6669d4` … `B1-10000-01519c-s5702-on6669d4`.
+> - **s4603, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens; played on from `B1-10000-122402-s4603` at iteration 500. Runs `B1-10000-122402-s5701-on6669d4` … `B1-10000-122402-s5702-on6669d4`.
 >
 > To make these runs again: `python3 gol_lab.py run E57`.
 <!-- /runs -->
@@ -1064,6 +1064,45 @@ The numbers are made by `python3 research/efficient/E50/e66.py`.
 > - **no rule, no hoarder** — 6 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1, 2; played on when the strategy is gone.
 >
 > To play these trials again: `python3 gol_lab.py run E66`.
+<!-- /runs -->
+
+### The head count against a line that evolved
+
+<!-- experiment E67 -->
+
+Experiment 66 stopped a hoarder written by hand. The lines that took the
+two worlds of Experiment 63 were made by mutation, and their brains are
+lost: those runs kept a world every 2,500 iterations, and each line lived
+a few hundred, between two of them. But a kept world also holds the state
+of the world's random numbers. So a run can be played again from a world
+it kept, and should come out the same, iteration for iteration.
+
+Experiment 67 plays both worlds again from the last world each kept
+before it died, and keeps a world every 10 iterations. If the two plays
+agree, the worlds inside the takeover are there to be played on under a
+head count, with the line that evolved in them.
+
+<!-- thesis E67 -->
+> [!quote] The thesis of Experiment 67, written down before any of its runs existed
+> **The claim.** A world played again from a world its run kept, under the same settings and with the random state kept with that world, is the same world. Both worlds of equals that died in Experiment 63 are taken by the same line of brains again and die out at the same iteration.
+>
+> **Why it would be so.** A world draws all its luck from one stream of random numbers, and a kept world holds the state of that stream beside every agent, brain, link and message. Nothing else decides what happens next. The engine has been changed since those runs were made (hand-written strategies, the setting wealth_guard), but with those off it should play as it did. If that is so, a finished run can be made to keep more of its worlds than it kept: here one every 10 iterations through the takeover, where the runs kept one every 2,500. The worlds inside the takeover hold the brains of the lines that took them, which no kept world has, and a rule can then be tried against a line that evolved and not only against one written by hand.
+>
+> **It holds if:** Each of the two runs is played again from the last world it kept before it died, iteration 27,500 for the world with 30 numbers and 22,500 for the world with 50, under its own settings and seed, keeping a world every 10 iterations. The thesis holds if in both, after every game, the agents, the tokens each holds and the brain each carries are those of the first play, read from the frames of the two plays, and the world dies out at the same iteration, 29,351 and 23,853.
+>
+> **It fails if:** In either world some agent, holding or brain differs after some game, or the world dies out at another iteration or not at all. Reported beside it: the first iteration at which the two plays differ, if any, and how many worlds each play kept.
+<!-- /thesis -->
+
+*Planned; the result follows here when the runs are played.*
+
+<!-- runs E67 -->
+> [!info]- The runs behind this page
+> **2 runs.** Every condition below is run once for every seed (6302), played on or again from a kept world of its own to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers, again** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens; played again from `B1-40000-8020c3-s6302-on210139` at iteration 27,500. Run `B1-40000-8020c3-s6302-on0a0a78`.
+> - **50 numbers, again** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `n_nodes` = 800; 40,000 tokens; played again from `B1-40000-3f4b02-s6302-on210139` at iteration 22,500. Run `B1-40000-3f4b02-s6302-ond3e026`.
+>
+> To make these runs again: `python3 gol_lab.py run E67`.
 <!-- /runs -->
 
 ### A few who play otherwise
