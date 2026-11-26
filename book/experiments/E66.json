@@ -1,0 +1,146 @@
+{
+ "id": "E66",
+ "title": "Three rules that wealth cannot break: a coalition counted by heads, a limit on a stake, and tokens that level across links, each against the hoarder that spreads",
+ "thesis": {
+  "claim": "Two of three rules stop the hoarder that spreads, and a world of equals lives on under them: a coalition counted by heads, and tokens that level across links. The third, a limit on a stake, does not stop it.",
+  "why": "The hoarder of Experiment 65 ends a world of equals because a coalition guards a node only against a stake smaller than the coalition's own tokens there. Each rule takes that power away in another way, and none has a number of its own. By heads: every agent that flags a token on a node counts one, and so does the node's largest staker, so two residents that flag a token there take the node from any stake. A hoarder is the largest staker on the node it hoards on, so it should lose that node in its first games, as a resident's frozen copy does. Levelling: after every game one token passes across each link from the richer end to the poorer, if they differ by two or more. A resident stakes about one token on each neighbour's node, so a hoarder gains about one token a link in a game and levelling takes one token a link back; it should not come to hold more than all its neighbours together, which is when it spreads. The limit: an agent stakes on another's node at most what that node's agent holds. The hoarder that spreads stakes just that on each neighbour's node. The coalition there stakes about what the holder holds, and it takes the node only with more than the largest stake, so the hoarder should still take about half the nodes it stakes on, keep its own with the rest of its tokens, and sweep. The residents' brains were made under the old rule, so each rule is also played without a hoarder, to see whether the world of equals itself lives on under it.",
+  "confirm": "The trials are those of Experiment 65, in the same three worlds at the same five places, with the hoarder that spreads hoarding at home or on its poorest neighbour's node, 30 for each rule; only the rule is changed, for the trial. A line sweeps if at some iteration it holds more than half the world's agents. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. For each rule six controls play the same worlds 1,000 iterations with no hoarder (a resident's frozen copy in its place, and the trial plays on when that copy is gone), and six more under no rule. The thesis holds if all of this is so: by heads at most 5 of the 30 lines sweep and at most 5 of the 30 worlds end; under levelling the same; under the limit at least 20 of the 30 lines sweep; and by heads and under levelling at most one of the six control worlds ends.",
+  "refute": "By heads or under levelling at least 20 of the 30 lines sweep, or at least three of the six control worlds end; or under the limit at most 5 of the 30 lines sweep. Anything else is undecided. Reported beside it, for each rule by itself: how many lines sweep and worlds end, by way of hoarding and by world, and when; how many lines are lost and when; the most tokens a line held; in the controls the world's agents, links and richest holding at the start and the end, beside the six controls under no rule; and the counts of Experiment 65, which played the same trials under no rule (30 of 30 lines swept, 25 of 30 worlds ended)."
+ },
+ "trials": {
+  "kind": "invasion",
+  "T": 1000,
+  "workers": 4,
+  "sets": [
+   {
+    "name": "by heads",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": [
+      "home-spreader",
+      "moving-spreader"
+     ],
+     "size": 1,
+     "place": "1..5",
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "a limit on a stake",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": [
+      "home-spreader",
+      "moving-spreader"
+     ],
+     "size": 1,
+     "place": "1..5",
+     "rules": {
+      "wealth_guard": "limit"
+     }
+    }
+   },
+   {
+    "name": "levelling",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": [
+      "home-spreader",
+      "moving-spreader"
+     ],
+     "size": 1,
+     "place": "1..5",
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "by heads, no hoarder",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "resident",
+     "size": 1,
+     "place": "1..2",
+     "play_on": true,
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "a limit on a stake, no hoarder",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "resident",
+     "size": 1,
+     "place": "1..2",
+     "play_on": true,
+     "rules": {
+      "wealth_guard": "limit"
+     }
+    }
+   },
+   {
+    "name": "levelling, no hoarder",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "resident",
+     "size": 1,
+     "place": "1..2",
+     "play_on": true,
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "no rule, no hoarder",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "resident",
+     "size": 1,
+     "place": "1..2",
+     "play_on": true
+    }
+   }
+  ]
+ }
+}

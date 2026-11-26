@@ -304,6 +304,21 @@
             own claim on every token it flags. It needs revolutions.</small>
         </div>
         <div class="field">
+          <label for="cfg_wealth_guard">Against a rich agent's stake</label>
+          <select id="cfg_wealth_guard" data-cfg="wealth_guard">
+            <option value="off">Nothing: the largest stake rule alone</option>
+            <option value="heads">A coalition counted by heads</option>
+            <option value="limit">A limit on a stake</option>
+            <option value="level">Tokens level across links</option>
+          </select>
+          <small>By heads: each agent that flags a token on a node counts one
+            against the largest staker, whatever it holds. A limit: an agent
+            stakes on another's node at most what that node's agent holds, and
+            the rest stays at home. Levelling: after every game one token
+            passes across each link from the richer end to the poorer, if they
+            differ by two or more. Each needs stakes placed all at once.</small>
+        </div>
+        <div class="field">
           <label for="cfg_pool">Stakes are pooled by</label>
           <select id="cfg_pool" data-cfg="pool">
             <option value="off">Nobody: every staker alone</option>

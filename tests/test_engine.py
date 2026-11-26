@@ -3170,8 +3170,17 @@ def test_a_mask_changes_one_decision_of_a_resident():
     world.step(record_decisions=False)
     if patch[0] in world.tokens:
         assert world.tokens[patch[0]] >= before, "an agent that staked everything at home ended with less"
-    gol_strategies.check_trial({"kind": "invasion", "run": "r", "T": 4, "era": 0, "strategy": "moving-hoarder",
-                                "size": 1, "place": 1})
+    trial = {"kind": "invasion", "run": "r", "T": 4, "era": 0, "strategy": "moving-hoarder", "size": 1, "place": 1}
+    gol_strategies.check_trial(trial)
+    # A trial may change rules of the world it plays in, and play on once its strategy is gone.
+    gol_strategies.check_trial({**trial, "rules": {"wealth_guard": "heads"}, "play_on": True})
+    for rules in ({"no_such_rule": 1}, {"seed": 3}, "heads"):
+        try:
+            gol_strategies.check_trial({**trial, "rules": rules})
+        except ValueError as exc:
+            assert "rules" in str(exc)
+        else:
+            raise AssertionError(f"accepted the rules {rules!r}")
 
 
 def test_a_contest_in_a_world_of_families_deals_each_brain_with_its_family():

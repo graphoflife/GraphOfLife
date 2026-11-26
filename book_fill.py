@@ -285,7 +285,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
 
     words = [("run", "worlds"), ("eras", "eras"), ("era", "at iteration"), ("strategy", "strategies"),
              ("size", "patches of"), ("place", "places"), ("background", "in a world of"),
-             ("settle", "settled for"), ("operator", "mutations of"), ("mutants", "mutants"),
+             ("settle", "settled for"), ("rules", "with"), ("play_on", "played on when the strategy is gone"),
+             ("operator", "mutations of"), ("mutants", "mutants"),
              ("controls", "controls"), ("seed", "seeds" if kind == "assay" else "coins"),
              ("swap", "brains moved by seeds"), ("world_seed", "played with the luck of seeds")]
     for label, fields in gol_plan.trial_sets(name).items():
@@ -293,7 +294,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
         if "a" in fields:
             fields["eras"] = sorted(set(fields.pop("a")) | set(fields.pop("b")))
             fields.pop("home", None)                   # every pair is played on both its eras' worlds
-        said = "; ".join(f"{word} " + (", ".join(f"`{v}`" for v in fields[key]) if key == "run"
+        said = "; ".join(word if key == "play_on" else
+                         f"{word} " + (", ".join(f"`{v}`" for v in fields[key]) if key == "run"
                                        else sizes(fields[key]) if key == "size"
                                        else span(fields[key]))
                          for key, word in words if key in fields)

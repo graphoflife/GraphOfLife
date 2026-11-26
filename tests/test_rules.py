@@ -58,6 +58,9 @@ RULES = {
     "local estate": dict(redistribution="local"),
     "local estate, mended": dict(redistribution="local", mend_on_death=True, birth_links=2),
     "revolutionary tokens separate": dict(revolt_tokens="separate"),
+    "a coalition counted by heads": dict(wealth_guard="heads"),
+    "a limit on a stake": dict(wealth_guard="limit"),
+    "tokens level across links": dict(wealth_guard="level"),
     "genotype pools": dict(pool="genotype"),
     "family pools": dict(pool="family", tag_rate=0.2),
     "weakest first": dict(allocation="weakest_first"),
@@ -95,11 +98,14 @@ def test_what_each_new_rule_needs():
     _refused(dict(hidden_activation="tanh", brain_kind="binary", hidden_layers=[24, 16]), "binary")
     _refused(dict(upkeep_to="estate"), "link_upkeep")
     _refused(dict(revolt_tokens="separate", allow_revolutions=False), "allow_revolutions")
+    _refused(dict(wealth_guard="heads", allow_revolutions=False), "allow_revolutions")
+    _refused(dict(wealth_guard="limit", allocation="weakest_first"), "allocation")
     _refused(dict(pool="family"), "tag_rate")
     _refused(dict(tag_rate=0.2), "pool")
     _refused(dict(pool="genotype", allocation="weakest_first"), "allocation")
     _refused(dict(allocation="weakest_first", proto={"came_from": True}), "proto")
-    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation", "revolt_tokens", "pool"):
+    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation", "revolt_tokens", "pool",
+                    "wealth_guard"):
         _refused({setting: "no-such-rule"}, setting)
 
 
@@ -306,6 +312,74 @@ def test_a_separate_revolutionary_token_counts_for_the_coalition_alone():
     assert GraphOfLife._resolve_winner(separate._claims(stakes, revolts), revolts, rng)[0] == 2
     # The board the token-at-a-time game reads tells the same.
     assert would_take(stakes, revolts) == 1 and would_take(stakes, revolts, separate=True) == 2
+
+
+def test_a_coalition_counted_by_heads_takes_a_node_from_any_stake():
+    # Agent 1 stakes 100; agents 2 and 3 stake and flag one token each. By tokens their 2 do not
+    # outweigh 100; by heads they are two against one.
+    stakes, revolts = {1: 100, 2: 1, 3: 1}, {2: 1, 3: 1}
+    rng = np.random.RandomState(0)
+    assert GraphOfLife._resolve_winner(stakes, revolts, rng) == (1, 100, False)
+    for _ in range(20):
+        winner, largest, by_coalition = GraphOfLife._resolve_winner(stakes, revolts, rng, heads=True)
+        assert winner in (2, 3) and largest == 100 and by_coalition
+    # One head is not more than one: a single agent against the largest staker takes nothing.
+    assert GraphOfLife._resolve_winner({1: 100, 2: 1}, {2: 1}, rng, heads=True)[0] == 1
+    # The weakest still rise first: 2 and 3, a token each, outnumber 4 and the largest staker
+    # only once 4 has joined them, and the winner is drawn from the rung that tips it.
+    for _ in range(20):
+        assert GraphOfLife._resolve_winner({1: 100, 2: 1, 3: 1, 4: 5}, {2: 1, 3: 1, 4: 5}, rng, heads=True)[0] == 4
+
+
+def test_a_limited_stake_is_at_most_what_the_nodes_agent_holds():
+    # One agent holds nearly everything among neighbours with two tokens each. Whatever its brain
+    # says, at most two of its tokens reach each neighbour's node and the rest stays at home.
+    world = new_world(small(wealth_guard="limit"))
+    rich = max(world.G.nodes(), key=world.G.degree)
+    pool, others = sum(world.tokens.values()), world.G.number_of_nodes() - 1
+    world.tokens = {u: 2 for u in world.G.nodes()}
+    world.tokens[rich] = pool - 2 * others
+    held = dict(world.tokens)
+    records = world.blotto_phase(record_decisions=True)["decisions"]["allocations"]
+    assert len(records) == others + 1
+    for record in records:
+        assert sum(record["alloc"]) == held[record["agent"]]
+        assert all(amount <= held[target] for target, amount in zip(record["targets"][1:], record["alloc"][1:]))
+    mine = next(r for r in records if r["agent"] == rich)
+    assert mine["alloc"][0] >= held[rich] - 2 * world.G.degree(rich) > 0
+    # Without the rule the same agent in the same world stakes more than two on a neighbour's node.
+    free = new_world(small())
+    free.tokens = dict(held)
+    mine = next(r for r in free.blotto_phase(record_decisions=True)["decisions"]["allocations"] if r["agent"] == rich)
+    assert max(mine["alloc"][1:]) > 2
+
+
+def test_levelling_passes_one_token_down_every_link_and_keeps_every_token():
+    world = new_world(small(wealth_guard="level"))
+    hub = max(world.G.nodes(), key=world.G.degree)
+    near = sorted(world.G.neighbors(hub))
+    pool = sum(world.tokens.values())
+    for u in world.G.nodes():
+        world.tokens[u] = 3
+    world.tokens[hub] = pool - 3 * (world.G.number_of_nodes() - 1)
+    assert world.tokens[hub] > 3 + 2 * len(near)
+    world._level()
+    assert sum(world.tokens.values()) == pool
+    assert world.tokens[hub] == pool - 3 * (world.G.number_of_nodes() - 1) - len(near)
+    # A neighbour got the hub's token, and may then have passed one on or got one more.
+    assert all(world.tokens[u] >= 3 for u in near) and min(world.tokens.values()) >= 3
+    # A gap of one moves nothing.
+    for u in world.G.nodes():
+        world.tokens[u] = 3
+    world.tokens[hub] = 4
+    world._level()
+    assert world.tokens[hub] == 4 and set(world.tokens.values()) == {3, 4}
+    # And a world plays under it with every token kept.
+    world = new_world(small(wealth_guard="level"))
+    total = sum(world.tokens.values())
+    for _ in range(20):
+        world.step(record_decisions=False)
+    assert sum(world.tokens.values()) == total
 
 
 def test_pooled_stakes_count_as_one_sides_and_the_owner_keeps_its_own_sides_win():

@@ -2207,6 +2207,11 @@ class GraphOfLife:
                 else:
                     alloc = np.zeros(len(targets), dtype=int)
                     alloc[int(np.argmax(scores))] = stake
+                if self.cfg.wealth_guard == "limit":
+                    # On another's node at most what its agent holds; what is over stays at home.
+                    over = np.maximum(alloc[1:] - [int(self.tokens.get(v, 0)) for v in targets[1:]], 0)
+                    alloc[1:] -= over
+                    alloc[0] += int(over.sum())
                 alloc[0] += kept
 
                 revolts_allowed = self.cfg.allow_revolutions
@@ -2276,7 +2281,8 @@ class GraphOfLife:
                 winner, max_amount, by_revolt = self._lottery(self._weighed(v, offers))
             else:
                 winner, max_amount, by_revolt = self._resolve_winner(
-                    self._weighed(v, self._claims(offers, revolution_to[v])), revolution_to[v], self.rng)
+                    self._weighed(v, self._claims(offers, revolution_to[v])), revolution_to[v], self.rng,
+                    heads=self.cfg.wealth_guard == "heads")
             new_brains[v] = self._copy_brain(self.brains[winner])
             # A won node is a copy of its winner's brain made somewhere new, so
             # under mutate_on_replication it is a replication like a birth.
@@ -2331,6 +2337,8 @@ class GraphOfLife:
         self._note("game.cleanup", lambda: {
             "removed": [int(u) for u in sorted(alive_before - set(self.G.nodes()))]},
             over=before)
+        if self.cfg.wealth_guard == "level":
+            self._level()
 
         # Every brain mutates, and it happens after the clearing-up rather than
         # before it. Nothing between the two reads a brain — the pruning goes on
@@ -2355,6 +2363,21 @@ class GraphOfLife:
             }
         return self._frame(phase=2, cleanup=cleanup, nodes_before=nodes_before,
                            tokens_before=tokens_before, decisions=decisions)
+
+    def _level(self) -> None:
+        """
+        wealth_guard = level: across every link, taken in a random order, one
+        token passes from the richer end to the poorer if they differ by two or
+        more (by one, the token would only change which end is the richer).
+        """
+        links = sorted(tuple(sorted(e)) for e in self.G.edges())
+        for i in self.rng.permutation(len(links)):
+            u, v = links[i]
+            gap = self.tokens[u] - self.tokens[v]
+            if abs(gap) >= 2:
+                rich, poor = (u, v) if gap > 0 else (v, u)
+                self.tokens[rich] -= 1
+                self.tokens[poor] += 1
 
     def _weighed(self, v: int, offers: Dict[int, int]) -> Dict[int, float]:
         """
@@ -2416,7 +2439,7 @@ class GraphOfLife:
 
     @staticmethod
     def _resolve_winner(offers: Dict[int, int], revolutionaries: Dict[int, int],
-                        rng: np.random.RandomState) -> Tuple[int, int, bool]:
+                        rng: np.random.RandomState, heads: bool = False) -> Tuple[int, int, bool]:
         """
         Decide who takes a node, given every offer made on it.
 
@@ -2436,6 +2459,12 @@ class GraphOfLife:
         ties broken at random. That is the whole of the alternative rule; it
         needs no separate branch.
 
+        Under `heads` (wealth_guard = heads) the two sides are counted by their
+        members and not by their tokens: every member of the mob counts one,
+        and so does the hegemon. The mob is still walked weakest-first, so the
+        winner is still drawn from the rung that tips it; but no stake is large
+        enough to hold a node against two who flag a token there.
+
         Returns (winner_id, hegemon's allocation, whether a revolution won).
         """
         max_amount = max(offers.values())
@@ -2446,7 +2475,8 @@ class GraphOfLife:
             return hegemon, max_amount, False
 
         mob.sort(key=lambda pair: pair[1])
-        total_mob_tokens = sum(tokens for _, tokens in mob)
+        weight = (lambda tokens: 1) if heads else (lambda tokens: tokens)
+        total_mob_tokens = sum(weight(tokens) for _, tokens in mob)
 
         lower_class = 0
         i = 0
@@ -2456,11 +2486,11 @@ class GraphOfLife:
             rung: List[int] = []
             while i < len(mob) and mob[i][1] == rung_amount:
                 rung.append(mob[i][0])
-                lower_class += mob[i][1]
+                lower_class += weight(mob[i][1])
                 i += 1
 
             upper_class = total_mob_tokens - lower_class
-            if lower_class > upper_class + max_amount:
+            if lower_class > upper_class + weight(max_amount):
                 return int(rng.choice(rung)), max_amount, True
 
         # The mutiny never reached critical mass.

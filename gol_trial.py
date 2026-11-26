@@ -15,9 +15,11 @@ in its archive, or a pilot of the engine's own rules in its checkpoint
              era's brains may be those another run kept (`a_run`, `b_run`)
   invasion   the world of one era, a patch of it given a strategy written by
              hand (gol_strategies.plant), after the whole world was given
-             another strategy and left to settle if the trial says so; its
-             result is the strategy's agents and tokens, and the world's agents
-             and links, after every iteration
+             another strategy and left to settle if the trial says so, under
+             the run's rules or with some of them changed for the trial
+             (`rules`); its result is the strategy's agents and tokens, and the
+             world's agents, links and richest holding, after every iteration.
+             It ends when the strategy is gone, unless it says `play_on`
   assay      the world of one era, some of its agents' brains changed once
              and marked, as many more only marked, with mutation off
              (gol_tournament.assay); its result is how many agents carry
@@ -68,7 +70,7 @@ def contest(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional
 
 def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
     """Chapter 51's invasion test, with the patch's strategy counted after every iteration."""
-    cfg = SimConfig.from_dict(store.source_config(trial["run"]))
+    cfg = SimConfig.from_dict({**store.source_config(trial["run"]), **trial.get("rules", {})})
     cfg.extinction_threshold = 0
     world = GraphOfLife.GraphOfLife.from_checkpoint(store.kept_world(trial["run"], int(trial["era"])), cfg)
     world.rng = np.random.RandomState(int(trial["place"]))
@@ -88,13 +90,14 @@ def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optiona
                 return None
             if dead:
                 # The world emptied and the engine started it again with one new agent: nobody is left.
-                series.append({"t": t, "agents": 0, "links": 0, "mine": 0, "tokens": 0})
+                series.append({"t": t, "agents": 0, "links": 0, "mine": 0, "tokens": 0, "richest": 0})
                 break
         ids = list(world.G.nodes())
         mine = [u for u in ids if world.brains[u].brain_id == mark]
         series.append({"t": t, "agents": len(ids), "links": world.G.number_of_edges(), "mine": len(mine),
-                       "tokens": int(sum(world.tokens[u] for u in mine))})
-        if not mine or not ids:
+                       "tokens": int(sum(world.tokens[u] for u in mine)),
+                       "richest": int(max(world.tokens[u] for u in ids)) if ids else 0})
+        if not ids or not (mine or trial.get("play_on")):
             break
     return {"series": series, "patch": len(patch)}
 

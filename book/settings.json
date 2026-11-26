@@ -18,6 +18,7 @@
   "contest",
   "allocation",
   "revolt_tokens",
+  "wealth_guard",
   "pool",
   "allow_gifting",
   "random_decisions",
@@ -255,6 +256,10 @@
   "revolt_tokens": {
    "meaning": "What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim.",
    "glance": "what a revolutionary token counts for"
+  },
+  "wealth_guard": {
+   "meaning": "What stands between a rich agent and another's node: nothing but the largest-stake rule (`off`); a coalition counted by its members and not by their tokens (`heads`); a stake on another's node of at most what that node's agent holds (`limit`); or one token passing across every link from the richer end to the poorer after every game (`level`).",
+   "glance": "a rule that wealth cannot break"
   },
   "pool": {
    "meaning": "Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side.",

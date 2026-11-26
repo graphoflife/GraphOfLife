@@ -1006,14 +1006,14 @@ class ProtoWorld(GraphOfLife):
             return 0
         return half
 
-    def _resolve_winner(self, offers, revolutionaries, rng):
+    def _resolve_winner(self, offers, revolutionaries, rng, heads=False):
         if P.get("contest") == "lottery":
             keys = sorted(offers)
             w = np.array([float(offers[k]) for k in keys])
             pick = int(rng.choice(len(keys), p=w / w.sum())) if w.sum() > 0 else 0
             out = (int(keys[pick]), max(offers.values()), False)
         else:
-            out = GraphOfLife._resolve_winner(offers, revolutionaries, rng)
+            out = GraphOfLife._resolve_winner(offers, revolutionaries, rng, heads)
         if P.get("engine"):
             v = self._contested
             if out[0] != v:

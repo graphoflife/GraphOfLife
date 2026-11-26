@@ -484,7 +484,8 @@ def _experiment_trials(name: str) -> List[RunSpec]:
         specs.append(RunSpec(
             run_id=trial_id_for(trial),
             name=f"{trial['kind']} · {trial['run']} · {what}",
-            config={**source, "export_decisions": False, "checkpoint_every": 0, "archive_every": 0},
+            config={**source, **trial.get("rules", {}), "export_decisions": False, "checkpoint_every": 0,
+                    "archive_every": 0},
             lab={"seed": trial.get("seed", trial.get("place")), "trial": trial["kind"]},
             record={"heavy_every": 0},
             targets=[trial["T"]],

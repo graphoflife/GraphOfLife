@@ -797,6 +797,19 @@ def test_a_plan_can_play_a_kept_world_on_under_other_settings():
             share = json.load(f)["result"]["share"]
         assert share is None or 0.0 <= share <= 1.0
 
+        # An invasion may change a rule of the world for the trial, and play on once its strategy is gone.
+        write(trials_plan("E92", "invasion", [{"name": "by heads", "grid": {
+            "run": one, "era": 8, "strategy": "resident", "size": 1, "place": 1,
+            "rules": {"wealth_guard": "heads"}, "play_on": True}}], T=6))
+        heads = gol_plan.experiment_runs("E92")[0]
+        assert heads.config["wealth_guard"] == "heads" and heads.trial["rules"] == {"wealth_guard": "heads"}
+        series = gol_trial.invasion(heads.trial, lambda world, t: False)["series"]
+        assert [p["t"] for p in series] == list(range(len(series))) and series[0]["mine"] == 1
+        assert len(series) == 7 or series[-1]["agents"] == 0, series
+        assert all(p["richest"] >= 1 for p in series if p["agents"])
+        refused(lambda: gol_plan.experiment_runs(write(trials_plan("E92", "invasion", [{"name": "x", "grid": {
+            "run": one, "era": 8, "strategy": "resident", "size": 1, "place": 1, "rules": {"seed": 2}}}]))), "rules")
+
         refused(lambda: gol_plan.experiment_runs(on("E97", iterations=4)), "end later")
         refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": source.run_id, "at": 3}})), "archive_every")
         # A world that is not here blocks the run when the lab comes to make it, not when the plan is read:

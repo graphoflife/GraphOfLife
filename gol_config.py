@@ -119,6 +119,14 @@ MECHANICS: Dict[str, Any] = {
     # keeps naming what it always named.
     "revolt_tokens": "both",
 
+    # ---- a rule that wealth cannot break (2026-11-26) ---------------------------
+    #
+    # A coalition guards a node only against a stake smaller than its own tokens
+    # there, so an agent rich enough takes any node (Experiment 65). Three rules
+    # that take that power away, one at a time, each off here so that `gol-1`
+    # keeps naming what it always named.
+    "wealth_guard": "off",
+
     # ---- stakes pooled by kin (2026-11-11) ---------------------------------------
     #
     # The pilots' pools (research/oee/pilots/proto.py, `pool`), in the engine so
@@ -331,6 +339,9 @@ class SimConfig:
     # What a token flagged revolutionary counts for: its staker's claim and the
     # coalition both, or the coalition alone.
     REVOLT_TOKENS: ClassVar[Tuple[str, ...]] = ("both", "separate")
+    # What stands between a rich agent and another's node: nothing, a coalition
+    # counted by heads, a limit on a stake, or tokens levelling across links.
+    WEALTH_GUARDS: ClassVar[Tuple[str, ...]] = ("off", "heads", "limit", "level")
     # Whose stakes on a node count as one side's: nobody's, one genotype's, or
     # one family's.
     POOLS: ClassVar[Tuple[str, ...]] = ("off", "genotype", "family")
@@ -353,6 +364,7 @@ class SimConfig:
         "contest": CONTESTS,
         "allocation": ALLOCATIONS,
         "revolt_tokens": REVOLT_TOKENS,
+        "wealth_guard": WEALTH_GUARDS,
         "pool": POOLS,
         "link_upkeep": LINK_UPKEEPS,
         "upkeep_to": UPKEEP_TO,
@@ -477,6 +489,22 @@ class SimConfig:
     # for the coalition alone and the rest of the stake for the claim alone, so
     # a staker gives up its own claim on what it flags. It needs revolutions.
     revolt_tokens: str = "both"
+
+    # A rule that wealth cannot break (the author, 2026-11-26). Under the
+    # largest-stake rule a coalition takes a node only if its tokens there
+    # outweigh the largest stake, so an agent that holds more than its
+    # neighbours together takes their nodes (Experiment 65). One of three rules
+    # against that, none with a number of its own:
+    #   heads   a coalition is counted by its members, not by their tokens: each
+    #           agent that flags a token on the node counts one, and so does the
+    #           largest staker. It needs revolutions.
+    #   limit   an agent stakes on another's node at most what that node's agent
+    #           holds; what is over stays on its own node.
+    #   level   after every game's clearing-up, across every link, taken in a
+    #           random order, one token passes from the richer end to the poorer
+    #           if they differ by two or more.
+    # Each needs the stakes placed all at once (allocation = full).
+    wealth_guard: str = "off"
 
     # Stakes pooled by kin. `genotype`: every stake on a node by agents of one
     # genotype counts as one side's; `family`: by family, every genotype
@@ -1134,6 +1162,11 @@ class SimConfig:
         if self.revolt_tokens != "both" and not self.allow_revolutions:
             raise ValueError("revolt_tokens says what a revolutionary token counts for: it needs "
                              "allow_revolutions")
+        if self.wealth_guard == "heads" and not self.allow_revolutions:
+            raise ValueError("wealth_guard = heads counts a coalition by its members: it needs allow_revolutions")
+        if self.wealth_guard != "off" and (self.allocation != "full" or self.proto):
+            raise ValueError("wealth_guard is a rule of the game whose stakes are placed all at once: it needs "
+                             "allocation = full and no prototype (proto)")
         if self.contest == "lottery" and self.allow_revolutions:
             raise ValueError("contest = lottery draws a node's taker by chance, and a coalition belongs "
                              "to the largest-stake rule: it needs allow_revolutions off")

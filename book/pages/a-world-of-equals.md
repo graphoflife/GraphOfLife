@@ -887,6 +887,59 @@ The numbers are made by `python3 research/efficient/E50/e64.py E65`.
 > To play these trials again: `python3 gol_lab.py run E65`.
 <!-- /runs -->
 
+### Three rules that wealth cannot break
+
+<!-- experiment E66 -->
+
+Experiment 65 leaves one way to keep a world of equals: a rule of the game
+that a rich agent cannot get round. The author chose three to try, on
+26 November 2026. None has a number of its own. Each is a value of the
+setting [`wealth_guard`](settings.md#wealth_guard), and a trial plays under
+one of them at a time.
+
+- **A coalition counted by heads.** Every agent that flags a token on a
+  node counts one, and so does the node's largest staker, whatever they
+  stake. Two agents that flag a token there take the node from any stake.
+- **A limit on a stake.** An agent stakes on another agent's node at most
+  what that node's agent holds. What is over stays on its own node.
+- **Tokens that level across links.** After every game one token passes
+  across each link from the richer end to the poorer, if they differ by two
+  tokens or more.
+
+Experiment 66 plays the trials of Experiment 65 again under each rule: the
+same three worlds, the same five agents, the hoarder that spreads at home
+and moving. The residents' brains were made under the old rule. So each
+rule is also played with no hoarder, to see whether the world of equals
+itself lives on under it.
+
+<!-- thesis E66 -->
+> [!quote] The thesis of Experiment 66, written down before any of its runs existed
+> **The claim.** Two of three rules stop the hoarder that spreads, and a world of equals lives on under them: a coalition counted by heads, and tokens that level across links. The third, a limit on a stake, does not stop it.
+>
+> **Why it would be so.** The hoarder of Experiment 65 ends a world of equals because a coalition guards a node only against a stake smaller than the coalition's own tokens there. Each rule takes that power away in another way, and none has a number of its own. By heads: every agent that flags a token on a node counts one, and so does the node's largest staker, so two residents that flag a token there take the node from any stake. A hoarder is the largest staker on the node it hoards on, so it should lose that node in its first games, as a resident's frozen copy does. Levelling: after every game one token passes across each link from the richer end to the poorer, if they differ by two or more. A resident stakes about one token on each neighbour's node, so a hoarder gains about one token a link in a game and levelling takes one token a link back; it should not come to hold more than all its neighbours together, which is when it spreads. The limit: an agent stakes on another's node at most what that node's agent holds. The hoarder that spreads stakes just that on each neighbour's node. The coalition there stakes about what the holder holds, and it takes the node only with more than the largest stake, so the hoarder should still take about half the nodes it stakes on, keep its own with the rest of its tokens, and sweep. The residents' brains were made under the old rule, so each rule is also played without a hoarder, to see whether the world of equals itself lives on under it.
+>
+> **It holds if:** The trials are those of Experiment 65, in the same three worlds at the same five places, with the hoarder that spreads hoarding at home or on its poorest neighbour's node, 30 for each rule; only the rule is changed, for the trial. A line sweeps if at some iteration it holds more than half the world's agents. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. For each rule six controls play the same worlds 1,000 iterations with no hoarder (a resident's frozen copy in its place, and the trial plays on when that copy is gone), and six more under no rule. The thesis holds if all of this is so: by heads at most 5 of the 30 lines sweep and at most 5 of the 30 worlds end; under levelling the same; under the limit at least 20 of the 30 lines sweep; and by heads and under levelling at most one of the six control worlds ends.
+>
+> **It fails if:** By heads or under levelling at least 20 of the 30 lines sweep, or at least three of the six control worlds end; or under the limit at most 5 of the 30 lines sweep. Anything else is undecided. Reported beside it, for each rule by itself: how many lines sweep and worlds end, by way of hoarding and by world, and when; how many lines are lost and when; the most tokens a line held; in the controls the world's agents, links and richest holding at the start and the end, beside the six controls under no rule; and the counts of Experiment 65, which played the same trials under no rule (30 of 30 lines swept, 25 of 30 worlds ended).
+<!-- /thesis -->
+
+*Planned; the result follows here when the trials are played.*
+
+<!-- runs E66 -->
+> [!info]- The trials behind this page
+> **114 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 1,000 iterations, from a world another run kept in its archive.
+>
+> - **by heads** — 30 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies home-spreader, moving-spreader; patches of 1 agent; places 1 to 5, every 1; with wealth_guard = heads.
+> - **a limit on a stake** — 30 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies home-spreader, moving-spreader; patches of 1 agent; places 1 to 5, every 1; with wealth_guard = limit.
+> - **levelling** — 30 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies home-spreader, moving-spreader; patches of 1 agent; places 1 to 5, every 1; with wealth_guard = level.
+> - **by heads, no hoarder** — 6 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1, 2; with wealth_guard = heads; played on when the strategy is gone.
+> - **a limit on a stake, no hoarder** — 6 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1, 2; with wealth_guard = limit; played on when the strategy is gone.
+> - **levelling, no hoarder** — 6 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1, 2; with wealth_guard = level; played on when the strategy is gone.
+> - **no rule, no hoarder** — 6 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1, 2; played on when the strategy is gone.
+>
+> To play these trials again: `python3 gol_lab.py run E66`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->

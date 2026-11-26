@@ -55,6 +55,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`contest`](settings.md#contest) | largest | largest | who takes a contested node |
 | [`allocation`](settings.md#allocation) | full | full | how the game's stakes are placed |
 | [`revolt_tokens`](settings.md#revolt_tokens) | both | both | what a revolutionary token counts for |
+| [`wealth_guard`](settings.md#wealth_guard) | off | off | a rule that wealth cannot break |
 | [`pool`](settings.md#pool) | off | off | stakes pooled by kin |
 | [`allow_gifting`](settings.md#allow_gifting) | off | off | gifts of tokens |
 | [`random_decisions`](settings.md#random_decisions) | off | off | the control without brains |
@@ -327,6 +328,36 @@ What a token an agent flags as revolutionary counts for in the
 Added on 11 November 2026, at the author's request, after a reading of the
 engine found that under `both` the brains flag almost every token, since doing
 so costs nothing. It needs `allow_revolutions`.
+
+### wealth_guard
+
+What stands between a rich agent and another agent's
+[node](the-world.md#agents-and-tokens) in the
+[game](one-iteration.md#phase-2-the-game). Under the largest-stake rule a
+coalition takes a node only if its tokens there outweigh the largest stake. So
+an agent that holds more than all its neighbours together can take their nodes
+([A world of equals](a-world-of-equals.md#does-a-hoarder-that-spreads-end-it)).
+Each rule here takes that power away in its own way, and none has a number of
+its own:
+
+- `off`: nothing but the largest-stake rule, as since the simple engine.
+- `heads`: a coalition is counted by its members and not by their tokens. Every
+  agent that flags a token on the node counts one, and so does the node's
+  largest staker. The coalition is still walked from its weakest member up, and
+  the node goes to one of the members that tip it. No stake is large enough to
+  hold a node against two agents that flag a token there. It needs
+  `allow_revolutions`.
+- `limit`: an agent stakes on another agent's node at most what that node's
+  agent holds. What its brain places above that stays on its own node. A stake
+  on its own node has no limit.
+- `level`: after every game's clearing-up the links are taken in a random
+  order. Across each one, a token passes from the richer end to the poorer, if
+  they differ by two tokens or more. By one token it would only change which
+  end is the richer.
+
+Added on 26 November 2026, at the author's choice of all three, to be tried one
+at a time ([Experiment 66](a-world-of-equals.md)). Each needs the stakes placed
+all at once ([`allocation`](#allocation) = full).
 
 ### pool
 

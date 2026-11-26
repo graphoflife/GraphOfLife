@@ -52,6 +52,7 @@
     "contest": "largest",
     "allocation": "full",
     "revolt_tokens": "both",
+    "wealth_guard": "off",
     "pool": "off",
     "tag_rate": 0.0,
     "mate_pays": false,
