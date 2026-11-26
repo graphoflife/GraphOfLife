@@ -347,6 +347,13 @@ def test_a_limited_stake_is_at_most_what_the_nodes_agent_holds():
         assert all(amount <= held[target] for target, amount in zip(record["targets"][1:], record["alloc"][1:]))
     mine = next(r for r in records if r["agent"] == rich)
     assert mine["alloc"][0] >= held[rich] - 2 * world.G.degree(rich) > 0
+    # An agent with no link has no stake to limit, and keeps its tokens at home.
+    alone = new_world(small(wealth_guard="limit"))
+    lonely = min(alone.G.nodes(), key=alone.G.degree)
+    alone.G.remove_edges_from(list(alone.G.edges(lonely)))
+    had = alone.tokens[lonely]
+    mine = next(r for r in alone.blotto_phase(record_decisions=True)["decisions"]["allocations"] if r["agent"] == lonely)
+    assert mine["alloc"] == [had]
     # Without the rule the same agent in the same world stakes more than two on a neighbour's node.
     free = new_world(small())
     free.tokens = dict(held)

@@ -2209,7 +2209,8 @@ class GraphOfLife:
                     alloc[int(np.argmax(scores))] = stake
                 if self.cfg.wealth_guard == "limit":
                     # On another's node at most what its agent holds; what is over stays at home.
-                    over = np.maximum(alloc[1:] - [int(self.tokens.get(v, 0)) for v in targets[1:]], 0)
+                    held = np.array([self.tokens.get(v, 0) for v in targets[1:]], dtype=int)
+                    over = np.maximum(alloc[1:] - held, 0)
                     alloc[1:] -= over
                     alloc[0] += int(over.sum())
                 alloc[0] += kept

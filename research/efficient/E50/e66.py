@@ -57,6 +57,8 @@ if __name__ == "__main__":
         for way in ("at home", "moving"):
             for world in sorted({r["world"] for r in rows}):
                 part = sorted((r for r in rows if r["way"] == way and r["world"] == world), key=lambda r: r["place"])
+                if not part:
+                    continue
                 show = lambda key: [r[key] for r in part]
                 print(f"  {way}, {world}: sweeps at {show('sweeps_at')}; line gone at {show('line_gone_at')}; "
                       f"played {show('played')}; most tokens {show('most_tokens')}; most copies {show('most_copies')}; "
