@@ -1,0 +1,154 @@
+{
+ "id": "E71",
+ "title": "Does the order of equals last under a head count? Four worlds of equals with mutations of 30 and 50 numbers, played on with the rule",
+ "thesis": {
+  "claim": "A world of equals whose mutations change 30 or 50 numbers lasts under a coalition counted by heads. Four such worlds of Experiment 63, two of which died out later without the rule, are played on from iteration 22,500 with the rule on, and at most one dies out before iteration 30,000.",
+  "why": "Both worlds of equals that died in Experiment 63 were taken by a line of hoarders, and Experiment 68 played both on from inside that takeover: under a head count the line lost its hoard in the first game in all 30 trials, and without the rule it took the world again in all 30. So the one way these worlds are known to end is closed by the rule. Experiment 66 showed that a world of equals plays under a head count as it did before, for 1,000 iterations. Two things could still end such a world, and this experiment is where they would show. Mutation may find a way to break the order that the old rule never rewarded, since under a head count the largest staker loses. And the order may wear away by itself: Experiment 69's one run suggests that under a head count a churning world does not condense into the order, so a world that leaves it may not come back.",
+  "confirm": "Experiment 63 kept its worlds every 2,500 iterations. Four of its runs with 30 and 50 numbers were worlds of equals in the 500 iterations from 22,500: 30 numbers with seeds 6301 and 6302, and 50 numbers with seeds 6302 and 6303. Without the rule the second and the third died out, at iterations 29,351 and 23,853, and the other two were worlds of equals to iteration 30,000. Each is played on once from its world kept at 22,500, with its own settings but wealth_guard = heads and the seed 7101, to iteration 30,000. A world dies out if its run ends as extinct before iteration 30,000. The thesis holds if at most one of the four dies out.",
+  "refute": "Three or more of the four die out. Two is undecided. Reported beside it, with no line drawn: for each run its fifteen windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition), and in how many of them it is one; its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run it was played on from."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "iterations": 30000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "seeds": "7101",
+  "conditions": [
+   {
+    "name": "30 numbers, the world of seed 6301, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-8020c3-s6301-on210139",
+     "at": 22500
+    }
+   },
+   {
+    "name": "30 numbers, the world of seed 6302, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-8020c3-s6302-on210139",
+     "at": 22500
+    }
+   },
+   {
+    "name": "50 numbers, the world of seed 6302, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-3f4b02-s6302-on210139",
+     "at": 22500
+    }
+   },
+   {
+    "name": "50 numbers, the world of seed 6303, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-3f4b02-s6303-on210139",
+     "at": 22500
+    }
+   }
+  ]
+ }
+}

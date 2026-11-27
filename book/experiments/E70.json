@@ -1,0 +1,114 @@
+{
+ "id": "E70",
+ "title": "Does the order of equals form under a head count? Nine worlds played 1,500 iterations with the rule",
+ "thesis": {
+  "claim": "Under a coalition counted by heads the order of equals does not form out of a churning world. Nine worlds are played 1,500 iterations from the kept world that Experiment 63 started from, with the rule on. At most two of them are worlds of equals in their last 500 iterations, where seven of the nine were without the rule.",
+  "why": "This claim rests on one world, and no reckoning stands behind it. Experiment 69 was to play six of these worlds for 10,000 iterations under a head count. It was stopped in its first run, because the world stayed large and slow and the six runs would have taken about two days. That run, with mutations of 30 numbers and seed 6301, is the ground for the claim. Without the rule the same world fell from 5,160 agents with two links each to 910 agents with 30 links each within 325 iterations, and was a world of equals from iteration 20,500. Under a head count it began the same way, 2,931 agents with seven links each at iteration 20,400, and then went back: between 5,000 and 7,200 agents with two links each from iteration 20,500 to 21,300, with two to ten nodes in a hundred won by a coalition, and a richest agent holding 1,800 to 3,200 tokens. Why the head count undoes the condensing is not known. Experiment 66 showed that a world that is already one of equals plays under a head count as before, so the rule does not break the order; what this world shows is that it may keep the order from forming.",
+  "confirm": "The nine runs of Experiment 63 (mutations of 20, 30 and 50 numbers, seeds 6301 to 6303) are made again from the same kept world at iteration 20,000 with the same settings but wealth_guard = heads, to iteration 21,500. One of the nine exists already: Experiment 69's first run, 30 numbers with seed 6301, which this thesis was written after seeing; it is counted, and the count is also given for the other eight alone. A run is a world of equals in its last window, iterations 21,000 to 21,500, by Experiment 63's measure: fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition. The thesis holds if at most two of the nine are.",
+  "refute": "Six or more of the nine are worlds of equals in their last window. Anything else is undecided. Without the rule seven of the nine were, in the same window: all three with 20 numbers, two of three with 30 and two of three with 50. Reported beside it, with no line drawn: for each run its three windows of 500 iterations with its agents, the links of an agent, the richest holding, births and the share of nodes won by a coalition, beside Experiment 63's run of the same step and seed."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "from": {
+   "run": "B1-40000-bbbccd-s5001-on45a3d3",
+   "at": 20000
+  },
+  "seeds": "6301..6303",
+  "iterations": 21500,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "20 numbers, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 20,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "30 numbers, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "50 numbers, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   }
+  ]
+ }
+}

@@ -1298,7 +1298,23 @@ staker loses?
 > **It fails if:** Three or more of the six die out, as many as without the rule. Two is undecided. Reported beside it, with no line drawn: for each run its twenty windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition); its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run of the same step and seed.
 <!-- /thesis -->
 
-*Planned; the result follows here when the runs are played.*
+**Stopped on 27 November 2026, in its first run, and not judged.** The
+plan reckoned with about one second an iteration, as in Experiment 63,
+where the worlds condensed to a few hundred agents within 500 iterations.
+Under the head count the first world did not condense. It stayed at 5,000
+to 7,000 agents and played at about 2.7 seconds an iteration, so the six
+runs would have taken about two days on the one worker that was free. No
+experiment of this notebook may take longer than one day (the author's
+rule of 23 November 2026). The thesis stands as written and has no
+verdict.
+
+What the first run showed is why the next two experiments ask what they
+ask. It is the world with 30 numbers and seed 6301. Without the rule it
+was a world of equals from iteration 20,500. Under a head count it began
+to condense in the same way and then went back to a large world with two
+links an agent. So the question of Experiment 69 is split in two:
+[does the order form under a head count](#does-the-order-form-under-a-head-count),
+and [does it last there](#does-the-order-last-under-a-head-count)?
 
 <!-- runs E69 -->
 > [!info]- The runs behind this page
@@ -1308,6 +1324,75 @@ staker loses?
 > - **50 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-eee3e3-s6301-on210139` … `B1-40000-eee3e3-s6303-on210139`.
 >
 > To make these runs again: `python3 gol_lab.py run E69`.
+<!-- /runs -->
+
+### Does the order form under a head count?
+
+<!-- experiment E70 -->
+
+Experiment 70 plays all nine worlds of Experiment 63 again under a head
+count, but only 1,500 iterations each: long enough for the order to form,
+which without the rule took 500 to 1,000. One of the nine runs is the one
+that Experiment 69 left, and the thesis was written after seeing it. It
+says so, and counts the other eight apart.
+
+<!-- thesis E70 -->
+> [!quote] The thesis of Experiment 70, written down before any of its runs existed
+> **The claim.** Under a coalition counted by heads the order of equals does not form out of a churning world. Nine worlds are played 1,500 iterations from the kept world that Experiment 63 started from, with the rule on. At most two of them are worlds of equals in their last 500 iterations, where seven of the nine were without the rule.
+>
+> **Why it would be so.** This claim rests on one world, and no reckoning stands behind it. Experiment 69 was to play six of these worlds for 10,000 iterations under a head count. It was stopped in its first run, because the world stayed large and slow and the six runs would have taken about two days. That run, with mutations of 30 numbers and seed 6301, is the ground for the claim. Without the rule the same world fell from 5,160 agents with two links each to 910 agents with 30 links each within 325 iterations, and was a world of equals from iteration 20,500. Under a head count it began the same way, 2,931 agents with seven links each at iteration 20,400, and then went back: between 5,000 and 7,200 agents with two links each from iteration 20,500 to 21,300, with two to ten nodes in a hundred won by a coalition, and a richest agent holding 1,800 to 3,200 tokens. Why the head count undoes the condensing is not known. Experiment 66 showed that a world that is already one of equals plays under a head count as before, so the rule does not break the order; what this world shows is that it may keep the order from forming.
+>
+> **It holds if:** The nine runs of Experiment 63 (mutations of 20, 30 and 50 numbers, seeds 6301 to 6303) are made again from the same kept world at iteration 20,000 with the same settings but wealth_guard = heads, to iteration 21,500. One of the nine exists already: Experiment 69's first run, 30 numbers with seed 6301, which this thesis was written after seeing; it is counted, and the count is also given for the other eight alone. A run is a world of equals in its last window, iterations 21,000 to 21,500, by Experiment 63's measure: fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition. The thesis holds if at most two of the nine are.
+>
+> **It fails if:** Six or more of the nine are worlds of equals in their last window. Anything else is undecided. Without the rule seven of the nine were, in the same window: all three with 20 numbers, two of three with 30 and two of three with 50. Reported beside it, with no line drawn: for each run its three windows of 500 iterations with its agents, the links of an agent, the richest holding, births and the share of nodes won by a coalition, beside Experiment 63's run of the same step and seed.
+<!-- /thesis -->
+
+*Planned; the result follows here when the runs are played.*
+
+<!-- runs E70 -->
+> [!info]- The runs behind this page
+> **9 runs.** Every condition below is run once for every seed (6301 to 6303), played on from the world `B1-40000-bbbccd-s5001-on45a3d3` kept at iteration 20,000, to iteration 21,500 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **20 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 20, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-c0734c-s6301-on210139` … `B1-40000-c0734c-s6303-on210139`.
+> - **30 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-142067-s6301-on210139` … `B1-40000-142067-s6303-on210139`.
+> - **50 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-eee3e3-s6301-on210139` … `B1-40000-eee3e3-s6303-on210139`.
+>
+> To make these runs again: `python3 gol_lab.py run E70`.
+<!-- /runs -->
+
+### Does the order last under a head count?
+
+<!-- experiment E71 -->
+
+Experiment 71 starts where the order is already there. Four runs of
+Experiment 63 with 30 and 50 numbers were worlds of equals at iteration
+22,500. Two of them died out later, taken by a line of hoarders, and two
+kept the order to the end. Each is played on from its world kept at
+22,500 under a head count, to iteration 30,000.
+
+<!-- thesis E71 -->
+> [!quote] The thesis of Experiment 71, written down before any of its runs existed
+> **The claim.** A world of equals whose mutations change 30 or 50 numbers lasts under a coalition counted by heads. Four such worlds of Experiment 63, two of which died out later without the rule, are played on from iteration 22,500 with the rule on, and at most one dies out before iteration 30,000.
+>
+> **Why it would be so.** Both worlds of equals that died in Experiment 63 were taken by a line of hoarders, and Experiment 68 played both on from inside that takeover: under a head count the line lost its hoard in the first game in all 30 trials, and without the rule it took the world again in all 30. So the one way these worlds are known to end is closed by the rule. Experiment 66 showed that a world of equals plays under a head count as it did before, for 1,000 iterations. Two things could still end such a world, and this experiment is where they would show. Mutation may find a way to break the order that the old rule never rewarded, since under a head count the largest staker loses. And the order may wear away by itself: Experiment 69's one run suggests that under a head count a churning world does not condense into the order, so a world that leaves it may not come back.
+>
+> **It holds if:** Experiment 63 kept its worlds every 2,500 iterations. Four of its runs with 30 and 50 numbers were worlds of equals in the 500 iterations from 22,500: 30 numbers with seeds 6301 and 6302, and 50 numbers with seeds 6302 and 6303. Without the rule the second and the third died out, at iterations 29,351 and 23,853, and the other two were worlds of equals to iteration 30,000. Each is played on once from its world kept at 22,500, with its own settings but wealth_guard = heads and the seed 7101, to iteration 30,000. A world dies out if its run ends as extinct before iteration 30,000. The thesis holds if at most one of the four dies out.
+>
+> **It fails if:** Three or more of the four die out. Two is undecided. Reported beside it, with no line drawn: for each run its fifteen windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition), and in how many of them it is one; its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run it was played on from.
+<!-- /thesis -->
+
+*Planned; the result follows here when the runs are played.*
+
+<!-- runs E71 -->
+> [!info]- The runs behind this page
+> **4 runs.** Every condition below is run once for every seed (7101), played on or again from a kept world of its own to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers, the world of seed 6301, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-8020c3-s6301-on210139` at iteration 22,500. Run `B1-40000-142067-s7101-oncc8e47`.
+> - **30 numbers, the world of seed 6302, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-8020c3-s6302-on210139` at iteration 22,500. Run `B1-40000-142067-s7101-on9f14d5`.
+> - **50 numbers, the world of seed 6302, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-3f4b02-s6302-on210139` at iteration 22,500. Run `B1-40000-eee3e3-s7101-one84bf9`.
+> - **50 numbers, the world of seed 6303, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-3f4b02-s6303-on210139` at iteration 22,500. Run `B1-40000-eee3e3-s7101-on192fc3`.
+>
+> To make these runs again: `python3 gol_lab.py run E71`.
 <!-- /runs -->
 
 ### A few who play otherwise
