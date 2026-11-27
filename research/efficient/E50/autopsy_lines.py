@@ -30,7 +30,12 @@ def rich(tokens):
     return np.asarray(tokens) > 5 * np.median(tokens)
 
 
-def trace(run, first, last, shown, game):
+def lineage(run, first, last):
+    """
+    The line that took the world, from the frames of iterations `first` to `last`: the brain it comes
+    from, when each brain was first seen, whether a brain belongs to it, and the world before and
+    after every game.
+    """
     parent, born, before, after = {}, {}, {}, {}
     for it in range(first, last + 1):
         for phase, keep in ((1, before), (2, after)):
@@ -57,6 +62,17 @@ def trace(run, first, last, shown, game):
             member[brain] = origin in chain(brain)
         return member[brain]
 
+    return origin, born, inline, before, after, start
+
+
+def line_at(run, first, last, at):
+    """The brains of the line in the world the run has at the start of iteration `at`, as a sorted list."""
+    origin, born, inline, before, after, start = lineage(run, first, last)
+    return sorted({b for b in after[at - 1]["brain_ids"] if inline(b)})
+
+
+def trace(run, first, last, shown, game):
+    origin, born, inline, before, after, start = lineage(run, first, last)
     print(f"  first iteration with five rich agents: {start}; the brain they all come from was first seen at {born[origin]}")
     print("  iteration: agents | the line's agents, its share of all tokens, links each | the others' tokens and links each | "
           "rich agents in the line / all rich")

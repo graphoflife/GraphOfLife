@@ -1,0 +1,32 @@
+{
+ "30 numbers, again": {
+  "first": "B1-40000-8020c3-s6302-on210139",
+  "again": "B1-40000-8020c3-s6302-on0a0a78",
+  "from": 27500,
+  "ends": {
+   "first": 29351,
+   "again": 29351
+  },
+  "games_compared": 1851,
+  "first_difference": null,
+  "worlds_kept": [
+   4,
+   186
+  ]
+ },
+ "50 numbers, again": {
+  "first": "B1-40000-3f4b02-s6302-on210139",
+  "again": "B1-40000-3f4b02-s6302-ond3e026",
+  "from": 22500,
+  "ends": {
+   "first": 23853,
+   "again": 23853
+  },
+  "games_compared": 1353,
+  "first_difference": null,
+  "worlds_kept": [
+   2,
+   136
+  ]
+ }
+}

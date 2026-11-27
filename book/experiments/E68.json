@@ -1,0 +1,626 @@
+{
+ "id": "E68",
+ "title": "A coalition counted by heads against the lines that evolved: the two worlds that died, played on from inside the takeover",
+ "thesis": {
+  "claim": "A coalition counted by heads stops the lines that evolution made, too. Played on from inside the takeover under a head count, the two worlds of equals that died live on. Played on under the old rule, with other luck, they end again.",
+  "why": "The head count stopped a hoarder written by hand in all 30 trials of Experiment 66. The lines that took the two worlds of Experiment 63 were not written by hand, and nobody knows their brains' rule. What is known is that they hoard: in the one game of a takeover whose stakes are recorded, all twelve agents of the line staked everything on one node, six on their own and six on a neighbour's. Under a head count such a stake counts one, and two neighbours that flag a token on the node take it. So an agent of the line should lose nodes where it took them, and what it holds should pass to those around it. That should hold however much the line holds already, because the count is of heads and the line's agents are few: 9 to 127 among 512 to 761 at the six worlds played on from. Under the old rule the takeover should not hang on luck once the line holds a few tokens in a hundred, since each agent of it outweighs any coalition it meets; so with other seeds the worlds should end as they did.",
+  "confirm": "Experiment 67 kept the two worlds every 10 iterations. Each is played on from three of them: with the line holding about 4% of all tokens (iterations 29,280 and 23,400), about 22% (29,300 and 23,470) and about 54% (29,320 and 23,520). Each of the six is played on 1,000 iterations with five seeds under no rule, five under a head count and five under levelling; nothing else is changed, and mutation goes on. The line is the brains that come from the one brain all rich agents came from in the first play, and every brain copied from them. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. A line sweeps if at some iteration it holds more than half the world's agents. The thesis holds if under no rule at least 20 of the 30 worlds end, and by heads at most 5 of the 30 worlds end and at most 5 of the 30 lines sweep.",
+  "refute": "By heads at least 15 of the 30 worlds end, or under no rule at most 10 of the 30 worlds end. Anything else is undecided. Reported beside it, with no line drawn: the same counts under levelling, which Experiment 66 found to be a brake; all counts by world and by how much the line held; the line's agents and tokens over time and at the end; and the richest holding."
+ },
+ "trials": {
+  "kind": "sequel",
+  "T": 1000,
+  "workers": 4,
+  "sets": [
+   {
+    "name": "no rule: 30 numbers at iteration 29280",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29280,
+     "seed": "1..5",
+     "line": [
+      5528895,
+      5528958,
+      5529371,
+      5529458
+     ]
+    }
+   },
+   {
+    "name": "no rule: 30 numbers at iteration 29300",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29300,
+     "seed": "1..5",
+     "line": [
+      5530845,
+      5531045,
+      5531070,
+      5531159,
+      5531182,
+      5531192,
+      5531276,
+      5531457,
+      5531607,
+      5531646,
+      5531652,
+      5531693,
+      5531868,
+      5531874,
+      5531938
+     ]
+    }
+   },
+   {
+    "name": "no rule: 30 numbers at iteration 29320",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29320,
+     "seed": "1..5",
+     "line": [
+      5532669,
+      5532898,
+      5533160,
+      5533313,
+      5533353,
+      5533407,
+      5533532,
+      5533557,
+      5533688,
+      5533734,
+      5533774,
+      5533805,
+      5533833,
+      5533904,
+      5533924,
+      5533989,
+      5534023,
+      5534024,
+      5534040,
+      5534107,
+      5534179,
+      5534256,
+      5534262,
+      5534318,
+      5534319,
+      5534322,
+      5534358,
+      5534368,
+      5534398,
+      5534431,
+      5534449,
+      5534488,
+      5534493,
+      5534494,
+      5534512,
+      5534531,
+      5534532,
+      5534566,
+      5534576,
+      5534587,
+      5534593,
+      5534606,
+      5534623,
+      5534624,
+      5534631,
+      5534632,
+      5534639,
+      5534640,
+      5534646,
+      5534650,
+      5534657,
+      5534674,
+      5534690,
+      5534691,
+      5534714,
+      5534718,
+      5534719,
+      5534722,
+      5534724,
+      5534730,
+      5534741,
+      5534745,
+      5534754,
+      5534755,
+      5534757,
+      5534760,
+      5534762,
+      5534766,
+      5534770
+     ]
+    }
+   },
+   {
+    "name": "no rule: 50 numbers at iteration 23400",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23400,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959275,
+      4959834,
+      4959849,
+      4960074,
+      4961357,
+      4961600
+     ]
+    }
+   },
+   {
+    "name": "no rule: 50 numbers at iteration 23470",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23470,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959834,
+      4960074,
+      4967770,
+      4968156,
+      4968508,
+      4968553,
+      4968558,
+      4968571
+     ]
+    }
+   },
+   {
+    "name": "no rule: 50 numbers at iteration 23520",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23520,
+     "seed": "1..5",
+     "line": [
+      4960074,
+      4971687,
+      4972377,
+      4972399,
+      4972458,
+      4972595,
+      4972667,
+      4972719,
+      4972751,
+      4972801,
+      4972816,
+      4972824,
+      4972849,
+      4972898,
+      4972964,
+      4972988,
+      4973000,
+      4973066,
+      4973130,
+      4973146,
+      4973155,
+      4973186,
+      4973203,
+      4973214,
+      4973244,
+      4973252,
+      4973291
+     ]
+    }
+   },
+   {
+    "name": "by heads: 30 numbers at iteration 29280",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29280,
+     "seed": "1..5",
+     "line": [
+      5528895,
+      5528958,
+      5529371,
+      5529458
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "by heads: 30 numbers at iteration 29300",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29300,
+     "seed": "1..5",
+     "line": [
+      5530845,
+      5531045,
+      5531070,
+      5531159,
+      5531182,
+      5531192,
+      5531276,
+      5531457,
+      5531607,
+      5531646,
+      5531652,
+      5531693,
+      5531868,
+      5531874,
+      5531938
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "by heads: 30 numbers at iteration 29320",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29320,
+     "seed": "1..5",
+     "line": [
+      5532669,
+      5532898,
+      5533160,
+      5533313,
+      5533353,
+      5533407,
+      5533532,
+      5533557,
+      5533688,
+      5533734,
+      5533774,
+      5533805,
+      5533833,
+      5533904,
+      5533924,
+      5533989,
+      5534023,
+      5534024,
+      5534040,
+      5534107,
+      5534179,
+      5534256,
+      5534262,
+      5534318,
+      5534319,
+      5534322,
+      5534358,
+      5534368,
+      5534398,
+      5534431,
+      5534449,
+      5534488,
+      5534493,
+      5534494,
+      5534512,
+      5534531,
+      5534532,
+      5534566,
+      5534576,
+      5534587,
+      5534593,
+      5534606,
+      5534623,
+      5534624,
+      5534631,
+      5534632,
+      5534639,
+      5534640,
+      5534646,
+      5534650,
+      5534657,
+      5534674,
+      5534690,
+      5534691,
+      5534714,
+      5534718,
+      5534719,
+      5534722,
+      5534724,
+      5534730,
+      5534741,
+      5534745,
+      5534754,
+      5534755,
+      5534757,
+      5534760,
+      5534762,
+      5534766,
+      5534770
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "by heads: 50 numbers at iteration 23400",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23400,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959275,
+      4959834,
+      4959849,
+      4960074,
+      4961357,
+      4961600
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "by heads: 50 numbers at iteration 23470",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23470,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959834,
+      4960074,
+      4967770,
+      4968156,
+      4968508,
+      4968553,
+      4968558,
+      4968571
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "by heads: 50 numbers at iteration 23520",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23520,
+     "seed": "1..5",
+     "line": [
+      4960074,
+      4971687,
+      4972377,
+      4972399,
+      4972458,
+      4972595,
+      4972667,
+      4972719,
+      4972751,
+      4972801,
+      4972816,
+      4972824,
+      4972849,
+      4972898,
+      4972964,
+      4972988,
+      4973000,
+      4973066,
+      4973130,
+      4973146,
+      4973155,
+      4973186,
+      4973203,
+      4973214,
+      4973244,
+      4973252,
+      4973291
+     ],
+     "rules": {
+      "wealth_guard": "heads"
+     }
+    }
+   },
+   {
+    "name": "levelling: 30 numbers at iteration 29280",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29280,
+     "seed": "1..5",
+     "line": [
+      5528895,
+      5528958,
+      5529371,
+      5529458
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "levelling: 30 numbers at iteration 29300",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29300,
+     "seed": "1..5",
+     "line": [
+      5530845,
+      5531045,
+      5531070,
+      5531159,
+      5531182,
+      5531192,
+      5531276,
+      5531457,
+      5531607,
+      5531646,
+      5531652,
+      5531693,
+      5531868,
+      5531874,
+      5531938
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "levelling: 30 numbers at iteration 29320",
+    "grid": {
+     "run": "B1-40000-8020c3-s6302-on0a0a78",
+     "era": 29320,
+     "seed": "1..5",
+     "line": [
+      5532669,
+      5532898,
+      5533160,
+      5533313,
+      5533353,
+      5533407,
+      5533532,
+      5533557,
+      5533688,
+      5533734,
+      5533774,
+      5533805,
+      5533833,
+      5533904,
+      5533924,
+      5533989,
+      5534023,
+      5534024,
+      5534040,
+      5534107,
+      5534179,
+      5534256,
+      5534262,
+      5534318,
+      5534319,
+      5534322,
+      5534358,
+      5534368,
+      5534398,
+      5534431,
+      5534449,
+      5534488,
+      5534493,
+      5534494,
+      5534512,
+      5534531,
+      5534532,
+      5534566,
+      5534576,
+      5534587,
+      5534593,
+      5534606,
+      5534623,
+      5534624,
+      5534631,
+      5534632,
+      5534639,
+      5534640,
+      5534646,
+      5534650,
+      5534657,
+      5534674,
+      5534690,
+      5534691,
+      5534714,
+      5534718,
+      5534719,
+      5534722,
+      5534724,
+      5534730,
+      5534741,
+      5534745,
+      5534754,
+      5534755,
+      5534757,
+      5534760,
+      5534762,
+      5534766,
+      5534770
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "levelling: 50 numbers at iteration 23400",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23400,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959275,
+      4959834,
+      4959849,
+      4960074,
+      4961357,
+      4961600
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "levelling: 50 numbers at iteration 23470",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23470,
+     "seed": "1..5",
+     "line": [
+      4958664,
+      4959834,
+      4960074,
+      4967770,
+      4968156,
+      4968508,
+      4968553,
+      4968558,
+      4968571
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   },
+   {
+    "name": "levelling: 50 numbers at iteration 23520",
+    "grid": {
+     "run": "B1-40000-3f4b02-s6302-ond3e026",
+     "era": 23520,
+     "seed": "1..5",
+     "line": [
+      4960074,
+      4971687,
+      4972377,
+      4972399,
+      4972458,
+      4972595,
+      4972667,
+      4972719,
+      4972751,
+      4972801,
+      4972816,
+      4972824,
+      4972849,
+      4972898,
+      4972964,
+      4972988,
+      4973000,
+      4973066,
+      4973130,
+      4973146,
+      4973155,
+      4973186,
+      4973203,
+      4973214,
+      4973244,
+      4973252,
+      4973291
+     ],
+     "rules": {
+      "wealth_guard": "level"
+     }
+    }
+   }
+  ]
+ }
+}

@@ -25,9 +25,15 @@ if __name__ == "__main__":
     out = {}
     for spec in gol_plan.experiment_runs("E67"):
         first, start = spec.lab["from"]["run"], spec.lab["from"]["at"]
-        ends = {name: gol_store.load_meta(run)["iteration"] for name, run in (("first", first), ("again", spec.run_id))}
+        try:
+            ends = {name: gol_store.load_meta(run)["iteration"] for name, run in (("first", first), ("again", spec.run_id))}
+        except OSError:
+            print(f"{spec.condition}: not played yet")
+            continue
+        # A run still being played is compared as far as it has got.
+        playing = gol_store.load_meta(spec.run_id).get("status") == "running"
         differs = games = None
-        for games, it in enumerate(range(start, max(ends.values()) + 1)):
+        for games, it in enumerate(range(start, (ends["again"] if playing else max(ends.values()) + 1))):
             a, b = after_game(first, it), after_game(spec.run_id, it)
             if a is None and b is None:
                 break

@@ -627,3 +627,20 @@ Read by `E50/e66.py`.
   cc2ffab3bdc4e725. Nine crashed trials were played again from their
   start; their folders had to be removed, since an existing run stays on
   the engine that made it.
+
+
+### Experiment 67: the two dead worlds played again (confirmed)
+
+A plan's `from` may say `"again": true`: the kept world is played under
+its run's settings and seed with the random state kept with it. Both
+worlds of Experiment 63 that died (30 and 50 numbers, seed 6302) were
+played again from 27,500 and 22,500 with a world kept every 10
+iterations. Read by `E50/e67.py`.
+
+- Identical after every game (1,851 and 1,353 games: agents, tokens,
+  brains, parents), dead at 29,351 and 23,853 again. 186 and 136 worlds
+  kept (runs `B1-40000-8020c3-s6302-on0a0a78`, `B1-40000-3f4b02-s6302-ond3e026`).
+- First plays on engine f4c3230c5a7b6de3, second on 56688a922df379c2.
+- Use: any world of a finished run's past can be recovered, with its
+  brains. New trial kind `sequel` plays such a world on (own mutations,
+  own seed, optional `rules`, optional `line` of brain ids to follow).

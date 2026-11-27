@@ -1093,7 +1093,28 @@ head count, with the line that evolved in them.
 > **It fails if:** In either world some agent, holding or brain differs after some game, or the world dies out at another iteration or not at all. Reported beside it: the first iteration at which the two plays differ, if any, and how many worlds each play kept.
 <!-- /thesis -->
 
-*Planned; the result follows here when the runs are played.*
+**The thesis is confirmed.** Both worlds came out the same. After each of
+the 1,851 games of the world with 30 numbers and the 1,353 games of the
+world with 50, every agent, its tokens and its brain are those of the
+first play, and the worlds die out at iterations 29,351 and 23,853 again.
+
+- **The second plays kept 186 and 136 worlds**, one every 10 iterations,
+  where the first kept 4 and 2.
+- **The engine had been changed in between.** The first plays ran on the
+  engine of 24 November 2026 and the second on that of 26 November, with
+  the hand-written strategies and the setting `wealth_guard` added. With
+  those off it plays as it did.
+
+**What this shows.** A finished run can be made to keep any world of its
+past, as long as it kept one before it. The takeover that ended each world
+is now there to start from at any tenth iteration, with the brains of the
+line that did it.
+
+**What it does not show.** It is two runs and two versions of the engine.
+A change to the engine that draws its random numbers in another order
+would break it, and this comparison is how that would be seen.
+
+The two plays are compared by `python3 research/efficient/E50/e67.py`.
 
 <!-- runs E67 -->
 > [!info]- The runs behind this page
@@ -1103,6 +1124,65 @@ head count, with the line that evolved in them.
 > - **50 numbers, again** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `n_nodes` = 800; 40,000 tokens; played again from `B1-40000-3f4b02-s6302-on210139` at iteration 22,500. Run `B1-40000-3f4b02-s6302-ond3e026`.
 >
 > To make these runs again: `python3 gol_lab.py run E67`.
+<!-- /runs -->
+
+### Does the head count stop the lines that evolved?
+
+<!-- experiment E68 -->
+
+Experiment 68 plays both worlds on from inside the takeover. Each is
+started at three worlds that Experiment 67 kept: with the line holding
+about 4% of all tokens, about 22% and about 54%. From each it is played
+1,000 iterations with five seeds under no rule, under a head count, and
+under levelling. Nothing is planted and mutation goes on, so the line is
+the one that evolved, and it can go on changing.
+
+| world | played on from iteration | agents | of the line | its share of all tokens |
+|---|---|---|---|---|
+| 30 numbers, seed 6302 | 29,280 | 674 | 9 | 3% |
+| | 29,300 | 683 | 19 | 21% |
+| | 29,320 | 761 | 127 | 51% |
+| 50 numbers, seed 6302 | 23,400 | 531 | 8 | 5% |
+| | 23,470 | 526 | 9 | 24% |
+| | 23,520 | 512 | 35 | 57% |
+
+<!-- thesis E68 -->
+> [!quote] The thesis of Experiment 68, written down before any of its runs existed
+> **The claim.** A coalition counted by heads stops the lines that evolution made, too. Played on from inside the takeover under a head count, the two worlds of equals that died live on. Played on under the old rule, with other luck, they end again.
+>
+> **Why it would be so.** The head count stopped a hoarder written by hand in all 30 trials of Experiment 66. The lines that took the two worlds of Experiment 63 were not written by hand, and nobody knows their brains' rule. What is known is that they hoard: in the one game of a takeover whose stakes are recorded, all twelve agents of the line staked everything on one node, six on their own and six on a neighbour's. Under a head count such a stake counts one, and two neighbours that flag a token on the node take it. So an agent of the line should lose nodes where it took them, and what it holds should pass to those around it. That should hold however much the line holds already, because the count is of heads and the line's agents are few: 9 to 127 among 512 to 761 at the six worlds played on from. Under the old rule the takeover should not hang on luck once the line holds a few tokens in a hundred, since each agent of it outweighs any coalition it meets; so with other seeds the worlds should end as they did.
+>
+> **It holds if:** Experiment 67 kept the two worlds every 10 iterations. Each is played on from three of them: with the line holding about 4% of all tokens (iterations 29,280 and 23,400), about 22% (29,300 and 23,470) and about 54% (29,320 and 23,520). Each of the six is played on 1,000 iterations with five seeds under no rule, five under a head count and five under levelling; nothing else is changed, and mutation goes on. The line is the brains that come from the one brain all rich agents came from in the first play, and every brain copied from them. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. A line sweeps if at some iteration it holds more than half the world's agents. The thesis holds if under no rule at least 20 of the 30 worlds end, and by heads at most 5 of the 30 worlds end and at most 5 of the 30 lines sweep.
+>
+> **It fails if:** By heads at least 15 of the 30 worlds end, or under no rule at most 10 of the 30 worlds end. Anything else is undecided. Reported beside it, with no line drawn: the same counts under levelling, which Experiment 66 found to be a brake; all counts by world and by how much the line held; the line's agents and tokens over time and at the end; and the richest holding.
+<!-- /thesis -->
+
+*Planned; the result follows here when the trials are played.*
+
+<!-- runs E68 -->
+> [!info]- The trials behind this page
+> **90 trials**, sequels: the world of one era played on with its own mutations and a seed of its own, and its agents, and those of one line of brains, counted after every iteration; each plays 1,000 iterations, from a world another run kept in its archive.
+>
+> - **no rule: 30 numbers at iteration 29280** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,280; seeds 1 to 5, every 1; following a line of 4 brains.
+> - **no rule: 30 numbers at iteration 29300** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,300; seeds 1 to 5, every 1; following a line of 15 brains.
+> - **no rule: 30 numbers at iteration 29320** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,320; seeds 1 to 5, every 1; following a line of 69 brains.
+> - **no rule: 50 numbers at iteration 23400** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,400; seeds 1 to 5, every 1; following a line of 7 brains.
+> - **no rule: 50 numbers at iteration 23470** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,470; seeds 1 to 5, every 1; following a line of 9 brains.
+> - **no rule: 50 numbers at iteration 23520** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,520; seeds 1 to 5, every 1; following a line of 27 brains.
+> - **by heads: 30 numbers at iteration 29280** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,280; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 4 brains.
+> - **by heads: 30 numbers at iteration 29300** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,300; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 15 brains.
+> - **by heads: 30 numbers at iteration 29320** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,320; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 69 brains.
+> - **by heads: 50 numbers at iteration 23400** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,400; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 7 brains.
+> - **by heads: 50 numbers at iteration 23470** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,470; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 9 brains.
+> - **by heads: 50 numbers at iteration 23520** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,520; with wealth_guard = heads; seeds 1 to 5, every 1; following a line of 27 brains.
+> - **levelling: 30 numbers at iteration 29280** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,280; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 4 brains.
+> - **levelling: 30 numbers at iteration 29300** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,300; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 15 brains.
+> - **levelling: 30 numbers at iteration 29320** — 5 trials: worlds `B1-40000-8020c3-s6302-on0a0a78`; at iteration 29,320; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 69 brains.
+> - **levelling: 50 numbers at iteration 23400** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,400; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 7 brains.
+> - **levelling: 50 numbers at iteration 23470** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,470; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 9 brains.
+> - **levelling: 50 numbers at iteration 23520** — 5 trials: worlds `B1-40000-3f4b02-s6302-ond3e026`; at iteration 23,520; with wealth_guard = level; seeds 1 to 5, every 1; following a line of 27 brains.
+>
+> To play these trials again: `python3 gol_lab.py run E68`.
 <!-- /runs -->
 
 ### A few who play otherwise
