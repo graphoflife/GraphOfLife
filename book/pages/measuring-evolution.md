@@ -726,6 +726,7 @@ solved, but not that it is.
 - [Every era against three](every-era-against-three.md#where-to-go-next)
 - [Why does evolution level off?](why-does-evolution-level-off.md#how-it-is-read)
 - [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md#the-contests)
+- [A world of equals](a-world-of-equals.md#do-brains-get-better-under-a-head-count)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
 - [What a brain can compute](what-a-brain-can-compute.md#planted-in-its-place)
 - [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md#where-to-go-next)

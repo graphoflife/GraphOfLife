@@ -1403,7 +1403,7 @@ two of nine under a head count. And a world that does not form the order
 under a head count stays a churning world with two links an agent, in
 which one agent at a time holds a tenth of all tokens.
 
-**What the sparse worlds are: stars.** This was read from the runs'
+**What the sparse worlds are: [stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.").** This was read from the runs'
 statistics and frames after the verdict; no line was drawn for it
 beforehand. In the five worlds that stayed sparse, 96 to 100 agents in a
 hundred had one link in the last 500 iterations, and the most linked
@@ -1564,6 +1564,55 @@ The numbers are made by `python3 research/efficient/E50/e69.py E71`.
 > To make these runs again: `python3 gol_lab.py run E71`.
 <!-- /runs -->
 
+### Do brains get better under a head count?
+
+<!-- experiment E72 -->
+
+Experiment 71 left four worlds that lived 7,500 iterations under a head
+count, three of them with times of many births. Experiment 72 asks what
+Experiment 54 asked of the first world of equals: are the later brains
+better than the earlier ones? It plays the brains of two [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against
+each other in the world of one of them, for 100 iterations, and counts
+whose brains hold more of the agents at the end.
+
+Each of the four worlds has three pairs of eras. The thesis reads the
+last 4,000 iterations, 30,000 against 26,000, where both eras' brains
+were made under the head count. The pairs with 22,500 are reported beside
+it: those earlier brains were made under the old rule.
+
+<!-- thesis E72 -->
+> [!quote] The thesis of Experiment 72, written down before any of its runs existed
+> **The claim.** Under a coalition counted by heads the brains of a world of equals go on getting better. In the four worlds that Experiment 71 played under the rule from iteration 22,500, the brains of iteration 30,000 beat those of iteration 26,000.
+>
+> **Why it would be so.** Under the old rule the brains of a world of equals got better for about 2,000 iterations and then stopped (Experiment 54), and a changed brain left as many copies as an unchanged one (Experiment 62). Such a world has no births and no deaths, and a node's new brain is drawn by lot among stakers who all stake alike, so there is little that one brain can do better than another. Under a head count the same worlds lived on with something new: three of the four had times of many births while coalitions still won nearly every node (Experiment 71). A birth is where brains differ in what they leave behind, so selection has something to act on there that it did not have before. If that is so, later brains should beat earlier ones, and also in the second half of the 7,500 iterations, when the brains had 3,500 iterations to get used to the new rule. It may well be otherwise. One world had no births to speak of, and should show a tie. And all brain lines of such a world merge into one within about 500 games by lot alone, so what spreads there may be luck and not a better brain; then the contests are ties, or the later brains are worse, worn by mutations of 30 and 50 numbers.
+>
+> **It holds if:** A contest plays 100 iterations in one of the two eras' worlds, under that run's rules, with the brains of the two eras dealt to its agents by coin. A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. For each of the four worlds of Experiment 71, and each of three pairs of eras, eight coins are played, four in each era's world. The thesis reads one pair: 30,000 against 26,000, pooled over the four worlds, 32 coins. It holds if the later brains' share of the agents has a band that lies wholly above 0.5.
+>
+> **It fails if:** That band includes 0.5 or lies wholly below it: over those 4,000 iterations under a head count brains did not get better. Reported beside it, with no line drawn: 26,000 against 22,500 and 30,000 against 22,500, where the earlier brains were made under the old rule; each world alone, and the three worlds that had births apart from the one that had none; and the share of the tokens.
+<!-- /thesis -->
+
+*Planned; the result follows here when the contests are played.*
+
+<!-- runs E72 -->
+> [!info]- The trials behind this page
+> **192 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
+>
+> - **30 numbers, seed 6301: 30,000 against 26,000** — 16 trials: worlds `B1-40000-142067-s7101-oncc8e47`; eras 26,000, 30,000; coins 7,201 to 7,208, every 1.
+> - **30 numbers, seed 6301: 26,000 against 22,500** — 16 trials: worlds `B1-40000-142067-s7101-oncc8e47`; eras 22,500, 26,000; coins 7,209 to 7,216, every 1.
+> - **30 numbers, seed 6301: 30,000 against 22,500** — 16 trials: worlds `B1-40000-142067-s7101-oncc8e47`; eras 22,500, 30,000; coins 7,217 to 7,224, every 1.
+> - **30 numbers, seed 6302: 30,000 against 26,000** — 16 trials: worlds `B1-40000-142067-s7101-on9f14d5`; eras 26,000, 30,000; coins 7,225 to 7,232, every 1.
+> - **30 numbers, seed 6302: 26,000 against 22,500** — 16 trials: worlds `B1-40000-142067-s7101-on9f14d5`; eras 22,500, 26,000; coins 7,233 to 7,240, every 1.
+> - **30 numbers, seed 6302: 30,000 against 22,500** — 16 trials: worlds `B1-40000-142067-s7101-on9f14d5`; eras 22,500, 30,000; coins 7,241 to 7,248, every 1.
+> - **50 numbers, seed 6302: 30,000 against 26,000** — 16 trials: worlds `B1-40000-eee3e3-s7101-one84bf9`; eras 26,000, 30,000; coins 7,249 to 7,256, every 1.
+> - **50 numbers, seed 6302: 26,000 against 22,500** — 16 trials: worlds `B1-40000-eee3e3-s7101-one84bf9`; eras 22,500, 26,000; coins 7,257 to 7,264, every 1.
+> - **50 numbers, seed 6302: 30,000 against 22,500** — 16 trials: worlds `B1-40000-eee3e3-s7101-one84bf9`; eras 22,500, 30,000; coins 7,265 to 7,272, every 1.
+> - **50 numbers, seed 6303: 30,000 against 26,000** — 16 trials: worlds `B1-40000-eee3e3-s7101-on192fc3`; eras 26,000, 30,000; coins 7,273 to 7,280, every 1.
+> - **50 numbers, seed 6303: 26,000 against 22,500** — 16 trials: worlds `B1-40000-eee3e3-s7101-on192fc3`; eras 22,500, 26,000; coins 7,281 to 7,288, every 1.
+> - **50 numbers, seed 6303: 30,000 against 22,500** — 16 trials: worlds `B1-40000-eee3e3-s7101-on192fc3`; eras 22,500, 30,000; coins 7,289 to 7,296, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E72`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->
@@ -1643,6 +1692,7 @@ Experiments 56, 57 and 58 are read by
 `python3 research/efficient/E50/e64.py` (with `E65` after it); Experiments 66,
 67 and 68 by `python3 research/efficient/E50/e66.py`, `e67.py` and `e68.py`;
 Experiments 69, 70 and 71 by `python3 research/efficient/E50/e69.py` (with
-`E70` or `E71` after it). What the agents
+`E70` or `E71` after it); Experiment 72 by
+`python3 research/efficient/E50/e72.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
