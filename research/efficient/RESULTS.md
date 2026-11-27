@@ -74,6 +74,14 @@ from 3% to 57% of all tokens in the line's hands, where 30 of 30 sweep
 and 27 worlds end without the rule. Still open: a world played for
 thousands of iterations under the head count.
 
+**Added after Experiments 70 and 71.** The head count protects the order
+where it is: four worlds of equals with larger steps, two of which had
+died, all lived 7,500 iterations under it (71). But it mostly keeps the
+order from forming: out of the churning world it formed in two of nine
+worlds within 1,500 iterations, against seven of nine without the rule
+(70). And under it the order has times of many births while coalitions
+still win nearly every node.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -683,3 +691,58 @@ heads and levelling: 90 trials, all on engine 56688a922df379c2. Read by
 - Not separated: whether the growth of the world with 30 numbers under
   the head count is the rule or the world's drift (no trial without both
   the rule and the line).
+
+### Experiment 69: six worlds for 10,000 iterations under a head count (stopped, not judged)
+
+Stopped on 27 November 2026 in its first run (30 numbers, seed 6301, at
+21,555). Under the head count the world did not condense, stayed at 4,000
+to 7,000 agents with two links each and played at about 2.7 seconds an
+iteration; the six runs would have taken about two days. The plan had
+reckoned with one second, from Experiment 63's condensed worlds. Lesson:
+look at the pace of the first few hundred iterations before a long plan
+under a new rule. Split into Experiments 70 and 71.
+
+### Experiment 70: does the order form under a head count? (confirmed)
+
+The nine worlds of Experiment 63 (20, 30, 50 numbers; seeds 6301 to 6303)
+made again from the same kept world with `wealth_guard = heads`, 1,500
+iterations. Read by `E50/e69.py E70`.
+
+- Worlds of equals in 21,000 to 21,500: 2 of 9 by heads (20 numbers seed
+  6301; 50 numbers seed 6303), 7 of 9 without the rule. Of the eight runs
+  not seen before the thesis: 2.
+- Five stayed sparse: 3,753 to 5,638 agents, 2.0 to 2.1 links each, 0 to
+  3% of nodes won by a coalition, richest agent (median of the window)
+  2,178 to 4,477 of 40,000 tokens; the kept world's richest held 1,607.
+- In between: 30 numbers seed 6302 condensing one window late (987
+  agents, 27 links, 82% by a coalition); 20 numbers seed 6303 (3,038
+  agents, 6 links, 24%).
+- None died out.
+- Thesis (at most two of nine): confirmed. Fisher's exact test for 2 of 9
+  against 7 of 9: 0.057.
+- Not read: why coalitions win almost no nodes in the sparse worlds,
+  though two heads take any node.
+
+### Experiment 71: does the order last under a head count? (confirmed)
+
+Four worlds of equals of Experiment 63 (30 numbers seeds 6301, 6302; 50
+numbers seeds 6302, 6303) played on from 22,500 to 30,000 with
+`wealth_guard = heads`, seed 7101. Read by `E50/e69.py E71`.
+
+- 0 of 4 died out. Without the rule two died (29,351 and 23,853).
+- Windows of 500 that are a world of equals: 11, 11, 10 and 15 of 15
+  (without the rule 15 of 15, 14 of 14, 2 of 3, 15 of 15). All 13 misses
+  have births over 0.01 per agent and iteration; in three of them (30
+  numbers seed 6302) coalitions also won only 85 to 89%.
+- Largest holding ever: 119, 916, 765, 154 (without the rule 66, 4,827,
+  6,005, 123).
+- 30 numbers seed 6301: grew from 1,006 agents with 26 links to 2,736
+  with 9 by 27,000, then no births. 30 numbers seed 6302: a burst at
+  25,500 to 26,500 (1,490 agents, 44,825 deaths in a window), back to
+  482 agents with 56 links by 28,500. 50 numbers seed 6302: births from
+  26,500, up to 0.77 per agent and iteration from 28,000, 2,016 agents
+  with 12 links at the end, 96% still by a coalition. 50 numbers seed
+  6303: a world of equals throughout.
+- Thesis (at most one of four dies out): confirmed.
+- Not separated: rule and luck (one run a world, its own seed). Not
+  read: what starts a burst.

@@ -73,6 +73,19 @@ the old rule the line took the world again in all 30 trials and 27 worlds
 ended. Under a head count no line took it and no world ended, even where
 the line already held half of all tokens; confirmed.
 
+Three experiments then asked what whole worlds do under a head count.
+Experiment 69 was to play six for 10,000 iterations and was stopped in
+its first run, because it would have taken two days; it is not judged.
+Experiment 70 played the nine worlds of Experiment 63 again for 1,500
+iterations with the rule on: the order formed in two of them, where it
+had formed in seven without the rule, and five stayed large and sparse
+with one agent holding a tenth of all tokens; confirmed. Experiment 71
+played four worlds of equals on under the rule for 7,500 iterations, two
+of which had died without it: all four lived, but three had times of many
+births while coalitions still won nearly every node; confirmed. So the
+head count protects the order where it is and mostly keeps it from
+forming where it is not.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -1347,7 +1360,61 @@ says so, and counts the other eight apart.
 > **It fails if:** Six or more of the nine are worlds of equals in their last window. Anything else is undecided. Without the rule seven of the nine were, in the same window: all three with 20 numbers, two of three with 30 and two of three with 50. Reported beside it, with no line drawn: for each run its three windows of 500 iterations with its agents, the links of an agent, the richest holding, births and the share of nodes won by a coalition, beside Experiment 63's run of the same step and seed.
 <!-- /thesis -->
 
-*Planned; the result follows here when the runs are played.*
+**The thesis is confirmed.** The nine runs were played on 27 November
+2026. Under a head count two of the nine worlds were worlds of equals in
+iterations 21,000 to 21,500. Without the rule seven were. Of the eight
+runs that did not exist when the thesis was written, two were.
+
+Each world in those 500 iterations, under a head count and without the
+rule. The richest holding is the middle one of the window: in half of its
+iterations the richest agent held more.
+
+| step | seed | by heads: agents | links each | richest | nodes won by a coalition | world of equals | no rule: agents | links each | richest | nodes won by a coalition | world of equals |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 20 numbers | 6301 | 348 | 77 | 214 | 97% | **yes** | 612 | 28 | 235 | 98% | **yes** |
+| | 6302 | 3,753 | 2.0 | 3,020 | 0% | no | 536 | 49 | 146 | 99% | **yes** |
+| | 6303 | 3,038 | 6.2 | 1,082 | 24% | no | 533 | 50 | 181 | 99% | **yes** |
+| 30 numbers | 6301 | 5,638 | 2.1 | 2,178 | 3% | no | 419 | 64 | 211 | 98% | **yes** |
+| | 6302 | 987 | 27 | 122 | 82% | no | 493 | 45 | 218 | 95% | **yes** |
+| | 6303 | 5,359 | 2.1 | 3,654 | 3% | no | 1,073 | 24 | 155 | 69% | no |
+| 50 numbers | 6301 | 5,021 | 2.1 | 4,477 | 2% | no | 2,682 | 3.5 | 960 | 42% | no |
+| | 6302 | 4,082 | 2.0 | 3,375 | 0% | no | 564 | 47 | 169 | 93% | **yes** |
+| | 6303 | 696 | 38 | 128 | 99% | **yes** | 690 | 39 | 122 | 90% | **yes** |
+
+- **Five worlds stayed large and sparse.** They had 3,753 to 5,638
+  agents with two links each, and at most three nodes in a hundred were
+  won by a coalition. In each of them one agent held about a tenth of the
+  world: 2,178 to 4,477 of the 40,000 tokens, where the richest agent of
+  the kept world they all started from held 1,607.
+- **Two formed the order within 1,000 iterations**: the world with 20
+  numbers and seed 6301, 500 iterations later than without the rule, and
+  the one with 50 numbers and seed 6303, 500 iterations sooner.
+- **Two were in between.** The world with 30 numbers and seed 6302 was
+  condensing, about 500 iterations later than without the rule: 987
+  agents with 27 links each, and 82 nodes in a hundred won by a
+  coalition. The world with 20 numbers and seed 6303 had 3,038 agents
+  with six links each and a quarter of its nodes won by a coalition.
+- **No world died out.**
+
+**What this shows.** The rule that protects the order mostly keeps it from
+forming. From the same kept world, with the same seeds, seven of nine
+worlds were worlds of equals after 1,500 iterations without the rule and
+two of nine under a head count. And a world that does not form the order
+under a head count is not one of small holdings either. It stays a
+churning world with two links an agent, and its richest agent holds more
+than the richest did before the rule was switched on.
+
+**What it does not show.** Why. Under a head count two neighbours that
+flag a token on a node take it from any staker, so a coalition wins more
+easily, not less; yet in five worlds coalitions won almost no nodes. With
+two links an agent a node has few stakers, and it may be that there are
+too few neighbours for two of them to flag. That has not been read from
+the frames. It also does not show that the order never forms: these are
+1,500 iterations, and one world was still condensing at the end. And nine
+worlds a side is few: by luck alone a split of two against seven comes
+up about once in 18 times (Fisher's exact test, 0.057).
+
+The numbers are made by `python3 research/efficient/E50/e69.py E70`.
 
 <!-- runs E70 -->
 > [!info]- The runs behind this page
@@ -1381,7 +1448,72 @@ kept the order to the end. Each is played on from its world kept at
 > **It fails if:** Three or more of the four die out. Two is undecided. Reported beside it, with no line drawn: for each run its fifteen windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition), and in how many of them it is one; its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run it was played on from.
 <!-- /thesis -->
 
-*Planned; the result follows here when the runs are played.*
+**The thesis is confirmed.** The four runs were played on 27 November
+2026. None of the four worlds died out. Without the rule two of them had,
+at iterations 29,351 and 23,853.
+
+Each world from iteration 22,500, under a head count and without the
+rule, in windows of 500 iterations. Agents and links are a window's
+means, from the first window to the last. The largest holding is the
+most that one agent held at any iteration.
+
+| world | rule | windows that are a world of equals | agents | links each | largest holding | at iteration 30,000 |
+|---|---|---|---|---|---|---|
+| 30 numbers, seed 6301 | by heads | 11 of 15 | 1,006 to 2,462 | 26 to 10 | 119 | lives |
+| | no rule | 15 of 15 | 1,006 to 1,007 | 26 | 66 | lives |
+| 30 numbers, seed 6302 | by heads | 11 of 15 | 442 to 573 | 57 to 50 | 916 | lives |
+| | no rule | 14 of 14 | 452 to 670 | 56 to 36 | 4,827 | died out at 29,351 |
+| 50 numbers, seed 6302 | by heads | 10 of 15 | 536 to 2,016 | 46 to 12 | 765 | lives |
+| | no rule | 2 of 3 | 536 to 221 | 45 to 6 | 6,005 | died out at 23,853 |
+| 50 numbers, seed 6303 | by heads | 15 of 15 | 651 to 559 | 40 to 47 | 154 | lives |
+| | no rule | 15 of 15 | 651 to 624 | 41 to 42 | 123 | lives |
+
+- **Both worlds that died without the rule lived under it.** No agent in
+  them ever held more than 916 and 765 tokens, where without the rule
+  the richest agent held 4,827 and 6,005 shortly before the end.
+- **Coalitions kept winning.** In 57 of the 60 windows under a head count
+  at least nine nodes in ten were won by a coalition, and in the other
+  three 85 to 89 in a hundred.
+- **But the order is not as still.** Three of the four worlds left the
+  measure for some windows, 13 windows in all, every time with more
+  births than the measure allows. Without the rule the same worlds had
+  almost none.
+- **One world grew and settled again.** The world with 30 numbers and
+  seed 6301 grew from 1,006 agents with 26 links each to 2,736 with nine
+  links each by iteration 27,000. Then births stopped, and it was a world
+  of equals to the end, with about a third of the links it had.
+- **One had a burst and came back.** The world with 30 numbers and seed
+  6302 grew to 1,490 agents between iterations 25,500 and 26,500, with
+  44,825 deaths in 500 iterations and a richest agent holding 916. By
+  iteration 28,500 it was back at 482 agents with 56 links each, and its
+  richest agent held about 80. Births began again in the last window.
+- **One was in a burst when the run ended.** The world with 50 numbers
+  and seed 6302 was a world of equals for its first 4,500 iterations.
+  Births began at about iteration 26,500. From iteration 28,000 it had
+  up to 0.77 births per agent and iteration, and at the end 2,016
+  agents with 12 links each and a richest agent holding 765. Even then 96
+  nodes in a hundred were won by a coalition.
+- **One did not move.** The world with 50 numbers and seed 6303 was a
+  world of equals in all 15 windows and lost 92 of its 651 agents.
+
+**What this shows.** A world of equals lasts under a head count, also
+with the larger steps that ended it before. That is now seen three times:
+against a hoarder written by hand (Experiment 66), against the lines that
+evolved (Experiment 68), and over 7,500 iterations of a world's own
+mutations here. What it lasts as is new. Under a head count these worlds
+have times of many births and deaths while coalitions still win nearly
+every node, and the two that came out of such a time came out as worlds
+of small holdings again.
+
+**What it does not show.** Each world was played once, with a seed of its
+own, so each differs from its run without the rule by the rule and by
+luck. One world's burst had not ended; whether it settles, as the other
+two did, or goes to the sparse world that Experiment 70 found, is not
+known. And what starts a burst has not been read: whether it is a line of
+brains that has many children, and whether such a line is better at
+anything, is the question for a world that is to keep evolving.
+
+The numbers are made by `python3 research/efficient/E50/e69.py E71`.
 
 <!-- runs E71 -->
 > [!info]- The runs behind this page
@@ -1472,6 +1604,8 @@ Experiments 56, 57 and 58 are read by
 `python3 research/efficient/E50/autopsy.py` and
 `autopsy_lines.py`; Experiments 64 and 65 by
 `python3 research/efficient/E50/e64.py` (with `E65` after it); Experiments 66,
-67 and 68 by `python3 research/efficient/E50/e66.py`, `e67.py` and `e68.py`. What the agents
+67 and 68 by `python3 research/efficient/E50/e66.py`, `e67.py` and `e68.py`;
+Experiments 69, 70 and 71 by `python3 research/efficient/E50/e69.py` (with
+`E70` or `E71` after it). What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
