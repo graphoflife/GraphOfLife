@@ -65,6 +65,14 @@ slow it: 11 lines took half the world, 3.5 to 22 times later than
 without the rule. The
 thesis had levelling stop it, so it is undecided.
 
+The hoarder of Experiment 66 was written by hand. Experiment 67 got back
+the lines that evolution made: both worlds that died were played again
+from a world they had kept, and came out the same, game for game;
+confirmed. Experiment 68 played them on from inside the takeover. Under
+the old rule the line took the world again in all 30 trials and 27 worlds
+ended. Under a head count no line took it and no world ended, even where
+the line already held half of all tokens; confirmed.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -1157,7 +1165,85 @@ the one that evolved, and it can go on changing.
 > **It fails if:** By heads at least 15 of the 30 worlds end, or under no rule at most 10 of the 30 worlds end. Anything else is undecided. Reported beside it, with no line drawn: the same counts under levelling, which Experiment 66 found to be a brake; all counts by world and by how much the line held; the line's agents and tokens over time and at the end; and the richest holding.
 <!-- /thesis -->
 
-*Planned; the result follows here when the trials are played.*
+**The thesis is confirmed.** Under no rule 27 of the 30 worlds ended.
+Under a head count no world ended and no line swept.
+
+| rule | | 30 numbers: line holds 3% | 21% | 51% | 50 numbers: 5% | 24% | 57% | all |
+|---|---|---|---|---|---|---|---|---|
+| no rule | lines sweep | 5 of 5, at 48 to 61 | 5, at 29 to 37 | 5, at 13 to 16 | 5, at 196 to 265 | 5, at 65 to 206 | 5, at 25 to 42 | 30 of 30 |
+| | worlds end | 4 | 5 | 5 | 4 | 4 | 5 | 27 |
+| by heads | lines sweep | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| | worlds end | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| levelling | lines sweep | 0 | 4, at 163 to 343 | 5, at 61 to 105 | 0 | 3, at 359 to 477 | 4, at 101 to 210 | 16 |
+| | worlds end | 0 | 3 | 3 | 0 | 2 | 3 | 11 |
+
+Iterations are counted from the start of a trial.
+
+- **Under the old rule the takeover does not hang on luck.** All 30 lines
+  swept, from every starting world and with every seed. 27 worlds ended
+  with 1 to 164 agents, 15 of them as one agent holding all 40,000
+  tokens.
+- **Three worlds grew again out of the line.** They fell to 7, 8 and 194
+  agents and then grew to 1,135, 4,865 and 3,161 by iteration 1,000, with
+  two to three links each. Every agent of them comes from the line. A run
+  stops as died out under 20 agents, as the two first plays did; a trial
+  plays on, which is why this shows here.
+- **By heads the line loses its hoard in the first game.** The table
+  below gives what the line held. Even the lines that held half of all
+  tokens were down to about a tenth of that after one game. No line ever had
+  more agents than at the start.
+- **In the world with 30 numbers the line is gone**, in all 15 trials,
+  within 29 games.
+- **In the world with 50 numbers it lives on as ordinary agents.** In 10
+  of the 15 trials one or two agents of the line were left at iteration
+  1,000, holding 11 to 251 tokens. In the other five the line was gone at
+  iteration 204 to 719.
+- **The worlds go back to small holdings.** The richest agent held 166 to
+  3,289 tokens at the start, 105 to 297 after ten games and 48 to 251 at
+  the end. The world with 50 numbers kept its agents: 531, 526 and 512 at
+  the start, 509 to 531 at the end. The world with 30 numbers grew: from
+  674, 683 and 761 to between 683 and 1,570.
+- **Levelling is a brake here too.** It removed the line only where it
+  was smallest: in the world with 30 numbers, started with 3% of the
+  tokens, all five lines were gone within 19 games. From 21% and 51%
+  there, 9 of 10 swept, later than without the rule. In the world with 50
+  numbers, started with 5%, no line swept and none was lost, but two held
+  87% and 64% of all tokens at the end. In all, 22 of the 30 lines held
+  more than half of all tokens at some iteration.
+
+What the line held under a head count, in tokens, over the five seeds:
+
+| played on from | at the start | after one game | after ten games | line gone |
+|---|---|---|---|---|
+| 30 numbers, iteration 29,280 | 742 | 0 to 8 | 0 | 5 of 5, by game 3 |
+| 29,300 | 6,213 | 0 to 1,020 | 0 | 5 of 5, by game 3 |
+| 29,320 | 16,265 | 1,274 to 1,673 | 0 to 184 | 5 of 5, at game 8 to 29 |
+| 50 numbers, iteration 23,400 | 1,352 | 73 to 91 | 39 to 125 | 1 of 5, at 719 |
+| 23,470 | 7,057 | 1,334 to 3,260 | 48 to 191 | 1 of 5, at 515 |
+| 23,520 | 18,515 | 1,146 to 1,219 | 286 to 470 | 3 of 5, at 204 to 653 |
+
+**What this shows.** The head count stops the two lines that evolution
+made, as it stopped the hoarder written by hand: at every point of the
+takeover that was tried, with every seed, and whether the line held 3% of
+all tokens or 57%. And under the old rule the end of these two worlds was
+not bad luck. Once the line holds a few tokens in a hundred, it takes the
+world with any seed.
+
+**What it does not show.** These are two lines, from two worlds that
+differ only in their step, played 1,000 iterations. Both lines were made
+under the old rule. No world has yet been played under a head count long
+enough for mutation to try its luck against it, and in the world with 50
+numbers the line's brains are still there. The world with 30 numbers grew
+under the head count, and the two trials that grew most, to 1,456 and
+1,570 agents, ended with 17 and 16 links an agent where they started with
+32 and 22. Whether that is the rule or this world's own drift
+cannot be told apart here, because every trial without the rule has the
+line in it. Whether a world keeps the order of equals for long under a
+head count, and forms it there, needs worlds played on under the rule for
+thousands of iterations.
+
+All 90 trials ran on one copy of the engine. The numbers are made by
+`python3 research/efficient/E50/e68.py`.
 
 <!-- runs E68 -->
 > [!info]- The trials behind this page
@@ -1261,7 +1347,7 @@ Experiments 56, 57 and 58 are read by
 `E63` after it); the last iterations of the worlds that died by
 `python3 research/efficient/E50/autopsy.py` and
 `autopsy_lines.py`; Experiments 64 and 65 by
-`python3 research/efficient/E50/e64.py` (with `E65` after it); Experiment 66
-by `python3 research/efficient/E50/e66.py`. What the agents
+`python3 research/efficient/E50/e64.py` (with `E65` after it); Experiments 66,
+67 and 68 by `python3 research/efficient/E50/e66.py`, `e67.py` and `e68.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

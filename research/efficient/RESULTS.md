@@ -67,6 +67,13 @@ whether a world keeps or forms the order under the head count over a long
 run, and whether mutation finds another break (the largest staker now
 loses; a line of many small stakes was not tried).
 
+**Added after Experiments 67 and 68.** The head count also stops the two
+lines that evolution made (the worlds of Experiment 63 that died, got
+back by playing them again): 0 of 30 lines sweep and 0 of 30 worlds end,
+from 3% to 57% of all tokens in the line's hands, where 30 of 30 sweep
+and 27 worlds end without the rule. Still open: a world played for
+thousands of iterations under the head count.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -644,3 +651,35 @@ iterations. Read by `E50/e67.py`.
 - Use: any world of a finished run's past can be recovered, with its
   brains. New trial kind `sequel` plays such a world on (own mutations,
   own seed, optional `rules`, optional `line` of brain ids to follow).
+
+
+### Experiment 68: each rule switched on inside the takeover (confirmed)
+
+Sequels from six worlds that Experiment 67 kept (the line holding 3%,
+21%, 51% of all tokens in the world with 30 numbers; 5%, 24%, 57% in the
+world with 50), five seeds each, 1,000 iterations, under no rule, by
+heads and levelling: 90 trials, all on engine 56688a922df379c2. Read by
+`E50/e68.py`.
+
+- No rule: 30 of 30 lines sweep (at 13 to 61 with 30 numbers, 25 to 265
+  with 50), 27 worlds end (15 as one agent with all 40,000 tokens). The
+  other three fell to 7, 8 and 194 agents and grew again out of the line
+  alone, to 1,135, 4,865 and 3,161 agents with 2 to 3 links each. A run
+  would have stopped two of them as died out (under 20 agents).
+- By heads: 0 sweep, 0 end. After one game the line holds 0 to 16% of
+  what it held, except one world (19 to 46%, under 3% after five games).
+  With 30 numbers the line is gone in all 15 (by game 29); with 50 it is
+  gone in 5 of 15 and lives on in 10 as one or two ordinary agents (11
+  to 251 tokens). Richest holding 166 to 3,289 at the start, 48 to 251
+  at the end. Agents: 50 numbers unchanged (509 to 531), 30 numbers grew
+  (683 to 1,570).
+- Levelling: 16 sweep, 11 worlds end, 9 lines gone, 22 lines over half
+  of all tokens at some iteration. It removed the line only at 3% in the
+  world with 30 numbers (5 of 5 gone within 19 games).
+- Thesis (no rule at least 20 of 30 end; by heads at most 5 end and at
+  most 5 sweep): confirmed.
+- Minutes of play: no rule 56, by heads 366, levelling 199 (a dead world
+  plays fast).
+- Not separated: whether the growth of the world with 30 numbers under
+  the head count is the rule or the world's drift (no trial without both
+  the rule and the line).
