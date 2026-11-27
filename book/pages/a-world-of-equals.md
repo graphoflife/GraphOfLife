@@ -1400,21 +1400,58 @@ iterations the richest agent held more.
 forming. From the same kept world, with the same seeds, seven of nine
 worlds were worlds of equals after 1,500 iterations without the rule and
 two of nine under a head count. And a world that does not form the order
-under a head count is not one of small holdings either. It stays a
-churning world with two links an agent, and its richest agent holds more
-than the richest did before the rule was switched on.
+under a head count stays a churning world with two links an agent, in
+which one agent at a time holds a tenth of all tokens.
 
-**What it does not show.** Why. Under a head count two neighbours that
-flag a token on a node take it from any staker, so a coalition wins more
-easily, not less; yet in five worlds coalitions won almost no nodes. With
-two links an agent a node has few stakers, and it may be that there are
-too few neighbours for two of them to flag. That has not been read from
-the frames. It also does not show that the order never forms: these are
-1,500 iterations, and one world was still condensing at the end. And nine
-worlds a side is few: by luck alone a split of two against seven comes
-up about once in 18 times (Fisher's exact test, 0.057).
+**What the sparse worlds are: stars.** This was read from the runs'
+statistics and frames after the verdict; no line was drawn for it
+beforehand. In the five worlds that stayed sparse, 96 to 100 agents in a
+hundred had one link in the last 500 iterations, and the most linked
+agent was linked to between a third of all agents and every one of them.
+In three of the five it was linked to 98 to 100 in a hundred: one hub,
+and everyone else a leaf on it. The world with 20 numbers and seed 6303,
+one of the two in between, was three quarters leaves. Without the rule no
+world had more than 28 leaves in a hundred, and seven had at most seven.
 
-The numbers are made by `python3 research/efficient/E50/e69.py E70`.
+That explains two numbers of the table. Coalitions win almost no nodes
+because a leaf's node has two stakers, the leaf and the hub, and one
+flagger is no coalition. Only the hub's node has many, and it is one node
+among thousands. And the richest agent is whoever holds the hub. In 50
+games looked at, ten in each of the five worlds, it was the hub in 49.
+Most leaves stake one token on the hub's node, so that node collects
+2,000 to 4,600 tokens in a game, and in all 50 games a coalition won it
+for another brain. It is a pot that changes hands every game, not a
+hoard.
+
+Why the star stays is read from who keeps a node. In 20 games of the
+first 500 iterations, over all nine worlds, each node was sorted by its
+links, and counted as kept if its own brain won it again:
+
+| links of the node | by heads: kept | no rule: kept |
+|---|---|---|
+| one | 97% of 637,517 | 94% of 262,501 |
+| two | 31% of 112,153 | 75% of 94,027 |
+| three or more | 16% of 134,706 | 22% of 219,576 |
+
+A node with one link is safe under both rules. A node with many links is
+won by lot among its stakers under both. The difference is the step
+between. Without the rule a node with two links is mostly held by its
+owner's stake, even against two neighbours that flag (66% kept). Under a
+head count two flaggers take it whatever the owner stakes (13% kept). So
+the way from a star to a dense world leads through nodes that the head
+count hands to their neighbours two games in three.
+
+**What it does not show.** That this step is why the order does not form.
+It is a difference that was measured, not a cause that was tested: the
+brain that loses a node is not dead, and how losing nodes with two links
+keeps a world a star has not been followed. It also does not show that
+the order never forms under a head count: these are 1,500 iterations, and
+one world was still condensing at the end. And nine worlds a side is few:
+by luck alone a split of two against seven comes up about once in 18
+times (Fisher's exact test, 0.057).
+
+The numbers are made by `python3 research/efficient/E50/e69.py E70`, and
+those of the star by `python3 research/efficient/E50/e70_star.py`.
 
 <!-- runs E70 -->
 > [!info]- The runs behind this page

@@ -720,8 +720,17 @@ iterations. Read by `E50/e69.py E70`.
 - None died out.
 - Thesis (at most two of nine): confirmed. Fisher's exact test for 2 of 9
   against 7 of 9: 0.057.
-- Not read: why coalitions win almost no nodes in the sparse worlds,
-  though two heads take any node.
+- Read afterwards (`E50/e70_star.py`): the five sparse worlds are
+  stars. 96 to 100% of agents have one link; the most linked agent is
+  linked to 36 to 100% of all (98 to 100% in three). A leaf's node has
+  two stakers, so no coalition; the richest agent is the hub (49 of 50
+  games sampled), whose node collects 2,000 to 4,600 tokens a game and
+  is won by a coalition for another brain every game (50 of 50).
+- Nodes won again by their own brain, 20 games of 20,001 to 20,476, all
+  nine worlds: one link 97% by heads, 94% no rule; two links 31%
+  against 75% (with two or more flaggers 13% against 66%); three or
+  more 16% against 22%. So the head count bites at the step from one
+  link to two. Measured, not tested as the cause.
 
 ### Experiment 71: does the order last under a head count? (confirmed)
 
