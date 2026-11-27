@@ -1,0 +1,86 @@
+{
+ "id": "E69",
+ "title": "Do worlds with larger steps live under a head count? Six worlds with mutations of 30 and 50 numbers, played with the rule",
+ "thesis": {
+  "claim": "Under a coalition counted by heads, worlds whose mutations change 30 or 50 numbers live on. Experiment 63 played six such worlds from one kept world and three died out. Played again from that world with the head count switched on, at most one of the six dies out.",
+  "why": "Two of the three that died were worlds of equals, and each was taken by one line of hoarders: brains that stake everything on one node, grown from one agent to nearly all within 85 and 200 iterations. Experiment 68 played both worlds on from inside that takeover: without the rule the line took the world again in all 30 trials, and under a head count it lost its hoard in the first game in all 30, whether it held 3% of all tokens or 57%. So if hoarding lines are how such worlds end, a rule under which a hoard counts one head should let them live, however often mutation makes a hoarder. Two things are not known, and this experiment is where they would show. The third world died outside the order, and what ended it has not been read. And under a head count the largest staker no longer wins a node, so mutation may find another way to break a world, one that the old rule never rewarded.",
+  "confirm": "The six runs of Experiment 63 with 30 and 50 numbers are made again from the same kept world at iteration 20,000, with the same seeds (6301 to 6303) and the same settings but wealth_guard = heads, to iteration 30,000. A world dies out if its run ends as extinct before iteration 30,000. The thesis holds if at most one of the six dies out.",
+  "refute": "Three or more of the six die out, as many as without the rule. Two is undecided. Reported beside it, with no line drawn: for each run its twenty windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition); its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run of the same step and seed."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "from": {
+   "run": "B1-40000-bbbccd-s5001-on45a3d3",
+   "at": 20000
+  },
+  "seeds": "6301..6303",
+  "iterations": 30000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "30 numbers, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "50 numbers, by heads",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   }
+  ]
+ }
+}

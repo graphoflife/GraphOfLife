@@ -1271,6 +1271,45 @@ All 90 trials ran on one copy of the engine. The numbers are made by
 > To play these trials again: `python3 gol_lab.py run E68`.
 <!-- /runs -->
 
+### Do worlds with larger steps live under a head count?
+
+<!-- experiment E69 -->
+
+Experiment 68 switched the head count on inside a takeover and played
+1,000 iterations. Experiment 69 plays whole histories under it. The six
+worlds of Experiment 63 with mutations of 30 and 50 numbers are made
+again from the same kept world, with the same seeds, and with the head
+count on from the first iteration, for 10,000 iterations. Without the
+rule three of the six died out: two as worlds of equals taken by a line
+of hoarders, and one that never formed the order.
+
+It asks two things. Do such worlds live when a hoard no longer wins? And
+does mutation find another way to break a world, now that the largest
+staker loses?
+
+<!-- thesis E69 -->
+> [!quote] The thesis of Experiment 69, written down before any of its runs existed
+> **The claim.** Under a coalition counted by heads, worlds whose mutations change 30 or 50 numbers live on. Experiment 63 played six such worlds from one kept world and three died out. Played again from that world with the head count switched on, at most one of the six dies out.
+>
+> **Why it would be so.** Two of the three that died were worlds of equals, and each was taken by one line of hoarders: brains that stake everything on one node, grown from one agent to nearly all within 85 and 200 iterations. Experiment 68 played both worlds on from inside that takeover: without the rule the line took the world again in all 30 trials, and under a head count it lost its hoard in the first game in all 30, whether it held 3% of all tokens or 57%. So if hoarding lines are how such worlds end, a rule under which a hoard counts one head should let them live, however often mutation makes a hoarder. Two things are not known, and this experiment is where they would show. The third world died outside the order, and what ended it has not been read. And under a head count the largest staker no longer wins a node, so mutation may find another way to break a world, one that the old rule never rewarded.
+>
+> **It holds if:** The six runs of Experiment 63 with 30 and 50 numbers are made again from the same kept world at iteration 20,000, with the same seeds (6301 to 6303) and the same settings but wealth_guard = heads, to iteration 30,000. A world dies out if its run ends as extinct before iteration 30,000. The thesis holds if at most one of the six dies out.
+>
+> **It fails if:** Three or more of the six die out, as many as without the rule. Two is undecided. Reported beside it, with no line drawn: for each run its twenty windows of 500 iterations by Experiment 63's measure of a world of equals (fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition); its agents, the links of an agent and the richest holding over time; and the same for Experiment 63's run of the same step and seed.
+<!-- /thesis -->
+
+*Planned; the result follows here when the runs are played.*
+
+<!-- runs E69 -->
+> [!info]- The runs behind this page
+> **6 runs.** Every condition below is run once for every seed (6301 to 6303), played on from the world `B1-40000-bbbccd-s5001-on45a3d3` kept at iteration 20,000, to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-142067-s6301-on210139` … `B1-40000-142067-s6303-on210139`.
+> - **50 numbers, by heads** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-eee3e3-s6301-on210139` … `B1-40000-eee3e3-s6303-on210139`.
+>
+> To make these runs again: `python3 gol_lab.py run E69`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->
