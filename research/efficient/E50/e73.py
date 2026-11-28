@@ -46,6 +46,24 @@ if __name__ == "__main__":
         if run and (run["status"] == "extinct" or run["marks"].endswith("S")):
             bad.append(label)
     made = {label: pair["played on"] for label, pair in out.items() if pair["played on"]}
+    print("\nbeside: windows that are a world of equals; windows off the measure by births (0.01 or more) and by coalitions "
+          "(under nine in ten); separate times of many births; agents and links in the first and last window; "
+          "the largest share with one link; the largest holding")
+    for label, pair in out.items():
+        for name in ("before", "played on"):
+            run = pair[name]
+            if run is None:
+                continue
+            ws = run["windows"]
+            many = [w["births_per_agent"] >= 0.01 for w in ws]
+            run["summary"] = {"equals": run["marks"].count("E"), "windows": len(ws), "by_births": sum(many),
+                              "by_coalitions": sum(w["coalition"] < 0.9 for w in ws),
+                              "times_of_births": sum(m and not (i and many[i - 1]) for i, m in enumerate(many)),
+                              "most_one_link": max(w["one_link"] for w in ws), "largest": max(w["richest_most"] for w in ws)}
+            q = run["summary"]
+            print(f"  {label}, {name}: {q['equals']} of {q['windows']}; {q['by_births']} by births, {q['by_coalitions']} by coalitions; "
+                  f"{q['times_of_births']} times; {ws[0]['agents']:.0f} agents with {ws[0]['links']:.1f} links to "
+                  f"{ws[-1]['agents']:.0f} with {ws[-1]['links']:.1f}; one link {q['most_one_link']:.0%}; largest {q['largest']}")
     key = made.get("50 numbers, seed 6302")
     print(f"\nE73: {len(made)} of {len(out)} runs made; ended badly (extinct, or a star in the last window): {len(bad)} {bad}; "
           f"50 numbers, seed 6302: {key['marks'].count('E') if key else 0} windows a world of equals")

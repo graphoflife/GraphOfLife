@@ -90,6 +90,14 @@ coins). All brains of such a world descend from one brain within 300 to
 are no better for it. The head count keeps the order alive; it does not
 make it evolve.
 
+**Added after Experiment 73.** The order under a head count is a state a
+world keeps coming back to, not a still one. Played on to iteration
+37,500, the world that was in a burst is a world of equals again, one
+world came back from 7,320 agents with 2.7 links each, and none died or
+became a star. But the three worlds that moved have fewer links than
+15,000 iterations before (7.5 after 26, 19 after 57, 19 after 46), and one
+was growing fast at the end.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -804,3 +812,35 @@ single start: its births came from the line that was taking the world
 anyway (half the agents before its first birth), and that line's births
 per agent rose about a hundredfold within 200 iterations. With whole
 turnovers this fast, "which line started it" has no sharp answer.
+
+
+### Experiment 73: what does a burst of births end in? (confirmed)
+
+Plan `book/experiments/E73.json`; reader `E50/e73.py`. Experiment 71's
+four worlds played on from 30,000 to 37,500 under a head count, seed
+7301, on 28 November 2026: 2.2 to 5.3 hours of play each, about 12.5
+hours in the lab beside Experiment 48, 8.5 GB.
+
+- Thesis: the world with 50 numbers and seed 6302 is a world of equals in
+  at least one window (it is in 10 of 15, and in the last five), and no
+  world ends extinct or as a star (none; no window anywhere has more than
+  34% of agents with one link by its median). Confirmed.
+- 50 numbers seed 6302: births 0.030 per agent in the first window, then
+  two weaker times (to 0.053); from 35,000 a world of equals of about
+  1,370 agents with 19 links, richest about 55.
+- 30 numbers seed 6301: grew to 7,320 agents with 2.7 links (31,455), a
+  third with one link, coalitions 65%, no hub (most linked agent at most
+  2% of all); shrank over 5,500 iterations to 2,557 with 7.5 links,
+  coalitions 92%, last window a world of equals. Never 0.01 births per
+  agent in a window: all 13 windows off the measure are off by
+  coalitions.
+- 30 numbers seed 6302: 14 of 15 windows a world of equals (970, then
+  1,100 agents); in the last 250 iterations it grew from 1,088 to 2,958
+  agents, 24 to 8 links, 44% with one link at the last iteration (window
+  median 9%). Where that ends is not known.
+- 50 numbers seed 6303: still; two windows with a richest holding of 553
+  and 610 and 2,360 deaths.
+- Links an agent at 22,500 and at 37,500: 26 and 7.5; 57 and 19; 46 and
+  19; 40 and 48.
+- Not shown: whether the thinning goes on toward the star; anything about
+  brains (no contest played).

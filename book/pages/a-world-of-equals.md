@@ -93,6 +93,14 @@ agents against those of 26,000 (0.435 to 0.532); refuted. All brains of
 such a world descend from one brain within 300 to 2,100 iterations, yet
 after several such turnovers they are no better.
 
+Experiment 73 played the four worlds on for another 7,500 iterations, to
+see what a burst of births ends in. The world that was in a burst came
+back to a world of equals, and one world that grew to 7,320 agents with
+2.7 links each, a third of them with one link, came back too. None died
+and none became a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."); confirmed. But the three worlds that moved have
+fewer links at the end than at the start, and one was growing fast when
+the run ended.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -1410,7 +1418,7 @@ two of nine under a head count. And a world that does not form the order
 under a head count stays a churning world with two links an agent, in
 which one agent at a time holds a tenth of all tokens.
 
-**What the sparse worlds are: [stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.").** This was read from the runs'
+**What the sparse worlds are: stars.** This was read from the runs'
 statistics and frames after the verdict; no line was drawn for it
 beforehand. In the five worlds that stayed sparse, 96 to 100 agents in a
 hundred had one link in the last 500 iterations, and the most linked
@@ -1553,7 +1561,8 @@ of small holdings again.
 own, so each differs from its run without the rule by the rule and by
 luck. One world's burst had not ended; whether it settles, as the other
 two did, or goes to the sparse world that Experiment 70 found, is not
-known. And what starts a burst has not been read: whether it is a line of
+known. (Added on 28 November 2026: Experiment 73 played it on, and it
+settled.) And what starts a burst has not been read: whether it is a line of
 brains that has many children, and whether such a line is better at
 anything, is the question for a world that is to keep evolving.
 
@@ -1737,7 +1746,69 @@ is it a star.
 > **It fails if:** The world with 50 numbers and seed 6302 is a world of equals in none of its 15 windows, or two or more of the four worlds end badly. If it is a world of equals in some window and exactly one world ends badly, the thesis is undecided. Known before the runs: the four worlds to iteration 30,000, where the first three had 2,462, 573 and 2,016 agents with 10, 50 and 12 links each and the second had births again in its last window. Reported beside it, with no line drawn: for each world its windows by both measures, its agents and the links of an agent at the start and the end of the 7,500 iterations and at the start of Experiment 71, the number of separate times of many births, and the largest holding.
 <!-- /thesis -->
 
-*Planned; the result follows here when the runs are played.*
+**The thesis is confirmed.** The four runs were played on 28 November
+2026. The world with 50 numbers and seed 6302 came out of its burst: it
+was a world of equals in 10 of its 15 windows, and in all of the last
+five. No world died out, and none was a star in its last window, or in
+any window.
+
+Each world over the 7,500 iterations, in windows of 500. Agents and links
+are the means of the first and the last window. The share with one link
+is the largest of any window, by the median over its iterations; a star
+has more than half.
+
+| world | windows that are a world of equals | agents | links each | most agents at any iteration | largest share with one link | largest holding |
+|---|---|---|---|---|---|---|
+| 30 numbers, seed 6301 | 2 of 15 | 2,643 to 2,557 | 9.3 to 7.5 | 7,320 | 34% | 196 |
+| 30 numbers, seed 6302 | 14 of 15 | 961 to 1,500 | 27.8 to 19.3 | 2,958 | 9% | 318 |
+| 50 numbers, seed 6302 | 10 of 15 | 2,018 to 1,370 | 11.9 to 18.6 | 2,018 | 6% | 714 |
+| 50 numbers, seed 6303 | 15 of 15 | 559 to 559 | 47.0 to 47.7 | 559 | 0% | 610 |
+
+- **The burst ended.** In the world with 50 numbers and seed 6302 the
+  births fell away within 500 iterations, came back twice, more weakly,
+  and stopped. From iteration 35,000 it was a world of equals of 1,450
+  and then 1,370 agents with 18 to 19 links each, and its richest agent
+  held about 55 tokens. It had 12 links an agent in the burst and 46
+  before it.
+- **One world went most of the way to a star and came back.** The world
+  with 30 numbers and seed 6301 grew from 2,643 agents to 7,320 within
+  1,500 iterations, with 2.7 links each. A third of its agents had one
+  link, and coalitions won only 65 nodes in a hundred. It had no hub: its
+  most linked agent was linked to one agent in fifty at most. Then it
+  shrank for 5,500 iterations, to 2,557 agents with 7.5 links, coalitions
+  won 92 in a hundred again, and its last window is a world of equals.
+- **That world grew without a burst.** It had fewer than 0.01 births per
+  agent and iteration in every window. All 13 of its windows off the
+  measure are off because coalitions won fewer than nine nodes in ten. A
+  world can grow thin slowly, by children that live.
+- **One world was growing fast when the run ended.** The world with 30
+  numbers and seed 6302 was a world of equals for 14 windows, of about
+  970 and then 1,100 agents. In its last 250 iterations it grew from
+  1,088 agents to 2,958, its links fell from 24 to 8 an agent, and at the
+  last iteration 44% of its agents had one link. Its last window is not a
+  star by the measure, whose median is 9%, but where this growth ends is
+  not known.
+- **One did not move**, as before: 559 agents with 47 links. In two
+  windows its richest agent held 553 and 610 tokens, and 2,360 agents died
+  in the second; it stayed a world of equals with 559 agents.
+
+**What this shows.** Under a head count the order is not a still state
+but one a world keeps coming back to. Over 15,000 iterations, in
+Experiments 71 and 73 together, three of the four worlds left the measure
+and came back, some more than once, by a burst of births or by slow
+growth, and none died or became a star. One came back from 2.7 links an
+agent, close to the two links of the star. What held it back from the
+star may be that it had no hub; that is a guess, not a reading.
+
+**What it does not show.** The worlds do not come back to where they
+were. The three that moved have fewer links an agent at iteration 37,500
+than at 22,500: 7.5 after 26, 19 after 57 and 19 after 46. Whether that
+goes on, burst by burst, toward the star is open, and the world that was
+growing at the end may show it. Each world was played once. And coming
+back is not evolving: Experiment 72 found no brains that got better in
+these worlds up to iteration 30,000, and no contest was played here.
+
+The numbers are made by `python3 research/efficient/E50/e73.py`.
 
 <!-- runs E73 -->
 > [!info]- The runs behind this page
