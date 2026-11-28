@@ -1,0 +1,154 @@
+{
+ "id": "E73",
+ "title": "What does a burst of births end in? The four worlds under a head count played on to iteration 37,500",
+ "thesis": {
+  "claim": "Under a coalition counted by heads a burst of births ends in the order again, and not in a star. The world with 50 numbers and seed 6302, which was in a burst when Experiment 71 ended, is a world of equals again before iteration 37,500, and none of the four worlds of Experiment 71 dies out or ends as a star.",
+  "why": "Experiment 71 saw two worlds come out of a time of many births as worlds of small holdings: one grew from 1,006 agents to about 2,700 and settled there, the other went to 1,490 agents and was back at 482 within 3,000 iterations. All through a burst coalitions won at least 85 nodes in a hundred, and in the burst that had not ended the births per agent and iteration had already fallen from 0.77 to 0.11. So a burst looks like something the order passes through. It may be otherwise. Under a head count these rules have a second lasting state, the star, where nearly every agent has one link to a hub: five of nine churning worlds went there in Experiment 70, and the order formed in only two. A burst thins the links, from 46 an agent to 12 in the world still in its burst and from 26 to 9 in the world that grew, and the head count bites hardest at a node with two links. If every burst leaves a world thinner than it found it, the worlds go to the star one burst at a time. Brains do not get better in these worlds (Experiment 72), so nothing is known that would hold them back.",
+  "confirm": "Each of the four runs of Experiment 71 is played on once from its world kept at iteration 30,000, with its own settings, the head count on and the seed 7301, to iteration 37,500. Each run is read in its 15 windows of 500 iterations. A window is a world of equals by Experiment 63's measure: fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition. A window is a star if more than half the agents have one link, by the median over its iterations. A world ends badly if its run ends as extinct before iteration 37,500 or its last window is a star. The thesis holds if the world with 50 numbers and seed 6302 is a world of equals in at least one of its 15 windows, and none of the four worlds ends badly.",
+  "refute": "The world with 50 numbers and seed 6302 is a world of equals in none of its 15 windows, or two or more of the four worlds end badly. If it is a world of equals in some window and exactly one world ends badly, the thesis is undecided. Known before the runs: the four worlds to iteration 30,000, where the first three had 2,462, 573 and 2,016 agents with 10, 50 and 12 links each and the second had births again in its last window. Reported beside it, with no line drawn: for each world its windows by both measures, its agents and the links of an agent at the start and the end of the 7,500 iterations and at the start of Experiment 71, the number of separate times of many births, and the largest holding."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "iterations": 37500,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "seeds": "7301",
+  "conditions": [
+   {
+    "name": "30 numbers, the world of seed 6301, played on",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-142067-s7101-oncc8e47",
+     "at": 30000
+    }
+   },
+   {
+    "name": "30 numbers, the world of seed 6302, played on",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-142067-s7101-on9f14d5",
+     "at": 30000
+    }
+   },
+   {
+    "name": "50 numbers, the world of seed 6302, played on",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-eee3e3-s7101-one84bf9",
+     "at": 30000
+    }
+   },
+   {
+    "name": "50 numbers, the world of seed 6303, played on",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 50,
+     "wealth_guard": "heads"
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-eee3e3-s7101-on192fc3",
+     "at": 30000
+    }
+   }
+  ]
+ }
+}

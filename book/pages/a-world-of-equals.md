@@ -1711,6 +1711,46 @@ by `python3 research/efficient/E50/e71_lines.py`.
 > To play these trials again: `python3 gol_lab.py run E72`.
 <!-- /runs -->
 
+### What does a burst of births end in?
+
+<!-- experiment E73 -->
+
+Experiment 71 ended with one world in the middle of a burst of births
+and another just starting one. Experiment 70 had found the other thing
+these rules do under a head count: the star, where nearly every agent
+has one link to a hub. A burst thins the links of a world. So where does
+a burst lead: back to the order, or one step nearer the star?
+
+Experiment 73 plays the four worlds of Experiment 71 on for another
+7,500 iterations, from the worlds they kept at iteration 30,000, and
+reads each window of 500 by two measures: is it a world of equals, and
+is it a star.
+
+<!-- thesis E73 -->
+> [!quote] The thesis of Experiment 73, written down before any of its runs existed
+> **The claim.** Under a coalition counted by heads a burst of births ends in the order again, and not in a star. The world with 50 numbers and seed 6302, which was in a burst when Experiment 71 ended, is a world of equals again before iteration 37,500, and none of the four worlds of Experiment 71 dies out or ends as a star.
+>
+> **Why it would be so.** Experiment 71 saw two worlds come out of a time of many births as worlds of small holdings: one grew from 1,006 agents to about 2,700 and settled there, the other went to 1,490 agents and was back at 482 within 3,000 iterations. All through a burst coalitions won at least 85 nodes in a hundred, and in the burst that had not ended the births per agent and iteration had already fallen from 0.77 to 0.11. So a burst looks like something the order passes through. It may be otherwise. Under a head count these rules have a second lasting state, the star, where nearly every agent has one link to a hub: five of nine churning worlds went there in Experiment 70, and the order formed in only two. A burst thins the links, from 46 an agent to 12 in the world still in its burst and from 26 to 9 in the world that grew, and the head count bites hardest at a node with two links. If every burst leaves a world thinner than it found it, the worlds go to the star one burst at a time. Brains do not get better in these worlds (Experiment 72), so nothing is known that would hold them back.
+>
+> **It holds if:** Each of the four runs of Experiment 71 is played on once from its world kept at iteration 30,000, with its own settings, the head count on and the seed 7301, to iteration 37,500. Each run is read in its 15 windows of 500 iterations. A window is a world of equals by Experiment 63's measure: fewer than 0.01 births per agent and iteration, and at least nine nodes in ten won by a coalition. A window is a star if more than half the agents have one link, by the median over its iterations. A world ends badly if its run ends as extinct before iteration 37,500 or its last window is a star. The thesis holds if the world with 50 numbers and seed 6302 is a world of equals in at least one of its 15 windows, and none of the four worlds ends badly.
+>
+> **It fails if:** The world with 50 numbers and seed 6302 is a world of equals in none of its 15 windows, or two or more of the four worlds end badly. If it is a world of equals in some window and exactly one world ends badly, the thesis is undecided. Known before the runs: the four worlds to iteration 30,000, where the first three had 2,462, 573 and 2,016 agents with 10, 50 and 12 links each and the second had births again in its last window. Reported beside it, with no line drawn: for each world its windows by both measures, its agents and the links of an agent at the start and the end of the 7,500 iterations and at the start of Experiment 71, the number of separate times of many births, and the largest holding.
+<!-- /thesis -->
+
+*Planned; the result follows here when the runs are played.*
+
+<!-- runs E73 -->
+> [!info]- The runs behind this page
+> **4 runs.** Every condition below is run once for every seed (7301), played on or again from a kept world of its own to iteration 37,500 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers, the world of seed 6301, played on** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-142067-s7101-oncc8e47` at iteration 30,000. Run `B1-40000-142067-s7301-on2e1434`.
+> - **30 numbers, the world of seed 6302, played on** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-142067-s7101-on9f14d5` at iteration 30,000. Run `B1-40000-142067-s7301-on27ebc1`.
+> - **50 numbers, the world of seed 6302, played on** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-eee3e3-s7101-one84bf9` at iteration 30,000. Run `B1-40000-eee3e3-s7301-onbbfeaa`.
+> - **50 numbers, the world of seed 6303, played on** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `wealth_guard` = heads, `n_nodes` = 800; 40,000 tokens; played on from `B1-40000-eee3e3-s7101-on192fc3` at iteration 30,000. Run `B1-40000-eee3e3-s7301-on1e1856`.
+>
+> To make these runs again: `python3 gol_lab.py run E73`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->
@@ -1792,6 +1832,7 @@ Experiments 56, 57 and 58 are read by
 Experiments 69, 70 and 71 by `python3 research/efficient/E50/e69.py` (with
 `E70` or `E71` after it), the stars of Experiment 70 by `e70_star.py` and
 the turnover of brains in Experiment 71 by `e71_lines.py`; Experiment 72 by
-`python3 research/efficient/E50/e72.py`. What the agents
+`python3 research/efficient/E50/e72.py` and Experiment 73 by `e73.py`. What
+the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
