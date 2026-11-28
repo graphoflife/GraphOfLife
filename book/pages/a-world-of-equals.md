@@ -86,6 +86,13 @@ births while coalitions still won nearly every node; confirmed. So the
 head count protects the order where it is and mostly keeps it from
 forming where it is not.
 
+Experiment 72 then asked whether brains get better in the four worlds
+that lived under a head count, by playing later brains against earlier
+ones. They do not: the brains of iteration 30,000 held 0.484 of the
+agents against those of 26,000 (0.435 to 0.532); refuted. All brains of
+such a world descend from one brain within 300 to 2,100 iterations, yet
+after several such turnovers they are no better.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -1550,6 +1557,10 @@ known. And what starts a burst has not been read: whether it is a line of
 brains that has many children, and whether such a line is better at
 anything, is the question for a world that is to keep evolving.
 
+*Added on 28 November 2026.* Experiment 72 below played the brains of
+these worlds against each other, later against earlier. What starts a
+burst is still not read.
+
 The numbers are made by `python3 research/efficient/E50/e69.py E71`.
 
 <!-- runs E71 -->
@@ -1591,7 +1602,94 @@ it: those earlier brains were made under the old rule.
 > **It fails if:** That band includes 0.5 or lies wholly below it: over those 4,000 iterations under a head count brains did not get better. Reported beside it, with no line drawn: 26,000 against 22,500 and 30,000 against 22,500, where the earlier brains were made under the old rule; each world alone, and the three worlds that had births apart from the one that had none; and the share of the tokens.
 <!-- /thesis -->
 
-*Planned; the result follows here when the contests are played.*
+**The thesis is refuted.** The 192 contests were played on 27 and 28
+November 2026. Pooled over the four worlds, the brains of iteration 30,000
+held 0.484 of the agents against those of 26,000, with a band from 0.435 to
+0.532. The band includes a half: over those 4,000 iterations under a head
+count the brains did not get better.
+
+The later brains' share of the agents, with its band. Each world has
+eight coins a pair, the pooled rows 24 and 32.
+
+| world | 30,000 against 26,000 | 26,000 against 22,500 | 30,000 against 22,500 |
+|---|---|---|---|
+| 30 numbers, seed 6301 | 0.520 (0.486 to 0.554) | 0.588 (0.529 to 0.647) | 0.562 (0.498 to 0.627) |
+| 30 numbers, seed 6302 | 0.480 (0.345 to 0.615) | 0.658 (0.501 to 0.816) | 0.437 (0.279 to 0.595) |
+| 50 numbers, seed 6302 | 0.421 (0.328 to 0.513) | 0.587 (0.462 to 0.712) | 0.608 (0.332 to 0.884) |
+| 50 numbers, seed 6303 (no births) | 0.514 (0.412 to 0.616) | 0.531 (0.402 to 0.659) | 0.463 (0.333 to 0.592) |
+| the three with births | 0.474 (0.418 to 0.529) | 0.611 (0.543 to 0.679) | 0.536 (0.428 to 0.643) |
+| **all four** | **0.484 (0.435 to 0.532)** | 0.591 (0.530 to 0.652) | 0.517 (0.431 to 0.604) |
+
+- **No world shows it alone.** In the pair the thesis reads, no world's
+  band lies wholly above a half, and the later brains won 14 of the 32
+  coins.
+- **Births did not help.** The thesis expected the gain where brains have
+  children. The three worlds with births score 0.474, the one without
+  0.514.
+- **The first 3,500 iterations do show a gain.** The brains of 26,000 beat
+  those of 22,500 with 0.591 (0.530 to 0.652), 22 coins of 32. The earlier
+  brains there were made under the old rule, so this is what the thesis
+  set apart: brains getting used to the head count.
+- **The gain is not kept.** The brains of 30,000 do not beat those of
+  22,500: 0.517 (0.431 to 0.604), 15 coins of 32. If each era stood on the
+  one before, the longest step would show the most.
+- **The share of the tokens reads the same**, within 0.01 in every row.
+
+**Where a contest is played matters in one world.** Read afterwards: each
+pair has four coins in the earlier era's world and four in the later
+one's. In the world with 50 numbers and seed 6302, the brains of 30,000
+took 0.97 of the agents from those of 22,500 in their own world and 0.25
+in the earlier one. At 22,500 that world was a world of equals of 536
+agents; at 30,000 it was in a burst of births, with 2,016. Over all its 24
+coins the brains playing in their own era's world held 0.673 (0.593 to
+0.753). In the other three worlds together that share is 0.503 (0.464 to
+0.543), no advantage at all.
+
+**How fast the brains turn over.** Also read afterwards, from the frames
+of Experiment 71. Every brain names the brain it was copied from, so from
+any starting iteration each brain alive then founds a line. From five
+starts in each of the four worlds:
+
+- **About nine lines in ten are gone after 25 iterations.** Of 204 to
+  1,500 lines at a start, 19 to 177 were left 25 iterations later.
+- **One line takes the world.** In 18 of the 20 readings every agent
+  descended from one starting brain after 311 to 2,119 iterations, half of
+  them within about 830. The two that did not finish, in 3,000 and 1,500
+  iterations, are the late starts in the world that had grown to about
+  2,700 agents.
+- **That line starts small.** The brain that became everyone's ancestor
+  was held by between one agent in a thousand and one in fifty at the
+  start.
+
+So the eras of Experiment 72, 3,500 and 4,000 iterations apart, are in
+three of the four worlds several whole turnovers apart: all brains of the
+later era descend from one brain of the earlier.
+
+**What this shows.** Under a head count the brains of these worlds are
+replaced fast and whole, but the later ones are not better than the
+earlier ones. A world's brains turn over within some hundreds to two
+thousand iterations, and after several turnovers they hold no more of a
+shared world than their ancestors do. That fits a turnover by lot, as in the
+world of equals under the old rule (Experiments 54 and 62). Births, the
+one new thing under a head count, changed nothing in the contests. Where
+a difference shows, it is to the world of the moment: brains got used to
+the new rule in the first 3,500 iterations, and in the one world that went
+from stillness to a burst each era's brains did better in their own kind
+of world.
+
+**What it does not show.** The contests are 100 iterations long with
+mutation off; a brain that is better only over a longer time, or only
+through its mutants, would not show. Eight coins a pair in each world give
+wide bands, so a gain of a few hundredths in one world is not ruled out;
+the pooled band rules out a later share above 0.532. The gain from 22,500
+to 26,000 may be the new rule or may be chance among three pairs read; it
+was not the thesis. The advantage at home is one world's. And that the
+turnover is by lot is not tested here: no line was followed against the
+lot's own expectation.
+
+The numbers are made by `python3 research/efficient/E50/e72.py` (with
+`tokens` after it for the share of the tokens), and those of the turnover
+by `python3 research/efficient/E50/e71_lines.py`.
 
 <!-- runs E72 -->
 > [!info]- The trials behind this page
@@ -1692,7 +1790,8 @@ Experiments 56, 57 and 58 are read by
 `python3 research/efficient/E50/e64.py` (with `E65` after it); Experiments 66,
 67 and 68 by `python3 research/efficient/E50/e66.py`, `e67.py` and `e68.py`;
 Experiments 69, 70 and 71 by `python3 research/efficient/E50/e69.py` (with
-`E70` or `E71` after it); Experiment 72 by
+`E70` or `E71` after it), the stars of Experiment 70 by `e70_star.py` and
+the turnover of brains in Experiment 71 by `e71_lines.py`; Experiment 72 by
 `python3 research/efficient/E50/e72.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

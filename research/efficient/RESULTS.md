@@ -82,6 +82,14 @@ worlds within 1,500 iterations, against seven of nine without the rule
 (70). And under it the order has times of many births while coalitions
 still win nearly every node.
 
+**Added after Experiment 72.** Under a head count brains do not get better
+either. In the four worlds of Experiment 71 the brains of iteration 30,000
+held 0.484 of the agents against those of 26,000 (0.435 to 0.532, 32
+coins). All brains of such a world descend from one brain within 300 to
+2,100 iterations, so the brains are replaced whole several times over and
+are no better for it. The head count keeps the order alive; it does not
+make it evolve.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -755,3 +763,44 @@ numbers seeds 6302, 6303) played on from 22,500 to 30,000 with
 - Thesis (at most one of four dies out): confirmed.
 - Not separated: rule and luck (one run a world, its own seed). Not
   read: what starts a burst.
+
+
+### Experiment 72: do brains get better under a head count? (refuted)
+
+Plan `book/experiments/E72.json`; reader `E50/e72.py` (with `tokens`);
+192 contests of 100 iterations, played 27 and 28 November 2026 in about
+6.5 hours. In each of Experiment 71's four worlds, three pairs of eras
+(22,500, 26,000, 30,000), eight coins a pair, four in each era's world.
+
+- **The thesis's pair, 30,000 against 26,000, all four worlds:** the later
+  brains hold 0.484 of the agents (0.435 to 0.532), 14 coins of 32 above a
+  half. The band includes a half: refuted.
+- Each world alone: 0.520, 0.480, 0.421, 0.514; no band wholly above a
+  half. The three worlds with births: 0.474 (0.418 to 0.529).
+- 26,000 against 22,500: 0.591 (0.530 to 0.652), 22 of 32. The earlier
+  brains were made under the old rule, so this is getting used to the head
+  count.
+- 30,000 against 22,500: 0.517 (0.431 to 0.604). The gain is not kept.
+- The share of the tokens reads the same within 0.01.
+- Read afterwards, by where a contest was played: in the world with 50
+  numbers and seed 6302 (a world of equals at 22,500, in a burst of births
+  with 2,016 agents at 30,000) the brains of 30,000 took 0.97 from those of
+  22,500 at home and 0.25 in the earlier world; the home era's brains hold
+  0.673 (0.593 to 0.753) over its 24 coins. In the other three worlds
+  together 0.503 (0.464 to 0.543).
+
+**The turnover of brains** (frames of Experiment 71, nothing played;
+`E50/e71_lines.py`, about an hour of reading). From five starts in each of
+the four worlds, every brain alive founds a line. About nine lines in ten
+are gone after 25 iterations. In 18 of 20 readings one line held every
+agent after 311 to 2,119 iterations (half within about 830); that line's
+founder was held by 0.1% to 2% of the agents at the start. The two
+readings that did not finish are the late starts of the world that grew to
+about 2,700 agents.
+
+**A dead end.** One burst was traced birth by birth (30 numbers, seed
+6302, first birth at iteration 24,271; scratch code, not kept). It has no
+single start: its births came from the line that was taking the world
+anyway (half the agents before its first birth), and that line's births
+per agent rose about a hundredfold within 200 iterations. With whole
+turnovers this fast, "which line started it" has no sharp answer.
