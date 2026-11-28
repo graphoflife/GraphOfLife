@@ -1822,6 +1822,49 @@ The numbers are made by `python3 research/efficient/E50/e73.py`.
 > To make these runs again: `python3 gol_lab.py run E73`.
 <!-- /runs -->
 
+### Does a brain fit the state of its world?
+
+<!-- experiment E74 -->
+
+Experiment 72 found no brains that got better with time. But one of its
+worlds stood out when its contests were read by where they were played:
+the brains made in a burst of births won in the world of the burst and
+lost in the still world before it. That was one world, read afterwards.
+
+Experiment 73 gives more such pairs: a world that grew thin and came
+back, a burst that ended, a world that began to grow. Experiment 74
+plays the brains of two eras against each other in each era's world,
+for four pairs between which the world changed and three between which
+it did not, and counts how the brains do at home.
+
+<!-- thesis E74 -->
+> [!quote] The thesis of Experiment 74, written down before any of its runs existed
+> **The claim.** Under a coalition counted by heads a brain fits the state of its world. Where a world changed between two eras, by a burst of births or by growing thin and coming back, each era's brains do better in their own era's world than in the other's.
+>
+> **Why it would be so.** Experiment 72 found no brains that got better with time, but read afterwards one world stood out. It was a world of equals of 536 agents at iteration 22,500 and in a burst of births with 2,016 agents at 30,000, and the brains of 30,000 took 0.97 of the agents from those of 22,500 in their own world and 0.25 in the earlier one. Over that world's 24 coins the brains playing in their own era's world held 0.673 (0.593 to 0.753); in the other three worlds together 0.503. That would mean selection does act in these worlds, toward the state of the moment and back again when the state returns. But it was read afterwards, in the one world that stood out, so it has to be tested where it was not looked for. Experiment 73 gives four pairs of eras between which a world changed, and three between which it did not. If a brain fits its world's state, the home era's brains win in the first four and not in the last three, where all the brains were replaced as well, by lot. It may be otherwise. The world of Experiment 72 had 0.77 births per agent and iteration, far more than any change since, and the advantage may be that burst's own. Or the brains of one era may be the better ones in both worlds, and then the home era's share is a half.
+>
+> **It holds if:** A contest plays 100 iterations in one of the two eras' worlds, under that run's rules, with the brains of the two eras dealt to its agents by coin. A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. Every pair of eras has eight coins, four in each era's world. The home era's share of a coin is the share of the agents held at the end by the brains of the era in whose world it was played. Four pairs are of a world that changed, all from the runs of Experiment 73: 30 numbers and seed 6301 at 30,000 (2,470 agents with 9.9 links each) and at 31,500 (7,280 with 2.7); the same world at 31,500 and at 37,500 (2,521 with 7.7); 50 numbers and seed 6302 at 30,000 (2,017 with 11.8, in a time of many births) and at 36,000 (1,375 with 18.8, none); 30 numbers and seed 6302 at 36,000 (1,094 with 23.9) and at 37,500 (2,958 with 8.0, growing). The thesis holds if the home era's share, pooled over the 32 coins of these four pairs, has a band that lies wholly above 0.5.
+>
+> **It fails if:** That band includes 0.5 or lies wholly below it: a brain does no better in its own era's world, and what Experiment 72 showed in one world was that world's own. Reported beside it, with no line drawn: the home era's share over the 24 coins of three pairs between which the world did not change (50 numbers and seed 6303 at 30,000 and 37,500, 559 agents with 47 links both times; 30 numbers and seed 6302 at 31,000 and 33,500, 970 agents with 27 links; 50 numbers and seed 6302 at 35,500 and 37,500, 1,422 and 1,367 agents with 18 links), where the thesis expects a half; each pair alone, in each of its two worlds; the later brains' share; and the share of the tokens.
+<!-- /thesis -->
+
+*Planned; the result follows here when the contests are played.*
+
+<!-- runs E74 -->
+> [!info]- The trials behind this page
+> **112 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
+>
+> - **30 numbers, seed 6301: 31,500 against 30,000** — 16 trials: worlds `B1-40000-142067-s7301-on2e1434`; eras 30,000, 31,500; coins 7,401 to 7,408, every 1.
+> - **30 numbers, seed 6301: 37,500 against 31,500** — 16 trials: worlds `B1-40000-142067-s7301-on2e1434`; eras 31,500, 37,500; coins 7,409 to 7,416, every 1.
+> - **50 numbers, seed 6302: 36,000 against 30,000** — 16 trials: worlds `B1-40000-eee3e3-s7301-onbbfeaa`; eras 30,000, 36,000; coins 7,417 to 7,424, every 1.
+> - **30 numbers, seed 6302: 37,500 against 36,000** — 16 trials: worlds `B1-40000-142067-s7301-on27ebc1`; eras 36,000, 37,500; coins 7,425 to 7,432, every 1.
+> - **50 numbers, seed 6303: 37,500 against 30,000** — 16 trials: worlds `B1-40000-eee3e3-s7301-on1e1856`; eras 30,000, 37,500; coins 7,433 to 7,440, every 1.
+> - **30 numbers, seed 6302: 33,500 against 31,000** — 16 trials: worlds `B1-40000-142067-s7301-on27ebc1`; eras 31,000, 33,500; coins 7,441 to 7,448, every 1.
+> - **50 numbers, seed 6302: 37,500 against 35,500** — 16 trials: worlds `B1-40000-eee3e3-s7301-onbbfeaa`; eras 35,500, 37,500; coins 7,449 to 7,456, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E74`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->
@@ -1903,7 +1946,7 @@ Experiments 56, 57 and 58 are read by
 Experiments 69, 70 and 71 by `python3 research/efficient/E50/e69.py` (with
 `E70` or `E71` after it), the stars of Experiment 70 by `e70_star.py` and
 the turnover of brains in Experiment 71 by `e71_lines.py`; Experiment 72 by
-`python3 research/efficient/E50/e72.py` and Experiment 73 by `e73.py`. What
-the agents
+`python3 research/efficient/E50/e72.py`, Experiment 73 by `e73.py` and
+Experiment 74 by `e74.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

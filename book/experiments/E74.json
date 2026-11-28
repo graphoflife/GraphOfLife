@@ -1,0 +1,836 @@
+{
+ "id": "E74",
+ "title": "Does a brain fit the state of its world? Brains of two eras played in each era's world, where a world changed under a head count and where it did not",
+ "thesis": {
+  "claim": "Under a coalition counted by heads a brain fits the state of its world. Where a world changed between two eras, by a burst of births or by growing thin and coming back, each era's brains do better in their own era's world than in the other's.",
+  "why": "Experiment 72 found no brains that got better with time, but read afterwards one world stood out. It was a world of equals of 536 agents at iteration 22,500 and in a burst of births with 2,016 agents at 30,000, and the brains of 30,000 took 0.97 of the agents from those of 22,500 in their own world and 0.25 in the earlier one. Over that world's 24 coins the brains playing in their own era's world held 0.673 (0.593 to 0.753); in the other three worlds together 0.503. That would mean selection does act in these worlds, toward the state of the moment and back again when the state returns. But it was read afterwards, in the one world that stood out, so it has to be tested where it was not looked for. Experiment 73 gives four pairs of eras between which a world changed, and three between which it did not. If a brain fits its world's state, the home era's brains win in the first four and not in the last three, where all the brains were replaced as well, by lot. It may be otherwise. The world of Experiment 72 had 0.77 births per agent and iteration, far more than any change since, and the advantage may be that burst's own. Or the brains of one era may be the better ones in both worlds, and then the home era's share is a half.",
+  "confirm": "A contest plays 100 iterations in one of the two eras' worlds, under that run's rules, with the brains of the two eras dealt to its agents by coin. A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. Every pair of eras has eight coins, four in each era's world. The home era's share of a coin is the share of the agents held at the end by the brains of the era in whose world it was played. Four pairs are of a world that changed, all from the runs of Experiment 73: 30 numbers and seed 6301 at 30,000 (2,470 agents with 9.9 links each) and at 31,500 (7,280 with 2.7); the same world at 31,500 and at 37,500 (2,521 with 7.7); 50 numbers and seed 6302 at 30,000 (2,017 with 11.8, in a time of many births) and at 36,000 (1,375 with 18.8, none); 30 numbers and seed 6302 at 36,000 (1,094 with 23.9) and at 37,500 (2,958 with 8.0, growing). The thesis holds if the home era's share, pooled over the 32 coins of these four pairs, has a band that lies wholly above 0.5.",
+  "refute": "That band includes 0.5 or lies wholly below it: a brain does no better in its own era's world, and what Experiment 72 showed in one world was that world's own. Reported beside it, with no line drawn: the home era's share over the 24 coins of three pairs between which the world did not change (50 numbers and seed 6303 at 30,000 and 37,500, 559 agents with 47 links both times; 30 numbers and seed 6302 at 31,000 and 33,500, 970 agents with 27 links; 50 numbers and seed 6302 at 35,500 and 37,500, 1,422 and 1,367 agents with 18 links), where the thesis expects a half; each pair alone, in each of its two worlds; the later brains' share; and the share of the tokens."
+ },
+ "trials": {
+  "kind": "contest",
+  "T": 100,
+  "workers": 2,
+  "sets": [
+   {
+    "name": "30 numbers, seed 6301: 31,500 against 30,000",
+    "items": [
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7401
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7401
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7402
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7402
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7403
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7403
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7404
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 30000,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7404
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7405
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7405
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7406
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7406
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7407
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7407
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 30000,
+      "b": 31500,
+      "seed": 7408
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 30000,
+      "seed": 7408
+     }
+    ]
+   },
+   {
+    "name": "30 numbers, seed 6301: 37,500 against 31,500",
+    "items": [
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7409
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7409
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7410
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7410
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7411
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7411
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7412
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 31500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7412
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7413
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7413
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7414
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7414
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7415
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7415
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 31500,
+      "b": 37500,
+      "seed": 7416
+     },
+     {
+      "run": "B1-40000-142067-s7301-on2e1434",
+      "home": 37500,
+      "a": 37500,
+      "b": 31500,
+      "seed": 7416
+     }
+    ]
+   },
+   {
+    "name": "50 numbers, seed 6302: 36,000 against 30,000",
+    "items": [
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7417
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7417
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7418
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7418
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7419
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7419
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7420
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 30000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7420
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7421
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7421
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7422
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7422
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7423
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7423
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 30000,
+      "b": 36000,
+      "seed": 7424
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 36000,
+      "a": 36000,
+      "b": 30000,
+      "seed": 7424
+     }
+    ]
+   },
+   {
+    "name": "30 numbers, seed 6302: 37,500 against 36,000",
+    "items": [
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7425
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7425
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7426
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7426
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7427
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7427
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7428
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 36000,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7428
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7429
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7429
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7430
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7430
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7431
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7431
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 36000,
+      "b": 37500,
+      "seed": 7432
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 37500,
+      "a": 37500,
+      "b": 36000,
+      "seed": 7432
+     }
+    ]
+   },
+   {
+    "name": "50 numbers, seed 6303: 37,500 against 30,000",
+    "items": [
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7433
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7433
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7434
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7434
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7435
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7435
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7436
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 30000,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7436
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7437
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7437
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7438
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7438
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7439
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7439
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 30000,
+      "b": 37500,
+      "seed": 7440
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-on1e1856",
+      "home": 37500,
+      "a": 37500,
+      "b": 30000,
+      "seed": 7440
+     }
+    ]
+   },
+   {
+    "name": "30 numbers, seed 6302: 33,500 against 31,000",
+    "items": [
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7441
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7441
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7442
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7442
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7443
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7443
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7444
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 31000,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7444
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7445
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7445
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7446
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7446
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7447
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7447
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 31000,
+      "b": 33500,
+      "seed": 7448
+     },
+     {
+      "run": "B1-40000-142067-s7301-on27ebc1",
+      "home": 33500,
+      "a": 33500,
+      "b": 31000,
+      "seed": 7448
+     }
+    ]
+   },
+   {
+    "name": "50 numbers, seed 6302: 37,500 against 35,500",
+    "items": [
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7449
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7449
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7450
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7450
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7451
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7451
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7452
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 35500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7452
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7453
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7453
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7454
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7454
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7455
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7455
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 35500,
+      "b": 37500,
+      "seed": 7456
+     },
+     {
+      "run": "B1-40000-eee3e3-s7301-onbbfeaa",
+      "home": 37500,
+      "a": 37500,
+      "b": 35500,
+      "seed": 7456
+     }
+    ]
+   }
+  ]
+ }
+}
